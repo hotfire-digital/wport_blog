@@ -2,10 +2,10 @@
 title: "僑外生在台找工作：用 SEO 關鍵字策略提升履歷曝光與面試率"
 description: "從 SEO 專家的角度，教你把履歷、作品集與求職平台欄位做成可被搜尋的關鍵字資產。"
 publishDate: 2026-05-07
-tags: ["僑外生", "個人品牌"]
+tags: ["僑外生", "SEO", "履歷優化", "台灣求職"]
 featured: false
 draft: true
-cover: "https://images.pexels.com/photos/7947663/pexels-photo-7947663.jpeg?auto=compress&cs=tinysrgb&w=1200"
+cover: "https://images.pexels.com/photos/7947663/pexels-photo-7947663.jpeg?auto=compress&cs=tinysrgb&w=1600"
 ---
 
 多數僑外生求職卡關，不是能力不足，而是「可被找到的能力」不足。  
@@ -13,7 +13,7 @@ cover: "https://images.pexels.com/photos/7947663/pexels-photo-7947663.jpeg?auto=
 
 這篇用 SEO 思維處理求職：把履歷和作品集當成搜尋頁面，讓你被企業更快找到。
 
-![筆電上的分析儀表板，對應求職關鍵字與曝光追蹤](https://images.pexels.com/photos/7947663/pexels-photo-7947663.jpeg?auto=compress&cs=tinysrgb&w=1200)
+![筆電上的分析儀表板，對應求職關鍵字與曝光追蹤](https://images.pexels.com/photos/7947663/pexels-photo-7947663.jpeg?auto=compress&cs=tinysrgb&w=1600)
 
 ---
 
@@ -78,7 +78,7 @@ cover: "https://images.pexels.com/photos/7947663/pexels-photo-7947663.jpeg?auto=
 
 每個 case study 至少要有以下結構：
 
-![資料監測畫面，象徵持續優化履歷與作品集表現](https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1200)
+![資料監測畫面，象徵持續優化履歷與作品集表現](https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1600)
 
 - 問題背景（Problem）
 - 目標指標（Goal / KPI）
