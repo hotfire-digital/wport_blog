@@ -4,7 +4,7 @@ import BlogLayout from "@/layouts/BlogLayout.astro";
 import Topbar from "@/components/Topbar.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
   return posts.map((post: CollectionEntry<"posts">) => ({
     params: { slug: post.id },
     props: { post },
@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props as { post: CollectionEntry<"posts"> };
 const { Content } = await render(post);
-const allPosts = await getCollection("posts");
+const allPosts = await getCollection("posts", ({ data }) => !data.draft);
 
 const sortedPosts = [...allPosts].sort(
   (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
@@ -485,6 +485,20 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     object-fit: cover;
     border-radius: 12px;
     margin: 22px auto;
+  }
+  .prose figure {
+    margin: 32px auto;
+    max-width: 760px;
+  }
+  .prose figure img {
+    margin: 0 auto;
+  }
+  .prose figcaption {
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--fg-meta);
+    margin-top: 8px;
+    line-height: 1.5;
   }
   .prose blockquote { border-left: 3px solid var(--color-primary); padding-left: 16px; margin: 28px 0; color: var(--fg-meta); font-style: italic; font-size: var(--text-base); line-height: 1.75; }
   .prose code { font-family: var(--font-mono); font-size: var(--text-sm); background: var(--bg-code); border-radius: var(--radius-sm); padding: 2px 5px; }

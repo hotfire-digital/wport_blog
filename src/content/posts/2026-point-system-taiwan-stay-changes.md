@@ -4,14 +4,17 @@ description: "整理 2026 年評點制實務上最重要的調整方向，帶你
 publishDate: 2026-05-06
 tags: ["僑外生", "評點制", "留台", "工作許可"]
 featured: false
-cover: "https://images.pexels.com/photos/18552371/pexels-photo-18552371.jpeg?auto=compress&cs=tinysrgb&w=1600"
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1781164363/wport-blog/kaiyuan-seminar-small.jpg"
 ---
 
 很多僑外生畢業後想留台，卻卡在薪資門檻或雇主不敢聘。台灣自 103 年（2014）起推動**評點制**，就是為了讓畢業生不必只靠高薪這一條路，也能用學歷、語言、實習等條件組合達標。
 
 2026 年又有一波實務上的變化。這篇文章把政策重點、分數策略與時間表整理在一起，方便你提早布局。
 
-![俯瞰城市景觀，象徵提早布局與長期策略](https://images.pexels.com/photos/3075993/pexels-photo-3075993.jpeg?auto=compress&cs=tinysrgb&w=1600)
+<figure>
+  <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1781164358/wport-blog/kaiyuan-seminar-large.jpg" alt="2026 年開南大學僑外生評點制說明會小型場次現場" />
+  <figcaption>2026 年開南大學僑外生評點制說明會小型場次現場。</figcaption>
+</figure>
 
 ---
 
@@ -51,6 +54,11 @@ cover: "https://images.pexels.com/photos/18552371/pexels-photo-18552371.jpeg?aut
 - 讓 HR 感覺「這件事可控」
 
 ---
+
+<figure>
+  <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1781164363/wport-blog/kaiyuan-seminar-small.jpg" alt="2026 年開南大學僑外生評點制說明會大型場次，學生踴躍出席" />
+  <figcaption>大型場次現場，學生踴躍出席，講師詳細說明評點制申請流程。</figcaption>
+</figure>
 
 ## 五、分數來源從「單點」轉向「組合」
 
