@@ -212,6 +212,56 @@ body {
   margin: var(--space-12) 0;
 }
 
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-6) 0;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+.prose thead th {
+  background: var(--bg-tag);
+  color: var(--fg-heading);
+  font-weight: var(--weight-bold);
+  text-align: left;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border-default);
+  padding: var(--space-3) var(--space-4);
+  vertical-align: top;
+}
+
+.prose tbody tr:nth-child(even) {
+  background: var(--bg-hover);
+}
+
+.prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+
+.prose figure {
+  margin: var(--space-8) 0;
+}
+
+.prose figure img {
+  width: 100%;
+  border: 1px solid var(--border-default);
+}
+
+.prose figcaption {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--fg-meta);
+  text-align: center;
+  line-height: var(--leading-normal);
+}
+
 /* ─── Tag Pills ──────────────────────────────────────────────── */
 .tag {
   display: inline-block;
