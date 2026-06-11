@@ -82,6 +82,8 @@ The script also supports custom ports and common Git/GitHub flows, with inline c
 ```md
 .
 ├── src/
+│   ├── content/
+│   │   └── posts/  # Blog posts (.md)
 │   ├── layouts/    # Astro layouts
 │   ├── pages/      # Astro pages
 │   │   └── api/    # API endpoints
@@ -89,6 +91,76 @@ The script also supports custom ports and common Git/GitHub flows, with inline c
 │   └── assets/     # Static assets
 ├── public/         # Public assets
 ```
+
+## Writing Blog Posts
+
+All blog posts live in `src/content/posts/` as `.md` files.
+
+### File naming
+
+Use lowercase kebab-case, ideally prefixed with the topic or date for easy sorting:
+
+```
+taiwan-job-search-tips.md
+2026-06-11-my-post-title.md
+```
+
+### Frontmatter
+
+Every post **must** include a frontmatter block at the top. Copy the template below and fill in the fields:
+
+```yaml
+---
+title: "文章標題"
+description: "一到兩句話的文章摘要，用於 SEO meta description 與文章列表預覽。"
+publishDate: 2026-06-11
+tags: ["標籤一", "標籤二"]
+featured: false
+cover: "https://images.pexels.com/photos/XXXXXX/pexels-photo-XXXXXX.jpeg?auto=compress&cs=tinysrgb&w=1600"
+---
+```
+
+| 欄位 | 型別 | 必填 | 說明 |
+|---|---|---|---|
+| `title` | string | ✅ | 文章標題 |
+| `description` | string | ✅ | 摘要，建議 50–160 字元，用於 SEO |
+| `publishDate` | date | ✅ | 格式 `YYYY-MM-DD` |
+| `tags` | string[] | — | 分類標籤陣列，建議 2–4 個 |
+| `featured` | boolean | — | `true` 會在首頁置頂顯示，預設 `false` |
+| `cover` | string | — | 封面圖片 URL（建議使用 Pexels 或自有圖片） |
+| `draft` | boolean | — | `true` 則文章不對外顯示，預設發布 |
+
+### Images
+
+**不要將圖片檔案 commit 進 repo。** 所有圖片統一透過 Cloudinary 託管，文章內只放 URL。
+
+**上傳流程：**
+
+1. 登入 [Cloudinary Dashboard](https://cloudinary.com/)，使用 wport 公司帳號（cloud name: `dyebbsckc`）
+2. 上傳圖片到 `wport-blog/` 資料夾
+3. 複製圖片的 Public ID，組成以下格式的 URL 貼入文章：
+
+```
+https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/你的圖片名稱.jpg
+```
+
+**URL 參數說明：**
+
+| 參數 | 說明 |
+|---|---|
+| `f_auto` | 自動選擇最佳格式（WebP / AVIF），依瀏覽器支援決定 |
+| `q_auto:good` | 自動壓縮品質（約 80–85%），肉眼無感但檔案大幅縮小 |
+| `w_1200,c_limit` | 最大寬度 1200px，只縮不放大，適合 Mobile 與 Retina 螢幕 |
+
+> 上傳原始圖片尺寸不限，Cloudinary 會自動處理。行銷同仁可直接用 Cloudinary Dashboard 上傳，無需任何 API 金鑰。
+
+### Preview locally
+
+```bash
+npm run dev
+```
+
+開啟 `http://localhost:3000` 確認文章顯示正常後再 commit。
 
 ## Design Kit & Template Reuse
 

@@ -3,7 +3,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import Topbar from "@/components/Topbar.astro";
 
-const allPosts = await getCollection("posts");
+const allPosts = await getCollection("posts", ({ data }) => !data.draft);
 const sorted = allPosts.sort(
   (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
     b.data.publishDate.getTime() - a.data.publishDate.getTime()

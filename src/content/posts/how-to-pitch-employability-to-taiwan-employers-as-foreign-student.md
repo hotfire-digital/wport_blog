@@ -4,6 +4,7 @@ description: "從行銷溝通角度設計面試話術與文件，降低企業對
 publishDate: 2026-05-11
 tags: ["僑外生", "面試", "雇主溝通", "留台就業"]
 featured: false
+draft: true
 cover: "https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=1600"
 ---
 

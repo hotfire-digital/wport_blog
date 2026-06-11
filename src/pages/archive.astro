@@ -4,7 +4,7 @@ import BlogLayout from "@/layouts/BlogLayout.astro";
 import Topbar from "@/components/Topbar.astro";
 import ArticleArchive from "@/components/ArticleArchive";
 
-const posts = (await getCollection("posts")).sort(
+const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
   (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
     b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
