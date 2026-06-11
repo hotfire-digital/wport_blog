@@ -4,7 +4,7 @@ description: "Wport 在醒吾科大徵才博覽會做快閃履歷健檢，整理
 publishDate: 2026-06-11
 tags: ["僑外生", "履歷健檢", "求職攻略", "留台"]
 featured: false
-cover: "https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=1600"
+cover: "https://res.cloudinary.com/dcqz561bh/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/hsing-wu-resume-clinic-1.jpg"
 ---
 
 6 月初，Wport 團隊來到**醒吾科技大學的徵才博覽會**。現場氣氛非常熱烈，尤其是前來攤位諮詢的僑外生同學，眼神裡都閃著對「留在台灣發展」的期待。
@@ -12,6 +12,11 @@ cover: "https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=
 身為專注於僑外生與新創媒合的人力銀行，我們乾脆在攤位直接辦起了「**快閃履歷健檢**」。看過幾十份履歷後，我們發現大家普遍卡在同樣的四個盲點——而且都很可惜，因為每一個都有明確的解法。
 
 這篇就把當天現場的「大補帖」原汁原味整理給你，附上**可以直接照抄的改寫公式**。
+
+<figure>
+  <img src="https://res.cloudinary.com/dcqz561bh/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/hsing-wu-resume-clinic-1.jpg" alt="Wport 團隊在醒吾科大徵才博覽會攤位為僑外生提供快閃履歷健檢" />
+  <figcaption>Wport 在醒吾科大徵才博覽會現場，為僑外生同學提供一對一快閃履歷健檢。</figcaption>
+</figure>
 
 ---
 
@@ -83,6 +88,11 @@ cover: "https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=
 | 2. 沒有客製化 | 這跟我們的職缺有關嗎？ | 用目標職位的視角重新包裝 |
 | 3. 小看社團經歷 | 你有實作經驗嗎？ | 把社團當專案管理／業務開發來寫 |
 | 4. 太晚才準備 | 你的留台分數夠嗎？ | 大二起累積可驗證的評點制資產 |
+
+<figure>
+  <img src="https://res.cloudinary.com/dcqz561bh/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/hsing-wu-resume-clinic-2.jpg" alt="Wport 顧問在醒吾科大現場逐份檢視僑外生履歷並給出修改建議" />
+  <figcaption>顧問逐份檢視同學履歷，當場示範如何把流水帳改寫成量化成果。</figcaption>
+</figure>
 
 ---
 
