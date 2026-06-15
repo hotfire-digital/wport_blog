@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import CoverImage from "@/components/CoverImage";
 
 interface PostData {
   id: string;
@@ -172,14 +173,11 @@ export default function ArticleArchive({ posts, allTags }: Props) {
               <a href={withBase(`/posts/${post.id}`)} className="card">
                 <div className="card-cover" style={{ background: post.coverHue }}>
                   {post.cover ? (
-                    <img
+                    <CoverImage
                       src={post.cover}
                       alt={`${post.title} cover`}
                       style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                      width={1600}
-                      height={900}
                       loading="lazy"
-                      decoding="async"
                     />
                   ) : (
                     <>
