@@ -53,7 +53,7 @@ const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
 const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
 ---
 
-<BlogLayout title={post.data.title}>
+<BlogLayout title={post.data.title} description={post.data.description}>
   <Topbar />
 
 

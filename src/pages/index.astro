@@ -40,9 +40,13 @@ const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
 const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
 ---
 
-<BlogLayout title="Wport Blog — 在台僑外生找設計工作的完整指南">
+<BlogLayout
+  title="Wport Blog — 在台僑外生找設計工作的完整指南"
+  description="wport 設計誌彙整在台求職所需的設計思維與職涯資源——從作品集、履歷到面試與簽證，幫助在台僑外生找到理想的 UI/UX 設計工作。"
+>
   <Topbar currentPage="home" />
 
+  <main>
   <!-- HERO -->
   <section class="hero-section">
     <div class="hero-inner">
@@ -100,7 +104,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
 
       {
         popular.length === 0 ? (
-          <p style="color: #9A9A9A; font-size: 15px;">目前還沒有文章。</p>
+          <p style="color: var(--color-text-muted); font-size: 15px;">目前還沒有文章。</p>
         ) : (
           <ul class="card-grid">
             {popular.map((post, i) => {
@@ -116,7 +120,8 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
                           class="card-cover-image"
                           width="1600"
                           height="900"
-                          loading="lazy"
+                          loading={i === 0 ? "eager" : "lazy"}
+                          fetchpriority={i === 0 ? "high" : "auto"}
                           decoding="async"
                         />
                       ) : (
@@ -168,7 +173,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
         </div>
       </div>
       {tagOverview.length === 0 ? (
-        <p style="color: #9A9A9A; font-size: 15px;">目前還沒有標籤資料。</p>
+        <p style="color: var(--color-text-muted); font-size: 15px;">目前還沒有標籤資料。</p>
       ) : (
         <ul class="tag-overview-list">
           {tagOverview.map(([tag, count]) => (
@@ -183,6 +188,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
       )}
     </div>
   </section>
+  </main>
 </BlogLayout>
 
 <style is:global>
@@ -206,7 +212,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     gap: 6px;
     font-size: 12px;
     font-weight: 600;
-    color: #56c7bb;
+    color: #0d7c70;
     background: #eaf8f7;
     padding: 5px 12px;
     border-radius: 999px;
@@ -216,7 +222,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #56c7bb;
+    background: #0d7c70;
     flex-shrink: 0;
   }
   .hero-h1 {
@@ -242,7 +248,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     flex-wrap: wrap;
   }
   .btn-primary {
-    background: #56c7bb;
+    background: #0d7c70;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -256,7 +262,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     display: inline-block;
   }
   .btn-primary:hover {
-    background: #4ebcb1;
+    background: #0a6a60;
   }
   .btn-secondary {
     background: #fff;
@@ -274,8 +280,8 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     display: inline-block;
   }
   .btn-secondary:hover {
-    border-color: #56c7bb;
-    color: #56c7bb;
+    border-color: #0d7c70;
+    color: #0d7c70;
   }
 
   .hero-art-wrap {
@@ -380,7 +386,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
       background 150ms ease;
   }
   .tag-overview-item:hover {
-    border-color: #56c7bb;
+    border-color: #0d7c70;
     background: #f8fcfb;
   }
   .tag-overview-name {
@@ -390,7 +396,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   }
   .tag-overview-count {
     font-size: 12px;
-    color: #56c7bb;
+    color: #0d7c70;
     font-weight: 700;
     background: #eaf8f7;
     border-radius: 999px;
@@ -410,7 +416,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   .popular-label {
     font-size: 12px;
     font-weight: 600;
-    color: #56c7bb;
+    color: #0d7c70;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 8px;
@@ -424,7 +430,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     font-family: "PingFang TC", "Noto Sans TC", Arial, sans-serif;
   }
   .popular-see-all {
-    color: #56c7bb;
+    color: #0d7c70;
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
@@ -432,7 +438,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     font-family: "PingFang TC", "Noto Sans TC", Arial, sans-serif;
   }
   .popular-see-all:hover {
-    color: #4ebcb1;
+    color: #0a6a60;
   }
 
   /* Cards (shared with archive) */
@@ -514,7 +520,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   .tag {
     font-size: 11px;
     font-weight: 500;
-    color: #56c7bb;
+    color: #0d7c70;
     background: #eaf8f7;
     border-radius: 999px;
     padding: 2px 8px;
@@ -527,7 +533,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   }
   .card-excerpt {
     font-size: 13.5px;
-    color: #9a9a9a;
+    color: var(--color-text-muted);
     line-height: 1.65;
     flex: 1;
     display: -webkit-box;
@@ -541,7 +547,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   }
   .card-date {
     font-size: 12px;
-    color: #c0c0c0;
+    color: var(--color-text-faint);
   }
 
   @media (max-width: 768px) {

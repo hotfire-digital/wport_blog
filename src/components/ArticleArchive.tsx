@@ -131,7 +131,7 @@ export default function ArticleArchive({ posts, allTags }: Props) {
             borderRadius: 999,
             border: `1px solid ${activeTag === null ? "#56C7BB" : "#D7D7D7"}`,
             background: activeTag === null ? "#EAF8F7" : "#fff",
-            color: activeTag === null ? "#56C7BB" : "#5D5D5D",
+            color: activeTag === null ? "#0D7C70" : "#5D5D5D",
             cursor: "pointer",
             fontWeight: activeTag === null ? 600 : 400,
             transition: "all 120ms ease",
@@ -150,7 +150,7 @@ export default function ArticleArchive({ posts, allTags }: Props) {
               borderRadius: 999,
               border: `1px solid ${activeTag === tag ? "#56C7BB" : "#D7D7D7"}`,
               background: activeTag === tag ? "#EAF8F7" : "#fff",
-              color: activeTag === tag ? "#56C7BB" : "#5D5D5D",
+              color: activeTag === tag ? "#0D7C70" : "#5D5D5D",
               cursor: "pointer",
               fontWeight: activeTag === tag ? 600 : 400,
               transition: "all 120ms ease",
@@ -164,7 +164,7 @@ export default function ArticleArchive({ posts, allTags }: Props) {
 
       {/* Results */}
       {filtered.length === 0 ? (
-        <p style={{ color: "#9A9A9A", fontSize: 15 }}>找不到符合的文章。</p>
+        <p style={{ color: "#707070", fontSize: 15 }}>找不到符合的文章。</p>
       ) : (
         <ul className="card-grid">
           {filtered.map((post) => (

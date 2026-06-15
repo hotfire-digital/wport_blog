@@ -3,8 +3,12 @@ import "../styles/global.css";
 
 interface Props {
   title?: string;
+  description?: string;
 }
-const { title = "Wport Blog" } = Astro.props;
+const {
+  title = "Wport Blog",
+  description = "wport 設計誌：專為在台僑外生打造的設計求職指南，彙整作品集、履歷、面試與簽證等職涯資源。",
+} = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
 const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
 const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
@@ -15,6 +19,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
     <link rel="icon" type="image/x-icon" href={withBase("/favicon.ico")} />
     <link rel="preload" href={withBase("/fonts/NotoSansTC-VariableFont_wght.ttf")} as="font" type="font/ttf" crossorigin />
     <title>{title}</title>
