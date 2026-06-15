@@ -14,10 +14,12 @@
 
 /* ─── Design Tokens ──────────────────────────────────────────── */
 :root {
-  --color-primary:        #56C7BB;
-  --color-primary-hover:  #4EBCB1;
+  --color-primary:        #0D7C70;
+  --color-primary-hover:  #0A6A60;
   --color-primary-light:  #EAF8F7;
   --color-primary-muted:  #A8E4DF;
+  /* Bright brand teal — for large decorative fills only, NOT text/small UI (fails WCAG as text). */
+  --color-brand-bright:   #56C7BB;
 
   --color-bg:             #FFFFFF;
   --color-bg-hover:       #F8F7F7;
@@ -28,9 +30,10 @@
 
   --color-text:           #5D5D5D;
   --color-text-strong:    #2E2E2E;
-  --color-text-muted:     #9A9A9A;
-  --color-text-link:      #56C7BB;
-  --color-text-link-hover:#4EBCB1;
+  --color-text-muted:     #707070;
+  --color-text-faint:     #757575;
+  --color-text-link:      #0D7C70;
+  --color-text-link-hover:#0A6A60;
 
   --fg-primary:    var(--color-text);
   --fg-heading:    var(--color-text-strong);
