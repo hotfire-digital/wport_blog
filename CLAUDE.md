@@ -38,6 +38,10 @@ Full server-side rendering (`output: "server"` in astro.config.mjs). All pages a
 - **Services/helpers** go in `src/lib/` (or `src/lib/services/` for extracted business logic).
 - **Shared types** (entities, DTOs) go in `src/types.ts`.
 
+## Content Writing Rules
+
+- **禁止使用「——」（破折號）**：撰寫或編輯任何部落格文章時，不得使用「——」這個標點符號。請改用句號、逗號或將句子拆開重寫。
+
 ### Environment
 - Node.js v22.14.0 (see `.nvmrc`)
 - Env vars: `SUPABASE_URL`, `SUPABASE_KEY` (copy `.env.example` to `.env`)
