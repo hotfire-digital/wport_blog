@@ -49,6 +49,55 @@ const shareText = encodeURIComponent(`${post.data.title}｜Wport Blog`);
 const baseUrl = import.meta.env.BASE_URL;
 const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
 const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
+
+const rawMdPath = withBase(`/posts/${post.id}.md`);
+const rawMdUrl = `https://wport.me/blog/posts/${post.id}.md`;
+
+function needsYamlQuoting(str: string): boolean {
+  if (str.length === 0) return true;
+  if (/^\s|\s$/.test(str)) return true;
+  if (/[:#&*!|>'"%@`\n\r\t]/.test(str)) return true;
+  if (/^(true|false|null|yes|no|on|off|~)$/i.test(str)) return true;
+  if (/^-?\d/.test(str)) return true;
+  return false;
+}
+
+function yamlString(value: string): string {
+  if (!needsYamlQuoting(value)) return value;
+  const escaped = value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+  return `"${escaped}"`;
+}
+
+const frontmatterLines: string[] = ["---"];
+frontmatterLines.push(`title: ${yamlString(post.data.title)}`);
+frontmatterLines.push(`description: ${yamlString(post.data.description)}`);
+frontmatterLines.push(`publishDate: ${post.data.publishDate.toISOString().slice(0, 10)}`);
+if (post.data.tags && post.data.tags.length > 0) {
+  frontmatterLines.push("tags:");
+  for (const tag of post.data.tags) {
+    frontmatterLines.push(`  - ${yamlString(tag)}`);
+  }
+}
+if (post.data.featured) {
+  frontmatterLines.push(`featured: ${post.data.featured}`);
+}
+if (post.data.cover) {
+  frontmatterLines.push(`cover: ${yamlString(post.data.cover)}`);
+}
+frontmatterLines.push("---");
+
+const rawMarkdown = `${frontmatterLines.join("\n")}\n\n${(post.body ?? "").trim()}\n`;
+
+const clientVars = {
+  shareUrl,
+  rawMdUrl,
+  postTitle: post.data.title,
+  postDescription: post.data.description,
+  postPublishDate: post.data.publishDate.toISOString().slice(0, 10),
+  postTags: post.data.tags ?? [],
+  postCover: post.data.cover ?? null,
+  rawMarkdown,
+};
 ---
 
 <BlogLayout
@@ -59,6 +108,9 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   tags={post.data.tags}
   canonicalUrl={shareUrl}
 >
+  <Fragment slot="head">
+    <link rel="alternate" type="text/markdown" href={rawMdUrl} title="Raw Markdown" />
+  </Fragment>
   <Topbar />
 
   <main class="post-main">
@@ -83,9 +135,14 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
       <article>
         <header class="post-header">
           <div class="post-tags">
-            {post.data.tags && post.data.tags.slice(0, 4).map((tag: string) => (
-              <a href={`${withBase("/archive")}?tag=${encodeURIComponent(tag)}`} class="tag">{tag}</a>
-            ))}
+            {
+              post.data.tags &&
+                post.data.tags.slice(0, 4).map((tag: string) => (
+                  <a href={`${withBase("/archive")}?tag=${encodeURIComponent(tag)}`} class="tag">
+                    {tag}
+                  </a>
+                ))
+            }
           </div>
           <h1 class="post-title">
             {post.data.title}
@@ -348,7 +405,33 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
               </svg>
               Copy as Text
             </button>
+            <a
+              class="copy-btn copy-btn-open"
+              href={rawMdPath}
+              target="_blank"
+              rel="noopener"
+              title="在新分頁開啟原始 Markdown（AI 友善端點）"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#56C7BB"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              Open Raw .md
+            </a>
           </div>
+          <p class="copy-hint">
+            提示：把 <code>.md</code> 網址貼給 ChatGPT / Claude，就能直接餵給 AI 讀原文。
+          </p>
         </div>
       </aside>
     </div>
@@ -577,6 +660,23 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     flex-direction: column;
     gap: 6px;
   }
+  .copy-btn-open {
+    text-decoration: none;
+    color: var(--fg-primary);
+  }
+  .copy-hint {
+    margin: 10px 0 0;
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--fg-meta);
+  }
+  .copy-hint code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: var(--bg-code);
+    border-radius: var(--radius-sm);
+    padding: 1px 5px;
+  }
 
   .post-toast {
     position: fixed;
@@ -660,7 +760,9 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     background-size: fit-content 100%;
     display: table;
   }
-  .prose h4 + p { margin-top: 8px; }
+  .prose h4 + p {
+    margin-top: 8px;
+  }
   .prose img {
     display: block;
     width: 100%;
@@ -715,8 +817,16 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     color: var(--fg-heading);
     line-height: 1.65;
   }
-  .prose ul { list-style: disc; padding-left: 24px; margin-bottom: 22px; }
-  .prose ol { list-style: decimal; padding-left: 24px; margin-bottom: 22px; }
+  .prose ul {
+    list-style: disc;
+    padding-left: 24px;
+    margin-bottom: 22px;
+  }
+  .prose ol {
+    list-style: decimal;
+    padding-left: 24px;
+    margin-bottom: 22px;
+  }
   .prose li {
     margin-bottom: 8px;
   }
@@ -886,7 +996,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   }
 </style>
 
-<script is:inline define:vars={{ shareUrl, postTitle: post.data.title, postDescription: post.data.description }}>
+<script is:inline define:vars={clientVars}>
   // 閱讀進度條
   const sidebarFill = document.getElementById("sidebar-progress-fill");
   const progressPct = document.getElementById("progress-pct");
@@ -970,53 +1080,33 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     });
   });
 
-  // 複製 JSON
+  // 複製 JSON：使用原始 Markdown 作為內容欄位，AI 讀完全無損。
   document.getElementById("copy-json-btn")?.addEventListener("click", () => {
-    const prose = document.querySelector(".prose");
-    const blocks = [];
-    if (prose) {
-      prose.querySelectorAll("h2,h3,p,blockquote,pre,hr").forEach((el) => {
-        const tag = el.tagName.toLowerCase();
-        const text = el.textContent?.trim() || "";
-        if (tag === "hr") blocks.push({ type: "hr" });
-        else blocks.push({ type: tag, text });
-      });
-    }
-    const json = JSON.stringify(
-      {
-        title: postTitle,
-        description: postDescription,
-        url: shareUrl,
-        content: blocks,
-      },
-      null,
-      2
-    );
+    const payload = {
+      title: postTitle,
+      description: postDescription,
+      url: shareUrl,
+      raw_url: rawMdUrl,
+      publishDate: postPublishDate,
+      tags: postTags,
+      cover: postCover,
+      content_format: "markdown",
+      content: rawMarkdown,
+    };
+    const json = JSON.stringify(payload, null, 2);
     navigator.clipboard.writeText(json).then(() => showToast("已複製為 JSON"));
   });
 
-  // 複製 Markdown
+  // 複製 Markdown：直接送出 build 時預先組好的原始 Markdown（含 frontmatter）。
   document.getElementById("copy-md-btn")?.addEventListener("click", () => {
-    const prose = document.querySelector(".prose");
-    if (!prose) return;
-    let md = `# ${postTitle}\n\n${postDescription}\n\n---\n\n`;
-    prose.querySelectorAll("h2,h3,p,blockquote,pre,hr").forEach((el) => {
-      const tag = el.tagName.toLowerCase();
-      const text = el.textContent?.trim() || "";
-      if (tag === "h2") md += `## ${text}\n\n`;
-      else if (tag === "h3") md += `### ${text}\n\n`;
-      else if (tag === "blockquote") md += `> ${text}\n\n`;
-      else if (tag === "pre") md += "```\n" + text + "\n```\n\n";
-      else if (tag === "hr") md += "---\n\n";
-      else md += `${text}\n\n`;
-    });
-    navigator.clipboard.writeText(md.trim()).then(() => showToast("已複製為 Markdown"));
+    navigator.clipboard.writeText(rawMarkdown).then(() => showToast("已複製為 Markdown"));
   });
 
-  // 複製純文字
+  // 複製純文字：仍保留 DOM textContent 版本，讀起來最平順。
   document.getElementById("copy-text-btn")?.addEventListener("click", () => {
     const prose = document.querySelector(".prose");
     if (!prose) return;
-    navigator.clipboard.writeText(prose.textContent?.trim() || "").then(() => showToast("已複製純文字"));
+    const plain = (prose.textContent || "").replace(/\n{3,}/g, "\n\n").trim();
+    navigator.clipboard.writeText(plain).then(() => showToast("已複製純文字"));
   });
 </script>
