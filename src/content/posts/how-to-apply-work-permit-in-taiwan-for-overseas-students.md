@@ -2,7 +2,7 @@
 title: "如何在台灣申請工作許可？僑外生必讀完整流程（2026 最新制度）"
 description: "僑外生在台灣工作前一定要看！整理工作許可申請流程、2026 新制免許可期間、適用對象與常見注意事項，一篇搞懂。"
 publishDate: 2026-06-10
-tags: ["僑外生", "工作許可", "在台工作", "求職", "外籍人才", "2026新制", "居留證"]
+tags: ["僑外生", "工作許可", "在台工作", "2026新制"]
 featured: false
 cover: "https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=1600"
 ---

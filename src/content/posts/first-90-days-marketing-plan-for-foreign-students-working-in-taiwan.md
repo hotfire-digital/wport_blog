@@ -2,7 +2,7 @@
 title: "入職前 90 天職涯行銷計畫：僑外生在台灣如何做出可見績效"
 description: "拿到 offer 後，如何用行銷思維設計前 90 天行動，建立信任、做出成果，強化留任與升遷機會。"
 publishDate: 2026-05-12
-tags: ["僑外生", "職涯成長", "在台工作", "行銷策略"]
+tags: ["僑外生", "在台工作", "職涯發展", "個人品牌"]
 featured: false
 draft: true
 cover: "https://images.pexels.com/photos/6829538/pexels-photo-6829538.jpeg?auto=compress&cs=tinysrgb&w=1600"

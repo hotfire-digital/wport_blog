@@ -2,7 +2,7 @@
 title: "僑外生在台找工作：用 SEO 關鍵字策略提升履歷曝光與面試率"
 description: "從 SEO 專家的角度，教你把履歷、作品集與求職平台欄位做成可被搜尋的關鍵字資產。"
 publishDate: 2026-05-07
-tags: ["僑外生", "SEO", "履歷優化", "台灣求職"]
+tags: ["僑外生", "SEO", "履歷", "求職"]
 featured: false
 draft: true
 cover: "https://images.pexels.com/photos/7947663/pexels-photo-7947663.jpeg?auto=compress&cs=tinysrgb&w=1600"
