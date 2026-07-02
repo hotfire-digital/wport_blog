@@ -2,7 +2,7 @@
 title: "【工作許可懶人包】僑外生在台灣合法工作的第一步（2026 完整流程）"
 description: "僑外生在台灣工作前，一定要先拿到工作許可！本篇整理申辦 4 步驟、必備文件、審核時間與常見問題，附快速對照表，讓你第一次就搞懂。"
 publishDate: 2026-06-10
-tags: ["僑外生", "工作許可", "在台工作", "懶人包", "外籍人才", "居留證", "勞動部"]
+tags: ["僑外生", "工作許可", "居留證", "外籍人才"]
 featured: false
 cover: "https://images.pexels.com/photos/4386321/pexels-photo-4386321.jpeg?auto=compress&cs=tinysrgb&w=1600"
 ---

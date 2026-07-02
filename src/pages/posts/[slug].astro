@@ -79,16 +79,13 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
       <article>
         <header class="post-header">
           <div class="post-tags">
-            {post.data.tags && post.data.tags.map((tag: string) => (
+            {post.data.tags && post.data.tags.slice(0, 4).map((tag: string) => (
               <a href={`${withBase("/archive")}?tag=${encodeURIComponent(tag)}`} class="tag">{tag}</a>
             ))}
           </div>
           <h1 class="post-title">
             {post.data.title}
           </h1>
-          <p class="post-description">
-            {post.data.description}
-          </p>
           <div class="post-meta-row">
             <span class="post-meta-date">
               {post.data.publishDate.toLocaleDateString("zh-TW", {
@@ -96,6 +93,9 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
               })}
             </span>
           </div>
+          <p class="post-description">
+            {post.data.description}
+          </p>
         </header>
 
         <div class="prose">
@@ -328,9 +328,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   .post-meta-row {
     display: flex;
     align-items: center;
-    padding: 16px 0;
-    border-top: 1px solid var(--bg-code);
-    border-bottom: 1px solid var(--bg-code);
+    padding: 8px 0;
   }
   .post-meta-date {
     font-size: var(--text-sm);
@@ -484,6 +482,22 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   .prose p  { margin-bottom: 12px; }
   .prose h2 { font-size: var(--text-xl); font-weight: var(--weight-bold); color: var(--fg-heading); line-height: var(--leading-tight); margin-top: var(--space-12); margin-bottom: 14px; }
   .prose h3 { font-size: var(--text-lg); font-weight: var(--weight-bold); color: var(--fg-heading); line-height: var(--leading-tight); margin-top: var(--space-8); margin-bottom: 10px; }
+  .prose h4 {
+    font-size: var(--text-base);
+    font-weight: var(--weight-bold);
+    color: var(--fg-heading);
+    line-height: var(--leading-tight);
+    margin-top: var(--space-6);
+    margin-bottom: 8px;
+  }
+  .prose h4 > span,
+  .prose h4 {
+    background-image: linear-gradient(transparent 55%, rgba(86, 199, 187, 0.35) 55%);
+    background-repeat: no-repeat;
+    background-size: fit-content 100%;
+    display: table;
+  }
+  .prose h4 + p { margin-top: 8px; }
   .prose img {
     display: block;
     width: 100%;

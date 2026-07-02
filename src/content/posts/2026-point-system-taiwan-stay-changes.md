@@ -2,7 +2,7 @@
 title: "2026 評點制留台變化：僑外生該怎麼提早布局"
 description: "整理 2026 年評點制實務上最重要的調整方向，帶你用「分數策略」思考留台與求職節奏。"
 publishDate: 2026-05-06
-tags: ["僑外生", "評點制", "留台", "工作許可"]
+tags: ["僑外生", "工作許可", "留台", "2026新制"]
 featured: false
 cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1781164363/wport-blog/kaiyuan-seminar-small.jpg"
 ---

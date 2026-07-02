@@ -132,7 +132,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
                     <div class="card-body">
                       {post.data.tags && post.data.tags.length > 0 && (
                         <div class="card-tags">
-                          {post.data.tags.map((tag: string) => (
+                          {post.data.tags.slice(0, 4).map((tag: string) => (
                             <span class="tag">{tag}</span>
                           ))}
                         </div>
@@ -173,10 +173,10 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
         <ul class="tag-overview-list">
           {tagOverview.map(([tag, count]) => (
             <li>
-              <span class="tag-overview-item">
+              <a href={`${withBase("/archive")}?tag=${encodeURIComponent(tag)}`} class="tag-overview-item">
                 <span class="tag-overview-name">{tag}</span>
                 <span class="tag-overview-count">{count}</span>
-              </span>
+              </a>
             </li>
           ))}
         </ul>

@@ -194,7 +194,7 @@ export default function ArticleArchive({ posts, allTags }: Props) {
                 <div className="card-body">
                   {post.tags && post.tags.length > 0 && (
                     <div className="card-tags">
-                      {post.tags.map((tag) => (
+                      {post.tags.slice(0, 4).map((tag) => (
                         <span key={tag} className="tag">
                           {tag}
                         </span>
