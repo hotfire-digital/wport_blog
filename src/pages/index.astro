@@ -2,6 +2,8 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import Topbar from "@/components/Topbar.astro";
+import CoverImage from "@/components/CoverImage.astro";
+import { getCoverImageUrls } from "@/lib/cover-image";
 
 const allPosts = await getCollection("posts", ({ data }) => !data.draft);
 const sorted = allPosts.sort(
@@ -11,15 +13,12 @@ const sorted = allPosts.sort(
 
 const featured = sorted.filter((p) => p.data.featured).slice(0, 3);
 const popular = featured.length > 0 ? featured : sorted.slice(0, 3);
-const tagCountMap = sorted.reduce(
-  (acc, post) => {
-    for (const tag of post.data.tags ?? []) {
-      acc.set(tag, (acc.get(tag) ?? 0) + 1);
-    }
-    return acc;
-  },
-  new Map<string, number>()
-);
+const tagCountMap = sorted.reduce((acc, post) => {
+  for (const tag of post.data.tags ?? []) {
+    acc.set(tag, (acc.get(tag) ?? 0) + 1);
+  }
+  return acc;
+}, new Map<string, number>());
 const tagOverview = [...tagCountMap.entries()].sort((a, b) => {
   if (b[1] !== a[1]) {
     return b[1] - a[1];
@@ -38,151 +37,173 @@ const COVER_COLORS = [
 const baseUrl = import.meta.env.BASE_URL;
 const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
 const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
+
+const lcpCoverSource = popular[0]?.data.cover;
+const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : undefined;
 ---
 
-<BlogLayout title="Wport Blog — 在台僑外生找設計工作的完整指南">
+<BlogLayout
+  title="Wport Blog — 在台僑外生找設計工作的完整指南"
+  description="wport 設計誌彙整在台求職所需的設計思維與職涯資源——從作品集、履歷到面試與簽證，幫助在台僑外生找到理想的 UI/UX 設計工作。"
+>
+  {
+    lcpCover && (
+    <link
+      slot="head"
+      rel="preload"
+      as="image"
+      href={lcpCover.default}
+      imagesrcset={lcpCover.srcset}
+      imagesizes={lcpCover.sizes}
+      fetchpriority="high"
+    />
+    )
+  }
   <Topbar currentPage="home" />
 
-  <!-- HERO -->
-  <section class="hero-section">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          專為在台僑外生打造
+  <main>
+    <!-- HERO -->
+    <section class="hero-section">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            專為在台僑外生打造
+          </div>
+          <h1 class="hero-h1">
+            在台僑外生<br />找設計工作的完整指南
+          </h1>
+          <h2 class="hero-h2">
+            從作品集到面試、從履歷到簽證——wport 設計誌彙整在台求職所需的設計思維與職涯資源，幫助你在台灣找到理想的 UI/UX
+            設計工作。
+          </h2>
+          <div class="hero-ctas">
+            <a href={withBase("/archive")} class="btn-primary">瀏覽所有文章 →</a>
+            <a href="#popular" class="btn-secondary">熱門文章</a>
+          </div>
         </div>
-        <h1 class="hero-h1">
-          在台僑外生<br />找設計工作的完整指南
-        </h1>
-        <h2 class="hero-h2">
-          從作品集到面試、從履歷到簽證——wport 設計誌彙整在台求職所需的設計思維與職涯資源，幫助你在台灣找到理想的 UI/UX
-          設計工作。
-        </h2>
-        <div class="hero-ctas">
-          <a href={withBase("/archive")} class="btn-primary">瀏覽所有文章 →</a>
-          <a href="#popular" class="btn-secondary">熱門文章</a>
+        <div class="hero-art-wrap">
+          <div class="hero-figure">
+            <img
+              src={withBase("/mascot-graduation.png")}
+              alt="Wport mascot - graduation"
+              class="hero-mascot hero-mascot--graduation"
+              width="832"
+              height="832"
+              decoding="async"
+              fetchpriority="high"
+            />
+            <img
+              src={withBase("/mascot-cooperation.png")}
+              alt="Wport mascot - cooperation"
+              class="hero-mascot hero-mascot--cooperation"
+              width="832"
+              height="832"
+              decoding="async"
+            />
+          </div>
         </div>
       </div>
-      <div class="hero-art-wrap">
-        <div class="hero-figure">
-          <img
-            src={withBase("/mascot-graduation.png")}
-            alt="Wport mascot - graduation"
-            class="hero-mascot hero-mascot--graduation"
-            width="832"
-            height="832"
-            decoding="async"
-            fetchpriority="high"
-          />
-          <img
-            src={withBase("/mascot-cooperation.png")}
-            alt="Wport mascot - cooperation"
-            class="hero-mascot hero-mascot--cooperation"
-            width="832"
-            height="832"
-            decoding="async"
-          />
+    </section>
+
+    <!-- POPULAR ARTICLES -->
+    <section id="popular" class="popular-section">
+      <div class="popular-inner">
+        <div class="popular-header">
+          <div>
+            <div class="popular-label">POPULAR</div>
+            <h2 class="popular-title">熱門文章</h2>
+          </div>
+          <a href={withBase("/archive")} class="popular-see-all">查看全部 →</a>
         </div>
+
+        {
+          popular.length === 0 ? (
+            <p style="color: var(--color-text-muted); font-size: 15px;">目前還沒有文章。</p>
+          ) : (
+            <ul class="card-grid">
+              {popular.map((post, i) => {
+                const cover = COVER_COLORS[i % COVER_COLORS.length];
+                return (
+                  <li>
+                    <a href={withBase(`/posts/${post.id}`)} class="card">
+                      <div class="card-cover" style={`background: ${cover.hue};`}>
+                        {post.data.cover ? (
+                          <CoverImage
+                            src={post.data.cover}
+                            alt={`${post.data.title} cover`}
+                            class="card-cover-image"
+                            loading={i === 0 ? "eager" : "lazy"}
+                            fetchpriority={i === 0 ? "high" : "auto"}
+                          />
+                        ) : (
+                          <>
+                            <div class="card-cover-shape1" style={`background: ${cover.accent};`} />
+                            <div class="card-cover-shape2" style={`background: ${cover.accent};`} />
+                            <div class="card-cover-label" style={`color: ${cover.accent};`}>
+                              wport
+                            </div>
+                          </>
+                        )}
+                      </div>
+                      <div class="card-body">
+                        {post.data.tags && post.data.tags.length > 0 && (
+                          <div class="card-tags">
+                            {post.data.tags.slice(0, 4).map((tag: string) => (
+                              <span class="tag">{tag}</span>
+                            ))}
+                          </div>
+                        )}
+                        <div class="card-title">{post.data.title}</div>
+                        <div class="card-excerpt">{post.data.description}</div>
+                        <div class="card-footer">
+                          <span class="card-date">
+                            {post.data.publishDate.toLocaleDateString("zh-TW", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                          </span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          )
+        }
       </div>
     </div>
   </section>
 
-  <!-- POPULAR ARTICLES -->
-  <section id="popular" class="popular-section">
-    <div class="popular-inner">
-      <div class="popular-header">
-        <div>
-          <div class="popular-label">POPULAR</div>
-          <h2 class="popular-title">熱門文章</h2>
+    <section class="tag-overview-section">
+      <div class="tag-overview-inner">
+        <div class="popular-header">
+          <div>
+            <div class="popular-label">TAG OVERVIEW</div>
+            <h2 class="popular-title">標籤總覽</h2>
+          </div>
         </div>
-        <a href={withBase("/archive")} class="popular-see-all">查看全部 →</a>
-      </div>
-
-      {
-        popular.length === 0 ? (
-          <p style="color: #9A9A9A; font-size: 15px;">目前還沒有文章。</p>
-        ) : (
-          <ul class="card-grid">
-            {popular.map((post, i) => {
-              const cover = COVER_COLORS[i % COVER_COLORS.length];
-              return (
+        {
+          tagOverview.length === 0 ? (
+            <p style="color: var(--color-text-muted); font-size: 15px;">目前還沒有標籤資料。</p>
+          ) : (
+            <ul class="tag-overview-list">
+              {tagOverview.map(([tag, count]) => (
                 <li>
-                  <a href={withBase(`/posts/${post.id}`)} class="card">
-                    <div class="card-cover" style={`background: ${cover.hue};`}>
-                      {post.data.cover ? (
-                        <img
-                          src={post.data.cover}
-                          alt={`${post.data.title} cover`}
-                          class="card-cover-image"
-                          width="1600"
-                          height="900"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      ) : (
-                        <>
-                          <div class="card-cover-shape1" style={`background: ${cover.accent};`} />
-                          <div class="card-cover-shape2" style={`background: ${cover.accent};`} />
-                          <div class="card-cover-label" style={`color: ${cover.accent};`}>
-                            wport
-                          </div>
-                        </>
-                      )}
-                    </div>
-                    <div class="card-body">
-                      {post.data.tags && post.data.tags.length > 0 && (
-                        <div class="card-tags">
-                          {post.data.tags.slice(0, 4).map((tag: string) => (
-                            <span class="tag">{tag}</span>
-                          ))}
-                        </div>
-                      )}
-                      <div class="card-title">{post.data.title}</div>
-                      <div class="card-excerpt">{post.data.description}</div>
-                      <div class="card-footer">
-                        <span class="card-date">
-                          {post.data.publishDate.toLocaleDateString("zh-TW", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
-                        </span>
-                      </div>
-                    </div>
+                  <a href={`${withBase("/archive")}?tag=${encodeURIComponent(tag)}`} class="tag-overview-item">
+                    <span class="tag-overview-name">{tag}</span>
+                    <span class="tag-overview-count">{count}</span>
                   </a>
                 </li>
-              );
-            })}
-          </ul>
-        )
-      }
-    </div>
-  </section>
-
-  <section class="tag-overview-section">
-    <div class="tag-overview-inner">
-      <div class="popular-header">
-        <div>
-          <div class="popular-label">TAG OVERVIEW</div>
-          <h2 class="popular-title">標籤總覽</h2>
-        </div>
+              ))}
+            </ul>
+          )
+        }
       </div>
-      {tagOverview.length === 0 ? (
-        <p style="color: #9A9A9A; font-size: 15px;">目前還沒有標籤資料。</p>
-      ) : (
-        <ul class="tag-overview-list">
-          {tagOverview.map(([tag, count]) => (
-            <li>
-              <a href={`${withBase("/archive")}?tag=${encodeURIComponent(tag)}`} class="tag-overview-item">
-                <span class="tag-overview-name">{tag}</span>
-                <span class="tag-overview-count">{count}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  </section>
+    </section>
+  </main>
 </BlogLayout>
 
 <style is:global>
@@ -206,7 +227,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     gap: 6px;
     font-size: 12px;
     font-weight: 600;
-    color: #56c7bb;
+    color: #0d7c70;
     background: #eaf8f7;
     padding: 5px 12px;
     border-radius: 999px;
@@ -216,7 +237,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #56c7bb;
+    background: #0d7c70;
     flex-shrink: 0;
   }
   .hero-h1 {
@@ -242,7 +263,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     flex-wrap: wrap;
   }
   .btn-primary {
-    background: #56c7bb;
+    background: #0d7c70;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -256,7 +277,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     display: inline-block;
   }
   .btn-primary:hover {
-    background: #4ebcb1;
+    background: #0a6a60;
   }
   .btn-secondary {
     background: #fff;
@@ -274,8 +295,8 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     display: inline-block;
   }
   .btn-secondary:hover {
-    border-color: #56c7bb;
-    color: #56c7bb;
+    border-color: #0d7c70;
+    color: #0d7c70;
   }
 
   .hero-art-wrap {
@@ -380,7 +401,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
       background 150ms ease;
   }
   .tag-overview-item:hover {
-    border-color: #56c7bb;
+    border-color: #0d7c70;
     background: #f8fcfb;
   }
   .tag-overview-name {
@@ -390,7 +411,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   }
   .tag-overview-count {
     font-size: 12px;
-    color: #56c7bb;
+    color: #0d7c70;
     font-weight: 700;
     background: #eaf8f7;
     border-radius: 999px;
@@ -410,7 +431,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   .popular-label {
     font-size: 12px;
     font-weight: 600;
-    color: #56c7bb;
+    color: #0d7c70;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 8px;
@@ -424,7 +445,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     font-family: "PingFang TC", "Noto Sans TC", Arial, sans-serif;
   }
   .popular-see-all {
-    color: #56c7bb;
+    color: #0d7c70;
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
@@ -432,7 +453,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     font-family: "PingFang TC", "Noto Sans TC", Arial, sans-serif;
   }
   .popular-see-all:hover {
-    color: #4ebcb1;
+    color: #0a6a60;
   }
 
   /* Cards (shared with archive) */
@@ -514,7 +535,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   .tag {
     font-size: 11px;
     font-weight: 500;
-    color: #56c7bb;
+    color: #0d7c70;
     background: #eaf8f7;
     border-radius: 999px;
     padding: 2px 8px;
@@ -527,7 +548,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   }
   .card-excerpt {
     font-size: 13.5px;
-    color: #9a9a9a;
+    color: var(--color-text-muted);
     line-height: 1.65;
     flex: 1;
     display: -webkit-box;
@@ -541,7 +562,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   }
   .card-date {
     font-size: 12px;
-    color: #c0c0c0;
+    color: var(--color-text-faint);
   }
 
   @media (max-width: 768px) {
