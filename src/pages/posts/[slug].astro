@@ -52,51 +52,13 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
 
 const rawMdPath = withBase(`/posts/${post.id}.md`);
 const rawMdUrl = `https://wport.me/blog/posts/${post.id}.md`;
-
-function needsYamlQuoting(str: string): boolean {
-  if (str.length === 0) return true;
-  if (/^\s|\s$/.test(str)) return true;
-  if (/[:#&*!|>'"%@`\n\r\t]/.test(str)) return true;
-  if (/^(true|false|null|yes|no|on|off|~)$/i.test(str)) return true;
-  if (/^-?\d/.test(str)) return true;
-  return false;
-}
-
-function yamlString(value: string): string {
-  if (!needsYamlQuoting(value)) return value;
-  const escaped = value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
-  return `"${escaped}"`;
-}
-
-const frontmatterLines: string[] = ["---"];
-frontmatterLines.push(`title: ${yamlString(post.data.title)}`);
-frontmatterLines.push(`description: ${yamlString(post.data.description)}`);
-frontmatterLines.push(`publishDate: ${post.data.publishDate.toISOString().slice(0, 10)}`);
-if (post.data.tags && post.data.tags.length > 0) {
-  frontmatterLines.push("tags:");
-  for (const tag of post.data.tags) {
-    frontmatterLines.push(`  - ${yamlString(tag)}`);
-  }
-}
-if (post.data.featured) {
-  frontmatterLines.push(`featured: ${post.data.featured}`);
-}
-if (post.data.cover) {
-  frontmatterLines.push(`cover: ${yamlString(post.data.cover)}`);
-}
-frontmatterLines.push("---");
-
-const rawMarkdown = `${frontmatterLines.join("\n")}\n\n${(post.body ?? "").trim()}\n`;
+const rawJsonPath = withBase(`/posts/${post.id}.json`);
+const rawJsonUrl = `https://wport.me/blog/posts/${post.id}.json`;
 
 const clientVars = {
   shareUrl,
   rawMdUrl,
-  postTitle: post.data.title,
-  postDescription: post.data.description,
-  postPublishDate: post.data.publishDate.toISOString().slice(0, 10),
-  postTags: post.data.tags ?? [],
-  postCover: post.data.cover ?? null,
-  rawMarkdown,
+  rawJsonUrl,
 };
 ---
 
@@ -109,7 +71,7 @@ const clientVars = {
   canonicalUrl={shareUrl}
 >
   <Fragment slot="head">
-    <link rel="alternate" type="text/markdown" href={rawMdUrl} title="Raw Markdown" />
+    <link rel="alternate" type="text/markdown" href={rawMdUrl} title="Markdown 原文（AI 友善）" />
   </Fragment>
   <Topbar />
 
@@ -259,6 +221,127 @@ const clientVars = {
           <nav id="toc" class="toc"></nav>
         </div>
 
+        <!-- AI 友善複製 -->
+        <div class="sidebar-card">
+          <div class="sidebar-label sidebar-section-label">AI 友善複製</div>
+
+          <div class="ai-copy-group">
+            <div class="ai-copy-group-label">Markdown (.md)</div>
+            <div class="ai-copy-row">
+              <a
+                class="ai-copy-btn ai-copy-btn-primary"
+                href={rawMdPath}
+                target="_blank"
+                rel="noopener"
+                title="在新分頁開啟 Markdown 原文"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Open
+              </a>
+              <button class="ai-copy-btn" id="copy-md-btn" type="button">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy as MD
+              </button>
+            </div>
+          </div>
+
+          <div class="ai-copy-divider" aria-hidden="true"></div>
+
+          <div class="ai-copy-group">
+            <div class="ai-copy-group-label">JSON</div>
+            <div class="ai-copy-row">
+              <a
+                class="ai-copy-btn ai-copy-btn-primary"
+                href={rawJsonPath}
+                target="_blank"
+                rel="noopener"
+                title="在新分頁開啟 JSON 原文"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Open
+              </a>
+              <button class="ai-copy-btn" id="copy-json-btn" type="button">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy as JSON
+              </button>
+            </div>
+          </div>
+
+          <div class="ai-copy-callout" role="note">
+            <svg
+              class="ai-copy-callout-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <p>把 Open 的 URL 複製給 AI 就能讀原文。</p>
+          </div>
+        </div>
+
         <!-- 分享 -->
         <div class="sidebar-card">
           <div class="sidebar-label sidebar-section-label">分享</div>
@@ -351,87 +434,6 @@ const clientVars = {
               </svg>
             </button>
           </div>
-        </div>
-
-        <!-- 複製內容 -->
-        <div class="sidebar-card">
-          <div class="sidebar-label sidebar-section-label">複製內容</div>
-          <div class="copy-actions">
-            <button class="copy-btn" id="copy-json-btn">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#56C7BB"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"></path>
-                <path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"></path>
-              </svg>
-              Copy as JSON
-            </button>
-            <button class="copy-btn" id="copy-md-btn">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#56C7BB"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line>
-                <line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line>
-              </svg>
-              Copy as Markdown
-            </button>
-            <button class="copy-btn" id="copy-text-btn">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#56C7BB"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <line x1="17" y1="10" x2="3" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line>
-                <line x1="21" y1="14" x2="3" y2="14"></line><line x1="17" y1="18" x2="3" y2="18"></line>
-              </svg>
-              Copy as Text
-            </button>
-            <a
-              class="copy-btn copy-btn-open"
-              href={rawMdPath}
-              target="_blank"
-              rel="noopener"
-              title="在新分頁開啟原始 Markdown（AI 友善端點）"
-            >
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#56C7BB"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-              Open Raw .md
-            </a>
-          </div>
-          <p class="copy-hint">
-            提示：把 <code>.md</code> 網址貼給 ChatGPT / Claude，就能直接餵給 AI 讀原文。
-          </p>
         </div>
       </aside>
     </div>
@@ -634,46 +636,93 @@ const clientVars = {
     gap: 8px;
   }
 
-  .copy-btn {
+  .ai-copy-group {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 8px;
-    font-size: var(--text-sm);
+  }
+  .ai-copy-group-label {
+    font-size: 12px;
+    font-weight: 600;
     color: var(--fg-primary);
-    background: none;
-    border: 1px solid #e8e8e8;
-    border-radius: 7px;
+    line-height: 1.4;
+  }
+  .ai-copy-row {
+    display: flex;
+    gap: 6px;
+  }
+  .ai-copy-divider {
+    height: 1px;
+    background: #e8e8e8;
+    margin: 12px 0;
+  }
+  .ai-copy-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 0;
     padding: 7px 10px;
+    border-radius: 7px;
+    border: 1px solid #e8e8e8;
+    background: #fafafa;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--fg-primary);
     cursor: pointer;
-    text-align: left;
+    text-decoration: none;
+    font-family: var(--font-sans);
     transition:
       border-color var(--transition-base),
-      background var(--transition-base);
-    font-family: var(--font-sans);
+      background var(--transition-base),
+      opacity var(--transition-base);
   }
-  .copy-btn:hover {
+  .ai-copy-btn svg {
+    flex-shrink: 0;
+    color: var(--color-primary);
+  }
+  .ai-copy-btn:hover {
     border-color: var(--color-primary);
     background: var(--bg-tag);
   }
-  .copy-actions {
+  .ai-copy-btn-primary {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+  }
+  .ai-copy-btn-primary svg {
+    color: #fff;
+  }
+  .ai-copy-btn-primary:hover {
+    background: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+    opacity: 1;
+  }
+  .ai-copy-callout {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
+    gap: 8px;
+    align-items: flex-start;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--color-primary-light);
+    border-radius: 8px;
   }
-  .copy-btn-open {
-    text-decoration: none;
-    color: var(--fg-primary);
+  .ai-copy-callout-icon {
+    flex-shrink: 0;
+    color: var(--color-primary);
+    margin-top: 1px;
   }
-  .copy-hint {
-    margin: 10px 0 0;
+  .ai-copy-callout p {
+    margin: 0;
     font-size: 11.5px;
     line-height: 1.55;
     color: var(--fg-meta);
   }
-  .copy-hint code {
+  .ai-copy-callout code {
     font-family: var(--font-mono);
     font-size: 11px;
-    background: var(--bg-code);
+    background: rgba(255, 255, 255, 0.7);
     border-radius: var(--radius-sm);
     padding: 1px 5px;
   }
@@ -1080,33 +1129,11 @@ const clientVars = {
     });
   });
 
-  // 複製 JSON：使用原始 Markdown 作為內容欄位，AI 讀完全無損。
-  document.getElementById("copy-json-btn")?.addEventListener("click", () => {
-    const payload = {
-      title: postTitle,
-      description: postDescription,
-      url: shareUrl,
-      raw_url: rawMdUrl,
-      publishDate: postPublishDate,
-      tags: postTags,
-      cover: postCover,
-      content_format: "markdown",
-      content: rawMarkdown,
-    };
-    const json = JSON.stringify(payload, null, 2);
-    navigator.clipboard.writeText(json).then(() => showToast("已複製為 JSON"));
-  });
-
-  // 複製 Markdown：直接送出 build 時預先組好的原始 Markdown（含 frontmatter）。
   document.getElementById("copy-md-btn")?.addEventListener("click", () => {
-    navigator.clipboard.writeText(rawMarkdown).then(() => showToast("已複製為 Markdown"));
+    navigator.clipboard.writeText(rawMdUrl).then(() => showToast("已複製 MD 連結"));
   });
 
-  // 複製純文字：仍保留 DOM textContent 版本，讀起來最平順。
-  document.getElementById("copy-text-btn")?.addEventListener("click", () => {
-    const prose = document.querySelector(".prose");
-    if (!prose) return;
-    const plain = (prose.textContent || "").replace(/\n{3,}/g, "\n\n").trim();
-    navigator.clipboard.writeText(plain).then(() => showToast("已複製純文字"));
+  document.getElementById("copy-json-btn")?.addEventListener("click", () => {
+    navigator.clipboard.writeText(rawJsonUrl).then(() => showToast("已複製 JSON 連結"));
   });
 </script>

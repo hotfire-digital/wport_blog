@@ -1,6 +1,9 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { APIRoute, GetStaticPaths } from "astro";
 
+const SITE_ORIGIN = "https://wport.me";
+const BASE_PATH = "/blog";
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
   return posts.map((post: CollectionEntry<"posts">) => ({
@@ -45,13 +48,29 @@ function buildFrontmatter(data: CollectionEntry<"posts">["data"]): string {
   return lines.join("\n");
 }
 
+function buildPostMarkdown(post: CollectionEntry<"posts">): string {
+  const body = post.body ?? "";
+  return `${buildFrontmatter(post.data)}\n\n${body.trimStart()}\n`;
+}
+
 export const GET: APIRoute = async ({ props }) => {
   const post = props.post as CollectionEntry<"posts">;
-  const body = post.body ?? "";
-  const md = `\uFEFF${buildFrontmatter(post.data)}\n\n${body.trimStart()}\n`;
-  return new Response(md, {
+  const slug = post.id;
+  const payload = {
+    title: post.data.title,
+    description: post.data.description,
+    url: `${SITE_ORIGIN}${BASE_PATH}/posts/${slug}/`,
+    raw_url: `${SITE_ORIGIN}${BASE_PATH}/posts/${slug}.md`,
+    publishDate: post.data.publishDate.toISOString().slice(0, 10),
+    tags: post.data.tags ?? [],
+    cover: post.data.cover ?? null,
+    content_format: "markdown",
+    content: buildPostMarkdown(post),
+  };
+  const json = `\uFEFF${JSON.stringify(payload, null, 2)}\n`;
+  return new Response(json, {
     headers: {
-      "Content-Type": "text/markdown; charset=utf-8",
+      "Content-Type": "application/json; charset=utf-8",
       "Cache-Control": "public, max-age=3600",
       "X-Robots-Tag": "index, follow",
     },
