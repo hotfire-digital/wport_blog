@@ -37,12 +37,8 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
 
   <main class="archive-main">
     <header class="archive-header">
-      <h1 class="archive-title">
-        所有文章
-      </h1>
-      <p class="archive-subtitle">
-        分享觀點、紀錄思考
-      </p>
+      <h1 class="archive-title">所有文章</h1>
+      <p class="archive-subtitle">分享觀點、紀錄思考</p>
     </header>
 
     <ArticleArchive client:load posts={postsData} allTags={allTags} />

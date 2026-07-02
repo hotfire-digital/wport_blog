@@ -19,7 +19,9 @@ const JOBS_URL = "https://wport.me/jobs";
     <!-- Right nav -->
     <nav class="topbar-nav">
       <a href={withBase("/")} class:list={["topbar-link", { "topbar-link--active": currentPage === "home" }]}>首頁</a>
-      <a href={withBase("/archive")} class:list={["topbar-link", { "topbar-link--active": currentPage === "archive" }]}>所有文章</a>
+      <a href={withBase("/archive")} class:list={["topbar-link", { "topbar-link--active": currentPage === "archive" }]}
+        >所有文章</a
+      >
       <a href={JOBS_URL} class="topbar-link topbar-link--cta" target="_blank" rel="noopener noreferrer">找工作</a>
     </nav>
   </div>

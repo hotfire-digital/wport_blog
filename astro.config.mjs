@@ -12,10 +12,7 @@ export default defineConfig({
   base: "/blog",
   integrations: [
     react(),
-    sitemap({
-      // Decap CMS is not meant to be indexed by search engines.
-      filter: (page) => !page.includes("/blog/admin"),
-    }),
+    sitemap(),
   ],
   server: { port: 3000 },
   vite: {

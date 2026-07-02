@@ -3,7 +3,7 @@ import { glob } from "astro/loaders";
 
 const posts = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/posts" }),
-  // Support both absolute image URLs and local image paths from Decap uploads.
+  // Support both absolute image URLs and local image paths.
   schema: z.object({
     title: z.string(),
     description: z.string(),
