@@ -37,7 +37,10 @@ const publishedTime = publishDate?.toISOString();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href={withBase("/favicon.ico")} />
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link rel="preconnect" href="https://images.pexels.com" crossorigin />
     <link rel="preload" href={withBase("/fonts/NotoSansTC-VariableFont_wght.ttf")} as="font" type="font/ttf" crossorigin />
+    <slot name="head" />
 
     <!-- Primary SEO -->
     <title>{fullTitle}</title>
@@ -103,14 +106,6 @@ const publishedTime = publishDate?.toISOString();
 </html>
 
 <style>
-  @font-face {
-    font-family: "Noto Sans TC";
-    src: url("/fonts/NotoSansTC-VariableFont_wght.ttf") format("truetype");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-  }
-
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;

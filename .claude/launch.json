@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "wport-blog",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "astro", "dev"],
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}

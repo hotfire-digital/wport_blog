@@ -1,0 +1,29 @@
+---
+import { getCoverImageUrls, type CoverImageContext } from "@/lib/cover-image";
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  context?: CoverImageContext;
+  loading?: "lazy" | "eager";
+  fetchpriority?: "high" | "auto" | "low";
+}
+
+const { src, alt, class: className, context = "card", loading = "lazy", fetchpriority = "auto" } = Astro.props;
+
+const cover = getCoverImageUrls(src, context);
+---
+
+<img
+  src={cover.default}
+  srcset={cover.srcset}
+  sizes={cover.sizes}
+  alt={alt}
+  class={className}
+  width={1600}
+  height={900}
+  loading={loading}
+  fetchpriority={fetchpriority}
+  decoding="async"
+/>
