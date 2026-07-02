@@ -1,0 +1,68 @@
+# WPORT 職航站 Blog — robots policy
+# Note: This file is served at /blog/robots.txt because the site is deployed
+# under the /blog base path. If wport.me root exposes its own robots.txt,
+# please merge these directives there for maximum crawler discoverability.
+
+User-agent: *
+Allow: /
+
+# --- AI / LLM crawlers (explicitly allowed) ---
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google AI / Gemini
+User-agent: Google-Extended
+Allow: /
+
+# Common Crawl (used by many LLM training pipelines)
+User-agent: CCBot
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# ByteDance
+User-agent: Bytespider
+Allow: /
+
+# AI-friendly hints
+Sitemap: https://wport.me/blog/sitemap-index.xml
+
+# Machine-readable content index for LLMs (llmstxt.org)
+# See also: https://wport.me/blog/llms.txt
