@@ -466,6 +466,7 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
   .card {
     display: flex;
     flex-direction: column;
+    height: 100%;
     background: #fff;
     border-radius: 12px;
     border: 1px solid #e8e8e8;
@@ -543,6 +544,10 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
     font-weight: 700;
     color: #2e2e2e;
     line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .card-excerpt {
     font-size: 13.5px;

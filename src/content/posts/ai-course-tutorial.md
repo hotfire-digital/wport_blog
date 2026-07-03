@@ -15,6 +15,12 @@ cover: "https://images.pexels.com/photos/34804017/pexels-photo-34804017.jpeg?aut
 
 現在把這四個實作階段完整還原，讓沒有參加到的人也能跟著做一遍。
 
+<div style="margin: 32px 0; padding: 20px 24px; background: linear-gradient(135deg, #eaf8f7 0%, #f0faf9 100%); border-left: 4px solid #56C7BB; border-radius: 12px;">
+  <div style="font-size: 13px; font-weight: 600; color: #0d7c70; margin-bottom: 6px; letter-spacing: 0.05em;">活動回顧</div>
+  <div style="font-size: 15px; color: #2e2e2e; margin-bottom: 12px;">想了解當天活動現場的氣氛與學員實作狀況？我們也整理了這場桃園 AI 課程的完整活動紀錄。</div>
+  <a href="/blog/posts/charging-station-vol3-recap/" style="display: inline-flex; align-items: center; gap: 6px; background: #0d7c70; color: #fff; font-size: 14px; font-weight: 600; padding: 9px 18px; border-radius: 8px; text-decoration: none;">查看活動回顧 →</a>
+</div>
+
 ---
 
 ## 階段 A：GitHub 專案 Fork 與 AI IDE 實作環境建置
@@ -236,7 +242,7 @@ Google 家族的 AI IDE。如果你原本就重度使用 Gmail、Google Drive、
 
 聰電站之後還會繼續舉辦，每次都會帶不同的主題。如果你想第一時間收到活動資訊，歡迎追蹤我們：
 
-<div style="display:flex; flex-direction:column; gap:4px; margin-top:8px;">
-  <span>更多活動資訊：<a href="https://hypelink.app/organizers/@wport">hypelink.app/organizers/@wport</a></span>
-  <span>更多職缺介紹：<a href="https://wport.me/">wport.me</a></span>
+<div style="display:flex; flex-direction:column; gap:5px; margin-top:16px; font-size:15px;">
+  <span>🗓 更多桃園 AI 活動資訊：<a href="https://hypelink.app/organizers/@wport" style="color:#0d7c70; font-weight:700; text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:2px;">hypelink.app/organizers/@wport →</a></span>
+  <span>💼 更多桃園在地職缺介紹：<a href="https://wport.me/" style="color:#0d7c70; font-weight:700; text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:2px;">wport.me →</a></span>
 </div>

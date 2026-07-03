@@ -248,6 +248,7 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
   .card {
     display: flex;
     flex-direction: column;
+    height: 100%;
     background: var(--bg-page);
     border-radius: 12px;
     border: 1px solid #e8e8e8;
@@ -335,6 +336,10 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
     font-weight: 700;
     color: var(--fg-heading);
     line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .card-excerpt {
