@@ -10,10 +10,7 @@ export default defineConfig({
   output: "static",
   site: "https://wport.me",
   base: "/blog",
-  integrations: [
-    react(),
-    sitemap(),
-  ],
+  integrations: [react(), sitemap()],
   server: { port: 3000 },
   vite: {
     plugins: [tailwindcss()],

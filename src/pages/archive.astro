@@ -2,7 +2,7 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import Topbar from "@/components/Topbar.astro";
-import ArticleArchive from "@/components/ArticleArchive";
+import CoverImage from "@/components/CoverImage.astro";
 
 const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
   (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
@@ -18,18 +18,11 @@ const COVER_COLORS = [
   { hue: "#FFF7ED", accent: "#F97316" },
 ];
 
-const postsData = posts.map((post, i) => ({
-  id: post.id,
-  title: post.data.title,
-  description: post.data.description,
-  publishDate: post.data.publishDate.toISOString(),
-  tags: post.data.tags ?? [],
-  coverHue: COVER_COLORS[i % COVER_COLORS.length].hue,
-  coverAccent: COVER_COLORS[i % COVER_COLORS.length].accent,
-  cover: post.data.cover,
-}));
-
 const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
+
+const baseUrl = import.meta.env.BASE_URL;
+const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
+const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
 ---
 
 <BlogLayout title="所有文章 — Wport Blog">
@@ -41,7 +34,103 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
       <p class="archive-subtitle">分享觀點、紀錄思考</p>
     </header>
 
-    <ArticleArchive client:load posts={postsData} allTags={allTags} />
+    <div class="archive-filters">
+      <div class="archive-search-wrap">
+        <svg
+          class="archive-search-icon"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#9A9A9A"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          id="archive-search"
+          class="archive-search"
+          type="search"
+          placeholder="搜尋文章、標籤…"
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="archive-tag-row" id="archive-tag-row">
+        <button type="button" class="archive-tag-btn is-active" data-tag="">全部</button>
+        {
+          allTags.map((tag) => (
+            <button type="button" class="archive-tag-btn" data-tag={tag}>
+              {tag}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <p id="archive-empty" class="archive-empty" hidden>找不到符合的文章。</p>
+
+    <ul class="card-grid" id="archive-grid">
+      {
+        posts.map((post, i) => {
+          const cover = COVER_COLORS[i % COVER_COLORS.length];
+          const tags = post.data.tags ?? [];
+          return (
+            <li
+              class="archive-card-item"
+              data-title={post.data.title}
+              data-description={post.data.description}
+              data-tags={tags.join(",")}
+            >
+              <a href={withBase(`/posts/${post.id}`)} class="card">
+                <div class="card-cover" style={`background: ${cover.hue};`}>
+                  {post.data.cover ? (
+                    <CoverImage
+                      src={post.data.cover}
+                      alt={`${post.data.title} cover`}
+                      class="card-cover-image"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <>
+                      <div class="card-cover-shape1" style={`background: ${cover.accent};`} />
+                      <div class="card-cover-shape2" style={`background: ${cover.accent};`} />
+                      <div class="card-cover-label" style={`color: ${cover.accent};`}>
+                        wport
+                      </div>
+                    </>
+                  )}
+                </div>
+                <div class="card-body">
+                  {tags.length > 0 && (
+                    <div class="card-tags">
+                      {tags.slice(0, 4).map((tag: string) => (
+                        <span class="tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                  <div class="card-title">{post.data.title}</div>
+                  <div class="card-excerpt">{post.data.description}</div>
+                  <div class="card-footer">
+                    <span class="card-date">
+                      {post.data.publishDate.toLocaleDateString("zh-TW", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
   </main>
 </BlogLayout>
 
@@ -72,6 +161,81 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
     font-family: var(--font-sans);
   }
 
+  .archive-filters {
+    margin-bottom: 40px;
+  }
+
+  .archive-search-wrap {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .archive-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .archive-search {
+    width: 100%;
+    padding: 10px 16px 10px 42px;
+    font-size: 14px;
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+    outline: none;
+    color: #2e2e2e;
+    background: #fff;
+    font-family: var(--font-sans);
+    transition: border-color 150ms ease;
+    box-sizing: border-box;
+  }
+
+  .archive-search:focus {
+    border-color: var(--color-primary);
+  }
+
+  .archive-tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .archive-tag-btn {
+    font-size: 13px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    border: 1px solid #d7d7d7;
+    background: #fff;
+    color: #5d5d5d;
+    cursor: pointer;
+    font-weight: 400;
+    transition: all 120ms ease;
+    font-family: var(--font-sans);
+  }
+
+  .archive-tag-btn:hover {
+    border-color: var(--color-primary);
+  }
+
+  .archive-tag-btn.is-active {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .archive-empty {
+    color: var(--fg-meta);
+    font-size: 15px;
+    margin: 0 0 24px;
+  }
+
+  .archive-card-item[hidden] {
+    display: none;
+  }
+
   .card-grid {
     list-style: none;
     padding: 0;
@@ -80,6 +244,7 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 24px;
   }
+
   .card {
     display: flex;
     flex-direction: column;
@@ -93,10 +258,12 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
       box-shadow 180ms ease,
       transform 180ms ease;
   }
+
   .card:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
     transform: translateY(-2px);
   }
+
   .card-cover {
     height: 140px;
     display: flex;
@@ -105,6 +272,13 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
     position: relative;
     overflow: hidden;
   }
+
+  .card-cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   .card-cover-shape1 {
     width: 64px;
     height: 64px;
@@ -114,6 +288,7 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
     top: 28px;
     left: 28px;
   }
+
   .card-cover-shape2 {
     width: 40px;
     height: 40px;
@@ -123,6 +298,7 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
     bottom: 20px;
     right: 36px;
   }
+
   .card-cover-label {
     font-size: 36px;
     font-weight: 700;
@@ -130,6 +306,7 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
     user-select: none;
     letter-spacing: -2px;
   }
+
   .card-body {
     padding: 18px 20px 20px;
     display: flex;
@@ -137,11 +314,13 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
     flex: 1;
     gap: 10px;
   }
+
   .card-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
   }
+
   .tag {
     font-size: 11px;
     font-weight: 500;
@@ -150,12 +329,14 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
     border-radius: 999px;
     padding: 2px 8px;
   }
+
   .card-title {
     font-size: 16px;
     font-weight: 700;
     color: var(--fg-heading);
     line-height: 1.4;
   }
+
   .card-excerpt {
     font-size: 13.5px;
     color: var(--fg-meta);
@@ -166,12 +347,106 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
   .card-footer {
     padding-top: 8px;
     border-top: 1px solid var(--bg-code);
   }
+
   .card-date {
     font-size: 12px;
     color: var(--color-text-faint);
   }
 </style>
+
+<script is:inline>
+  const searchInput = document.getElementById("archive-search");
+  const tagRow = document.getElementById("archive-tag-row");
+  const emptyState = document.getElementById("archive-empty");
+  const cards = Array.from(document.querySelectorAll(".archive-card-item"));
+
+  let activeTag = "";
+  let debounceTimer = 0;
+
+  function getSearchQuery() {
+    return searchInput instanceof HTMLInputElement ? searchInput.value.trim().toLowerCase() : "";
+  }
+
+  function cardMatches(card, query) {
+    const title = (card.getAttribute("data-title") ?? "").toLowerCase();
+    const description = (card.getAttribute("data-description") ?? "").toLowerCase();
+    const tags = (card.getAttribute("data-tags") ?? "").toLowerCase();
+
+    const matchTag = !activeTag || tags.split(",").includes(activeTag.toLowerCase());
+    const matchSearch = !query || title.includes(query) || description.includes(query) || tags.includes(query);
+
+    return matchTag && matchSearch;
+  }
+
+  function applyFilters() {
+    const query = getSearchQuery();
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const visible = cardMatches(card, query);
+      card.toggleAttribute("hidden", !visible);
+      if (visible) visibleCount += 1;
+    });
+
+    if (emptyState) {
+      emptyState.hidden = visibleCount > 0;
+    }
+  }
+
+  function syncUrl(query) {
+    const params = new URLSearchParams();
+    if (activeTag) params.set("tag", activeTag);
+    if (query) params.set("q", query);
+    const next = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
+    window.history.replaceState(null, "", next);
+  }
+
+  function setActiveTagButton(tag) {
+    if (!tagRow) return;
+    tagRow.querySelectorAll(".archive-tag-btn").forEach((btn) => {
+      const btnTag = btn.getAttribute("data-tag") ?? "";
+      btn.classList.toggle("is-active", btnTag === tag);
+    });
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const urlTag = params.get("tag");
+  const urlSearch = params.get("q") ?? "";
+
+  if (urlTag && tagRow?.querySelector(`[data-tag="${CSS.escape(urlTag)}"]`)) {
+    activeTag = urlTag;
+    setActiveTagButton(urlTag);
+  }
+
+  if (searchInput instanceof HTMLInputElement && urlSearch) {
+    searchInput.value = urlSearch;
+  }
+
+  applyFilters();
+
+  searchInput?.addEventListener("input", () => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(() => {
+      applyFilters();
+      syncUrl(getSearchQuery());
+    }, 180);
+  });
+
+  tagRow?.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLButtonElement) || !target.classList.contains("archive-tag-btn")) {
+      return;
+    }
+
+    const nextTag = target.getAttribute("data-tag") ?? "";
+    activeTag = activeTag === nextTag ? "" : nextTag;
+    setActiveTagButton(activeTag);
+    applyFilters();
+    syncUrl(getSearchQuery());
+  });
+</script>
