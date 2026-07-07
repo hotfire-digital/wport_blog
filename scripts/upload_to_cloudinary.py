@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """
 一次性腳本：從 Google Drive / 本機下載圖片並上傳到 Cloudinary wport 帳號
-執行方式：python3 scripts/upload_to_cloudinary.py
+
+執行方式：
+  1. 複製 .env.example 為 .env，填入 Cloudinary 憑證（勿 commit .env）
+  2. set -a && source .env && set +a
+  3. python3 scripts/upload_to_cloudinary.py
 """
 
 import subprocess
@@ -13,11 +17,31 @@ import time
 import urllib.request
 import json
 
-# ── Cloudinary 設定 ──────────────────────────────────────────────
-CLOUD_NAME = "dyebbsckc"
-API_KEY = "REDACTED_CLOUDINARY_API_KEY"
-API_SECRET = "REDACTED_CLOUDINARY_API_SECRET"
+# ── Cloudinary 設定（從環境變數讀取，勿將金鑰寫入程式碼）────────
 FOLDER = "wport-blog"
+
+
+def load_cloudinary_config() -> tuple[str, str, str]:
+    cloud_name = os.environ.get("CLOUDINARY_CLOUD_NAME", "dyebbsckc")
+    api_key = os.environ.get("CLOUDINARY_API_KEY", "").strip()
+    api_secret = os.environ.get("CLOUDINARY_API_SECRET", "").strip()
+
+    missing = [
+        name
+        for name, value in [
+            ("CLOUDINARY_API_KEY", api_key),
+            ("CLOUDINARY_API_SECRET", api_secret),
+        ]
+        if not value
+    ]
+    if missing:
+        print("❌ 缺少 Cloudinary 憑證，請設定環境變數：")
+        for name in missing:
+            print(f"   export {name}=...")
+        print("\n可參考 .env.example，並執行：set -a && source .env && set +a")
+        sys.exit(1)
+
+    return cloud_name, api_key, api_secret
 
 # ── Google Drive 檔案 ────────────────────────────────────────────
 FILES = [
@@ -74,28 +98,28 @@ def download_from_drive(file_id, token, dest_path):
         f.write(resp.read())
 
 
-def cloudinary_sign(params: dict) -> str:
+def cloudinary_sign(params: dict, api_secret: str) -> str:
     """產生 Cloudinary API 簽名"""
     to_sign = "&".join(f"{k}={v}" for k, v in sorted(params.items()))
-    to_sign += API_SECRET
+    to_sign += api_secret
     return hashlib.sha256(to_sign.encode()).hexdigest()
 
 
-def upload_to_cloudinary(image_path, public_id):
+def upload_to_cloudinary(image_path, public_id, *, cloud_name: str, api_key: str, api_secret: str):
     ts = str(int(time.time()))
     params = {
         "folder": FOLDER,
         "public_id": public_id,
         "timestamp": ts,
     }
-    signature = cloudinary_sign(params)
+    signature = cloudinary_sign(params, api_secret)
 
     cmd = [
         "curl",
         "-s",
         "-X",
         "POST",
-        f"https://api.cloudinary.com/v1_1/{CLOUD_NAME}/image/upload",
+        f"https://api.cloudinary.com/v1_1/{cloud_name}/image/upload",
         "-F",
         f"file=@{image_path}",
         "-F",
@@ -105,7 +129,7 @@ def upload_to_cloudinary(image_path, public_id):
         "-F",
         f"timestamp={ts}",
         "-F",
-        f"api_key={API_KEY}",
+        f"api_key={api_key}",
         "-F",
         f"signature={signature}",
     ]
@@ -128,6 +152,12 @@ def make_optimized_url(raw_url):
 
 
 def main():
+    cloud_name, api_key, api_secret = load_cloudinary_config()
+    upload_kwargs = {
+        "cloud_name": cloud_name,
+        "api_key": api_key,
+        "api_secret": api_secret,
+    }
     results = []
 
     if FILES:
@@ -143,7 +173,7 @@ def main():
                 print(f"   ✅ 下載完成（{size_kb} KB）")
 
                 print(f"☁️  上傳 {f['name']} 到 Cloudinary...")
-                raw_url = upload_to_cloudinary(dest, f["name"])
+                raw_url = upload_to_cloudinary(dest, f["name"], **upload_kwargs)
                 opt_url = make_optimized_url(raw_url)
                 results.append({"name": f["name"], "url": opt_url})
                 print(f"   ✅ {opt_url}")
@@ -156,7 +186,7 @@ def main():
         size_kb = os.path.getsize(f["path"]) // 1024
         print(f"📁 本機檔案 {f['name']}（{size_kb} KB）")
         print(f"☁️  上傳 {f['name']} 到 Cloudinary...")
-        raw_url = upload_to_cloudinary(f["path"], f["name"])
+        raw_url = upload_to_cloudinary(f["path"], f["name"], **upload_kwargs)
         opt_url = make_optimized_url(raw_url)
         results.append({"name": f["name"], "url": opt_url})
         print(f"   ✅ {opt_url}")

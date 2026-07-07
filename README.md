@@ -169,6 +169,15 @@ https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_li
 
 > 上傳原始圖片尺寸不限，Cloudinary 會自動處理。行銷同仁可直接用 Cloudinary Dashboard 上傳，無需任何 API 金鑰。
 
+**開發者批次上傳腳本**（`scripts/upload_to_cloudinary.py`）需要 Cloudinary API 金鑰，請從 [Cloudinary Console → API Keys](https://console.cloudinary.com/settings/api-keys) 取得，寫入本機 `.env`（已列入 `.gitignore`，勿 commit）：
+
+```bash
+cp .env.example .env
+# 編輯 .env 填入 CLOUDINARY_API_KEY、CLOUDINARY_API_SECRET
+set -a && source .env && set +a
+python3 scripts/upload_to_cloudinary.py
+```
+
 ### Preview locally
 
 ```bash
