@@ -2,7 +2,7 @@
 title: "台灣雇主最愛看的履歷長這樣！僑外生必知 5 大重點（附範例）"
 description: "履歷投出去都沒有回音？可能是這些地方出了問題！整理台灣中文履歷 5 大關鍵，附照片建議、量化範例與語言證書格式，讓雇主一眼看懂你。"
 publishDate: 2026-06-10
-tags: ["僑外生", "履歷", "求職", "面試"]
+tags: ["僑外生", "求職面試"]
 featured: false
 cover: "https://images.pexels.com/photos/4065891/pexels-photo-4065891.jpeg?auto=compress&cs=tinysrgb&w=1600"
 ---

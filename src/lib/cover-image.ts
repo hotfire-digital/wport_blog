@@ -1,6 +1,6 @@
 const CLOUDINARY_HOST = "res.cloudinary.com";
 
-export type CoverImageContext = "card" | "thumbnail";
+export type CoverImageContext = "card" | "thumbnail" | "bento" | "prose";
 
 const TRANSFORMS: Record<CoverImageContext, { mobile: string; desktop: string; widths: [number, number] }> = {
   card: {
@@ -12,6 +12,16 @@ const TRANSFORMS: Record<CoverImageContext, { mobile: string; desktop: string; w
     mobile: "f_auto,q_auto:good,w_160,c_limit",
     desktop: "f_auto,q_auto:good,w_320,c_limit",
     widths: [160, 320],
+  },
+  bento: {
+    mobile: "f_auto,q_auto:good,w_600,c_fill,g_auto",
+    desktop: "f_auto,q_auto:good,w_1200,c_fill,g_auto",
+    widths: [600, 1200],
+  },
+  prose: {
+    mobile: "f_auto,q_auto:good,w_640,c_limit",
+    desktop: "f_auto,q_auto:good,w_1200,c_limit",
+    widths: [640, 1200],
   },
 };
 
@@ -85,7 +95,14 @@ export function getCoverImageUrls(src: string, context: CoverImageContext = "car
   const mobile = buildUrl(src, preset.mobile, mobileW);
   const desktop = buildUrl(src, preset.desktop, desktopW);
 
-  const sizes = context === "thumbnail" ? "84px" : "(max-width: 768px) 100vw, (max-width: 1080px) 50vw, 300px";
+  const sizes =
+    context === "thumbnail"
+      ? "84px"
+      : context === "bento"
+        ? "(max-width: 768px) 100vw, (max-width: 1080px) 50vw, 520px"
+        : context === "prose"
+          ? "(max-width: 768px) 100vw, 720px"
+          : "(max-width: 768px) 100vw, (max-width: 1080px) 50vw, 300px";
 
   return {
     mobile,
@@ -98,3 +115,7 @@ export function getCoverImageUrls(src: string, context: CoverImageContext = "car
 
 /** Origins used by cover images — for preconnect hints in layout. */
 export const COVER_IMAGE_PRECONNECT_ORIGINS = ["https://res.cloudinary.com", "https://images.pexels.com"] as const;
+
+export function isOptimizableImageUrl(url: string): boolean {
+  return isCloudinaryUrl(url) || isPexelsUrl(url);
+}

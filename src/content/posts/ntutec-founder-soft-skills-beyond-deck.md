@@ -2,12 +2,11 @@
 title: "台大創創心得（三）｜簡報只是配角，創辦人才是主體：四次帶團隊後的軟實力領悟"
 description: "固定拜訪台大創創來到第四次，帶不同團隊與 VC 面談後的軟實力觀察：脫離簡報限制、捨我其誰的使命感、對產品的愛藏不住，以及有意識地消除填充詞。"
 publishDate: 2026-06-13
-tags: ["台大創創", "創業", "簡報", "軟實力", "Pitch"]
+tags: ["台大創創", "創業募資", "簡報 Pitch"]
 featured: false
 draft: false
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408904/wport-blog/ntutec-visit3-dennis-pitch.jpg"
 ---
-
-<!-- TODO: 封面圖 -->
 
 固定拜訪台大創創也來到第四次了。
 
@@ -15,11 +14,14 @@ draft: false
 
 很多也是我**自己常犯的錯誤**。
 
-<!-- TODO: 內文圖 -->
-
 ---
 
 ## 1. 脫離簡報限制，主體永遠是 Founder
+
+<figure>
+  <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408904/wport-blog/ntutec-visit3-dennis-pitch.jpg" alt="數位簡報室 Dennis 在台大創創進行產品 pitch" />
+  <figcaption>數位簡報室 Dennis 這次來 pitch 簡報模組產品。</figcaption>
+</figure>
 
 我最常犯的錯，就是把簡報當成主體。
 
@@ -34,6 +36,11 @@ draft: false
 ---
 
 ## 2. 捨我其誰：Why not me?
+
+<figure>
+  <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408908/wport-blog/ntutec-visit3-simon-feikuo.jpg" alt="斐闊 Simon 簡報後，投資經理 Howard 在台下與團隊互動" />
+  <figcaption>斐闊 Simon 與 Eric 同為桃園安東基地學員。不知道 Howard 這張笑得這麼開心，是看到什麼商機了。</figcaption>
+</figure>
 
 第二個觀察，跟第一點有關，但更偏「存在感」。
 

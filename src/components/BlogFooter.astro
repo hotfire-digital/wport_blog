@@ -1,0 +1,166 @@
+---
+const baseUrl = import.meta.env.BASE_URL;
+const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
+const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
+
+const links = [
+  { label: "關於我們", href: "https://wport.me/about-us" },
+  { label: "聯絡我們", href: "https://wport.me/contact-us" },
+];
+
+const socials = [
+  {
+    href: "https://www.facebook.com/wportjobstation/",
+    src: withBase("/icons/footer/footer_facebook.png"),
+    alt: "wport Facebook 專頁圖標",
+    ariaLabel: "前往 wport Facebook 官方粉絲專頁",
+    title: "wport Facebook",
+  },
+  {
+    href: "https://www.instagram.com/wport.me/",
+    src: withBase("/icons/footer/footer_instagram.png"),
+    alt: "wport Instagram 圖標",
+    ariaLabel: "追蹤 wport Instagram 官方帳號",
+    title: "wport Instagram",
+  },
+  {
+    href: "https://www.tiktok.com/@wport.me",
+    src: withBase("/icons/footer/footer_tiktok.png"),
+    alt: "wport TikTok 圖標",
+    ariaLabel: "觀看 wport TikTok 最新影片",
+    title: "wport TikTok",
+  },
+  {
+    href: "https://www.youtube.com/@wport-me",
+    src: withBase("/icons/footer/footer_youtube.png"),
+    alt: "wport YouTube 圖標",
+    ariaLabel: "訂閱 wport YouTube 頻道",
+    title: "wport YouTube",
+  },
+  {
+    href: "https://www.linkedin.com/company/w101人力銀行",
+    src: withBase("/icons/footer/footer_linkedin.png"),
+    alt: "wport LinkedIn 企業專頁圖標",
+    ariaLabel: "在 LinkedIn 上與 wport 建立專業聯繫",
+    title: "wport LinkedIn",
+  },
+];
+
+const copyright = `© ${new Date().getFullYear()} WPORT-熱火數碼資訊股份有限公司`;
+---
+
+<footer class="blog-footer">
+  <section class="blog-footer__top">
+    <nav class="blog-footer__links" aria-label="網站連結">
+      {
+        links.map((item) => (
+          <p>
+            <a href={item.href} target="_blank" rel="noopener noreferrer">
+              {item.label}
+            </a>
+          </p>
+        ))
+      }
+    </nav>
+
+    <section class="blog-footer__socials" aria-label="wport 官方社群連結">
+      {
+        socials.map((social) => (
+          <a
+            href={social.href}
+            aria-label={social.ariaLabel}
+            title={social.title}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img class="blog-footer__social-icon" src={social.src} alt={social.alt} width="24" height="24" loading="lazy" />
+          </a>
+        ))
+      }
+    </section>
+  </section>
+
+  <section class="blog-footer__copyright-wrap">
+    <p class="blog-footer__copyright">{copyright}</p>
+  </section>
+</footer>
+
+<style>
+  .blog-footer {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: auto;
+    border-top: 1px solid var(--border-default);
+    background: var(--bg-page);
+  }
+
+  .blog-footer__top {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 72rem;
+    margin: 0 auto;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .blog-footer__links {
+    display: flex;
+    gap: 44px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .blog-footer__links p {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .blog-footer__links a {
+    color: var(--fg-primary);
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .blog-footer__links a:hover {
+    color: var(--fg-link-hover);
+  }
+
+  .blog-footer__socials {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    justify-content: center;
+  }
+
+  .blog-footer__social-icon {
+    width: 24px;
+    height: 24px;
+    aspect-ratio: 1 / 1;
+    display: block;
+  }
+
+  .blog-footer__copyright-wrap {
+    text-align: center;
+  }
+
+  .blog-footer__copyright {
+    margin: 0;
+    font-size: 14px;
+    color: var(--fg-meta);
+  }
+
+  @media (min-width: 768px) {
+    .blog-footer__top {
+      flex-direction: row;
+      gap: 44px;
+    }
+
+    .blog-footer__socials {
+      gap: 44px;
+    }
+  }
+</style>

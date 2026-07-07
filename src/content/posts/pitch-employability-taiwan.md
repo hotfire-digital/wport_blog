@@ -2,7 +2,7 @@
 title: "僱主溝通攻略：僑外生如何讓台灣公司放心錄用你"
 description: "從行銷溝通角度設計面試話術與文件，降低企業對僑外生聘僱流程的不確定感。"
 publishDate: 2026-05-11
-tags: ["僑外生", "面試", "在台工作", "留台"]
+tags: ["僑外生", "求職面試"]
 featured: false
 draft: true
 cover: "https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=1600"

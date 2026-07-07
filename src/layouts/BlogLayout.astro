@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import BlogFooter from "@/components/BlogFooter.astro";
 
 interface Props {
   title?: string;
@@ -24,6 +25,8 @@ const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
 const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
 
 const siteUrl = "https://wport.me";
+const blogBasePath = import.meta.env.BASE_URL.replace(/\/$/, "") || "/blog";
+const rssFeedUrl = `${siteUrl}${blogBasePath}/feed.xml`;
 const siteName = "WPORT 職航站";
 const fullTitle = title === "Wport Blog" ? title : `${title} | ${siteName}`;
 const ogImage = cover || `${siteUrl}/template.png`;
@@ -46,6 +49,7 @@ const publishedTime = publishDate?.toISOString();
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title={`${siteName} Blog RSS`} href={rssFeedUrl} />
     {tags.length > 0 && <meta name="keywords" content={tags.join(", ")} />}
     <meta name="author" content={siteName} />
     <meta name="robots" content="index, follow" />
@@ -100,8 +104,9 @@ const publishedTime = publishDate?.toISOString();
       })} />
     )}
   </head>
-  <body>
+  <body class="page-shell">
     <slot />
+    <BlogFooter />
   </body>
 </html>
 
@@ -115,6 +120,12 @@ const publishedTime = publishDate?.toISOString();
   html, body {
     width: 100%;
     min-height: 100%;
+  }
+
+  .page-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
   body {

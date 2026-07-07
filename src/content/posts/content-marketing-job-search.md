@@ -2,7 +2,7 @@
 title: "內容行銷求職法：僑外生如何用 90 天內容策略拿到台灣面試機會"
 description: "把求職變成內容行銷專案，透過文章、案例與社群佈局，持續累積可被企業發現的職涯資產。"
 publishDate: 2026-05-09
-tags: ["僑外生", "內容行銷", "求職", "個人品牌"]
+tags: ["僑外生", "個人品牌"]
 featured: false
 draft: true
 cover: "https://images.pexels.com/photos/1552617/pexels-photo-1552617.jpeg?auto=compress&cs=tinysrgb&w=1600"

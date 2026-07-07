@@ -2,12 +2,11 @@
 title: "跑完台大創創與 SIC 之後，我整理了一份「VC 級新創健康檢查 Prompt」"
 description: "從黃紹麟 SIC 大師講堂、台灣新創 M 型化觀察，到可一鍵複製的 VC 審查 Prompt。兩種模式：從零生成 Pitch Deck 大綱，或對既有簡報做 Slide-by-Slide 殘酷壓力測試。"
 publishDate: 2026-05-25
-tags: ["台大創創", "創業", "募資", "VC", "Prompt", "Pitch Deck"]
+tags: ["台大創創", "創業募資", "簡報 Pitch"]
 featured: false
 draft: false
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408898/wport-blog/sic-howard-vc-insights.jpg"
 ---
-
-<!-- TODO: 封面圖 -->
 
 最近一邊跑台大創創帶團隊跟 VC 聊，一邊也到處聽課補腦。昨天去 SIC 聽黃紹麟老師的大師講堂，談付費制會員，2.5 小時的課程非常超值。
 
@@ -17,12 +16,20 @@ draft: false
 
 這種問題，就是 VC 日常在想的邏輯。不是聽你講願景，是追你的數字背後發生了什麼。
 
+<figure>
+  <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408898/wport-blog/sic-howard-vc-insights.jpg" alt="Howard 在活動中向團隊說明 VC 在意的項目" />
+  <figcaption>跑台大創創與聽課補腦的這幾個月，Howard 常提醒大家 VC 到底在看什麼。</figcaption>
+</figure>
+
 除了黃紹麟老師，下面兩位都是我實際聽過課的講者。只要在活動名單上看到他們的名字，不用懷疑，立刻報名，物超所值：
 
 1. **蕭一白**：講投資人如何出場
 2. **吳德威（David 哥）**：講怎樣的案子 VC 才會看（我的最愛，講話直白風趣又很願意幫忙）
 
-<!-- TODO: 內文圖 -->
+<figure>
+  <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408928/wport-blog/sic-david-wu-andong.jpg" alt="桃園安東青創基地課程現場，吳德威分享 VC 選案觀點" />
+  <figcaption>安東基地時期的啟蒙；<a href="https://www.iamdavidwu.com/">David Wu 吳德威</a></figcaption>
+</figure>
 
 ---
 
@@ -54,7 +61,7 @@ draft: false
 
 ---
 
-## 完整 Prompt（一鍵複製）
+## 完整 Prompt（點右上角「複製」一鍵帶走）
 
 ```text
 # Role & Objective

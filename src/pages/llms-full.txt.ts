@@ -24,6 +24,7 @@ export const GET: APIRoute = async () => {
   chunks.push("");
   chunks.push(`Website: ${SITE_ORIGIN}${BASE_PATH}/`);
   chunks.push(`Index: ${SITE_ORIGIN}${BASE_PATH}/llms.txt`);
+  chunks.push(`RSS: ${SITE_ORIGIN}${BASE_PATH}/feed.xml`);
   chunks.push("");
 
   for (const post of sorted) {

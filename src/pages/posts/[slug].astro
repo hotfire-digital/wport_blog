@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from "astro:content";
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import Topbar from "@/components/Topbar.astro";
 import CoverImage from "@/components/CoverImage.astro";
+import { getCoverImageUrls } from "@/lib/cover-image";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
@@ -62,6 +63,8 @@ const clientVars = {
   rawJsonPath,
   rawJsonUrl,
 };
+
+const heroCover = post.data.cover ? getCoverImageUrls(post.data.cover, "prose") : undefined;
 ---
 
 <BlogLayout
@@ -74,6 +77,18 @@ const clientVars = {
 >
   <Fragment slot="head">
     <link rel="alternate" type="text/markdown" href={rawMdUrl} title="Markdown 原文（AI 友善）" />
+    {
+      heroCover && (
+        <link
+          rel="preload"
+          as="image"
+          href={heroCover.default}
+          imagesrcset={heroCover.srcset}
+          imagesizes={heroCover.sizes}
+          fetchpriority="high"
+        />
+      )
+    }
   </Fragment>
   <Topbar />
 
@@ -140,10 +155,7 @@ const clientVars = {
                   <li>
                     <a
                       href={withBase(`/posts/${related.id}`)}
-                      class:list={[
-                        "post-related-card",
-                        !related.data.cover && "post-related-card--no-cover",
-                      ]}
+                      class:list={["post-related-card", !related.data.cover && "post-related-card--no-cover"]}
                     >
                       {related.data.cover && (
                         <CoverImage
@@ -235,7 +247,13 @@ const clientVars = {
           <div class="ai-copy-body">
             <div class="ai-copy-segment" role="tablist" aria-label="選擇格式" data-active="md">
               <span class="ai-copy-segment-indicator" aria-hidden="true"></span>
-              <button type="button" class="ai-copy-segment-btn is-active" role="tab" data-format="md" aria-selected="true">
+              <button
+                type="button"
+                class="ai-copy-segment-btn is-active"
+                role="tab"
+                data-format="md"
+                aria-selected="true"
+              >
                 MD
               </button>
               <button type="button" class="ai-copy-segment-btn" role="tab" data-format="json" aria-selected="false">
@@ -874,12 +892,26 @@ const clientVars = {
     overflow-x: auto;
     margin: 22px 0;
   }
+  .prose pre.astro-code {
+    background: var(--bg-code) !important;
+    color: var(--fg-heading) !important;
+  }
   .prose pre code {
     background: none;
     padding: 0;
     font-size: var(--text-sm);
     color: var(--fg-heading);
     line-height: 1.65;
+  }
+  .prose pre.astro-code code,
+  .prose pre.astro-code .line,
+  .prose pre.astro-code span {
+    color: inherit !important;
+    background: transparent !important;
+  }
+  .prose .code-block pre {
+    margin: 0;
+    padding-top: 40px;
   }
   .prose ul {
     list-style: disc;
@@ -1137,6 +1169,49 @@ const clientVars = {
       toast.style.opacity = "0";
     }, 2000);
   }
+
+  const copyIconSvg =
+    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+
+  function enhanceCodeBlocks() {
+    const pres = document.querySelectorAll(".prose pre");
+    pres.forEach((pre) => {
+      if (pre.closest(".code-block")) return;
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-block";
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "code-block-copy";
+      btn.setAttribute("aria-label", "複製程式碼");
+      btn.innerHTML = copyIconSvg + '<span>複製</span>';
+
+      const label = btn.querySelector("span");
+
+      btn.addEventListener("click", async () => {
+        const text = (pre.textContent || "").replace(/\n$/, "");
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.classList.add("is-copied");
+          if (label) label.textContent = "已複製";
+          showToast("已複製到剪貼簿");
+          window.setTimeout(() => {
+            btn.classList.remove("is-copied");
+            if (label) label.textContent = "複製";
+          }, 2000);
+        } catch {
+          showToast("複製失敗，請手動選取");
+        }
+      });
+
+      wrapper.appendChild(btn);
+    });
+  }
+
+  enhanceCodeBlocks();
 
   // 複製連結
   document.getElementById("copy-link-btn")?.addEventListener("click", () => {

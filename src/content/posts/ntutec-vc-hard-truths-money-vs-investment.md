@@ -2,12 +2,11 @@
 title: "台大創創心得（一）｜會賺錢不等於有投資價值：VC 在意的三個硬指標"
 description: "帶新創團隊拜訪台大創創後的第一波體悟：會賺錢不代表有投資價值、股權結構與團隊穩定度、VC 盡職調查現場會問什麼，以及為什麼越誠實越容易被幫助。"
 publishDate: 2026-03-20
-tags: ["台大創創", "創業", "募資", "創投", "VC", "商業思維"]
+tags: ["台大創創", "創業募資"]
 featured: false
 draft: false
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408891/wport-blog/ntutec-visit2-walter.jpg"
 ---
-
-<!-- TODO: 封面圖 -->
 
 從 2026 年 3 月起，WPORT 職航站開始與台大創創合作一種不太一樣的新創媒合模式：**深度 1:1 診斷**。不是 Demo Day 那種一場 20 家、每家 5 分鐘上台，而是一場只帶 2 到 3 家新創，每家給 VC 30 到 60 分鐘，直接拆股權、財報、商業模式。
 
@@ -17,7 +16,10 @@ draft: false
 
 這不是潑冷水，而是 VC 世界裡很常見、卻很少被講白的一條分界線。以下整理三次帶團隊後，我覺得最值得分享的三個硬指標。
 
-<!-- TODO: 內文圖 -->
+<figure>
+  <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408879/wport-blog/ntutec-visit2-zhiyou-journey.jpg" alt="智遊旅程團隊在台大創創簡報現場，與 WPORT 一同北上" />
+  <figcaption>智遊旅程團隊與 Eric 一同北上。兩人皆為桃園青年事務委員會第七屆委員。</figcaption>
+</figure>
 
 ---
 
@@ -76,6 +78,11 @@ VC 要的不只是好故事，是**經得起一通電話查證的數據**。
 
 ## 4. 越誠實，他們越知道怎麼幫你
 
+<figure>
+  <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408875/wport-blog/ntutec-visit2-howard-vc.jpg" alt="台大創創投資經理 Howard 向新創團隊說明 VC 評估重點" />
+  <figcaption>第二次拜訪台大創創（2026/4/27）現場，Howard 向團隊說明機構投資人真正在意的項目。</figcaption>
+</figure>
+
 跟 VC 對談，千萬不要害怕暴露缺點。
 
 你想掩蓋的每一個細節，在專業投資人眼裡，都是引爆警戒心的紅燈。試用客戶吹成簽約客戶、借款不寫、封測數字含糊帶過，這些都會在 DD 階段被拆穿。
@@ -83,6 +90,27 @@ VC 要的不只是好故事，是**經得起一通電話查證的數據**。
 相反地，台大創創投資經理 Howard 提到：**越是誠實，他們越知道如何幫你們。** 新創為了活下去借錢很正常，VC 怕的是錢進去第一時間被拿去還債，而不是你曾經借過錢。敢寫「本公司目前無借款」，反而是加分項。
 
 機構要的不是完美的新創。如果一切都完美，你來找 VC 幹嘛？
+
+---
+
+## 這次一起北上的夥伴
+
+第二次拜訪台大創創，除了新創團隊，也有幾位朋友一起來學習、交流：
+
+<figure>
+  <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408885/wport-blog/ntutec-visit2-shon-wuwa.jpg" alt="屋瓦資產 Shon 在台大創創與新創團隊交流" />
+  <figcaption>屋瓦資產 Shon，與 Eric 同為無白丁會所共同創辦人，也對新創產業很有興趣。</figcaption>
+</figure>
+
+<figure>
+  <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408891/wport-blog/ntutec-visit2-walter.jpg" alt="Walter 與 Eric 在台大創創活動現場交流" />
+  <figcaption>Walter 與 Eric 同屬桃園青年事務委員會國際組，想深入了解新創產業而一同北上。</figcaption>
+</figure>
+
+<figure>
+  <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408894/wport-blog/ntutec-visit2-coco.jpg" alt="coco 在台大創創向 VC pitch Threads 機器人專題" />
+  <figcaption>桃園好夥伴 coco，這次 pitch 的主題是 Threads 機器人。Threads：<a href="https://www.threads.com/@coco.career">@coco.career</a></figcaption>
+</figure>
 
 ---
 

@@ -2,7 +2,7 @@
 title: "LinkedIn SEO 實戰：僑外生在台建立個人品牌的 7 個高轉換做法"
 description: "用行銷漏斗思維優化 LinkedIn，讓僑外生在台灣求職時從被動等待變成主動獲得面試邀請。"
 publishDate: 2026-05-08
-tags: ["僑外生", "LinkedIn", "SEO", "個人品牌"]
+tags: ["僑外生", "個人品牌"]
 featured: false
 draft: true
 cover: "https://images.pexels.com/photos/2422286/pexels-photo-2422286.jpeg?auto=compress&cs=tinysrgb&w=1600"

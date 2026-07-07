@@ -65,4 +65,6 @@ Allow: /
 Sitemap: https://wport.me/blog/sitemap-index.xml
 
 # Machine-readable content index for LLMs (llmstxt.org)
-# See also: https://wport.me/blog/llms.txt
+# Index: https://wport.me/blog/llms.txt
+# Full bundle: https://wport.me/blog/llms-full.txt
+# RSS: https://wport.me/blog/feed.xml

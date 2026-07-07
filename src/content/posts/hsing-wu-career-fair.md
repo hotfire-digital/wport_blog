@@ -2,7 +2,7 @@
 title: "醒吾科大徵才博覽會現場直擊：僑外生履歷最常見的 4 大盲點與改寫公式"
 description: "Wport 在醒吾科大徵才博覽會做快閃履歷健檢，整理僑外生最容易踩的 4 個履歷盲點，附上量化改寫公式與前後對照，從打工、社團到大二留台布局一次說清楚。"
 publishDate: 2026-06-11
-tags: ["僑外生", "履歷", "面試", "求職"]
+tags: ["僑外生", "求職面試"]
 featured: false
 cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/hsing-wu-resume-clinic-1.jpg"
 ---

@@ -2,7 +2,7 @@
 title: "僑外生找工作必看：4 個台灣求職平台比較推薦（2026 最新）"
 description: "整理 WPORT、104、1111、才多多 4 大台灣求職平台，說明各自特色與最適合僑外生的使用情境，幫你不再茫然，找對平台出發。"
 publishDate: 2026-06-10
-tags: ["僑外生", "求職平台", "求職", "在台工作"]
+tags: ["僑外生", "求職面試"]
 featured: false
 cover: "https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=1600"
 ---

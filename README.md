@@ -121,10 +121,29 @@ cover: "https://images.pexels.com/photos/XXXXXX/pexels-photo-XXXXXX.jpeg?auto=co
 | `title` | string | ✅ | 文章標題 |
 | `description` | string | ✅ | 摘要，建議 50–160 字元，用於 SEO |
 | `publishDate` | date | ✅ | 格式 `YYYY-MM-DD` |
-| `tags` | string[] | — | 分類標籤陣列，建議 2–4 個 |
+| `tags` | string[] | — | 分類標籤陣列，每篇最多 3 個，請從下方叢集標籤選用 |
 | `featured` | boolean | — | `true` 會在首頁置頂顯示，預設 `false` |
 | `cover` | string | — | 封面圖片 URL（建議使用 Pexels 或自有圖片） |
 | `draft` | boolean | — | `true` 則文章不對外顯示，預設發布 |
+
+### 標籤叢集（Canonical Tags）
+
+文章 `tags` 請只使用以下 10 個叢集標籤，勿再新增細碎標籤：
+
+| 標籤 | 適用主題 |
+|---|---|
+| `僑外生` | 在台僑外生、外籍人才相關 |
+| `留台工作` | 評點制、工作許可、居留、留台政策 |
+| `求職面試` | 履歷、面試、求職平台 |
+| `個人品牌` | SEO、LinkedIn、作品集、職涯行銷 |
+| `AI 實作` | AI 工具、Cursor、Obsidian、MCP 等實作 |
+| `聰電站` | 聰電站活動、桃園線下課程 |
+| `台大創創` | 台大創創 × WPORT 系列 |
+| `創業募資` | 創業、募資、VC、商業思維 |
+| `簡報 Pitch` | 簡報、Pitch Deck、軟實力、Prompt |
+| `WPORT 功能` | 產品新功能、使用教學、設計理念說明 |
+
+舊版細標籤的 archive URL（例如 `?tag=履歷`）會自動導向對應叢集標籤。
 
 ### Images
 

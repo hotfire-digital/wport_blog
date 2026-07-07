@@ -2,7 +2,7 @@
 title: "作品集 SEO 優化指南：僑外生如何讓台灣雇主更快看懂你的價值"
 description: "從 SEO 與轉換率角度重構作品集，讓你的案例不只好看，還能有效提升面試邀約機率。"
 publishDate: 2026-05-10
-tags: ["僑外生", "作品集", "SEO", "個人品牌"]
+tags: ["僑外生", "個人品牌"]
 featured: false
 draft: true
 cover: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1600"
