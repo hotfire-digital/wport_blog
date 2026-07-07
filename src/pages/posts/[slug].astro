@@ -138,7 +138,13 @@ const clientVars = {
               <ul class="post-related-list">
                 {relatedPosts.map((related) => (
                   <li>
-                    <a href={withBase(`/posts/${related.id}`)} class="post-related-card">
+                    <a
+                      href={withBase(`/posts/${related.id}`)}
+                      class:list={[
+                        "post-related-card",
+                        !related.data.cover && "post-related-card--no-cover",
+                      ]}
+                    >
                       {related.data.cover && (
                         <CoverImage
                           src={related.data.cover}
@@ -938,6 +944,9 @@ const clientVars = {
       border-color var(--transition-base),
       background var(--transition-base);
   }
+  .post-related-card.post-related-card--no-cover {
+    grid-template-columns: 1fr;
+  }
   .post-related-cover {
     width: 100%;
     height: 58px;
@@ -1047,6 +1056,9 @@ const clientVars = {
     }
     .post-related-card {
       grid-template-columns: 72px 1fr;
+    }
+    .post-related-card.post-related-card--no-cover {
+      grid-template-columns: 1fr;
     }
     .post-related-cover {
       height: 52px;
