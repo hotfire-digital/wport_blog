@@ -5,13 +5,13 @@ publishDate: 2026-05-09
 tags: ["僑外生", "個人品牌"]
 featured: false
 draft: true
-cover: "https://images.pexels.com/photos/1552617/pexels-photo-1552617.jpeg?auto=compress&cs=tinysrgb&w=1600"
+cover: "https://images.pexels.com/photos/1552617/pexels-photo-1552617.jpeg?auto=compress&cs=tinysrgb&w=1200"
 ---
 
 很多僑外生把求職當一次性投遞，但企業其實更願意錄用「長期可觀察的人」。  
 內容行銷可以讓你在面試前就建立信任。
 
-![行銷策略筆記本與桌面，對應內容規劃流程](https://images.pexels.com/photos/1552617/pexels-photo-1552617.jpeg?auto=compress&cs=tinysrgb&w=1600)
+![行銷策略筆記本與桌面，對應內容規劃流程](https://images.pexels.com/photos/1552617/pexels-photo-1552617.jpeg?auto=compress&cs=tinysrgb&w=1200)
 
 ---
 
@@ -71,7 +71,7 @@ cover: "https://images.pexels.com/photos/1552617/pexels-photo-1552617.jpeg?auto=
 - Medium / 個人網站：完整長文案例
 - Notion / Portfolio：結構化專案證據
 
-![團隊在筆電與筆記本上協作，對應多平台內容分工](https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1600)
+![團隊在筆電與筆記本上協作，對應多平台內容分工](https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1200)
 
 每個平台角色不同，但關鍵字應保持一致，提升搜尋一致性。
 

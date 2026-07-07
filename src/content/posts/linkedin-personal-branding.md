@@ -5,14 +5,14 @@ publishDate: 2026-05-08
 tags: ["僑外生", "個人品牌"]
 featured: false
 draft: true
-cover: "https://images.pexels.com/photos/2422286/pexels-photo-2422286.jpeg?auto=compress&cs=tinysrgb&w=1600"
+cover: "https://images.pexels.com/photos/2422286/pexels-photo-2422286.jpeg?auto=compress&cs=tinysrgb&w=1200"
 ---
 
 你在 LinkedIn 上沒有機會，通常不是你不夠好，而是你的 profile 沒有被設計成「可搜尋、可判斷、可聯繫」。
 
 這篇給僑外生一套可執行框架：把 LinkedIn 當成一個 SEO Landing Page。
 
-![職場工作情境，對應個人品牌與平台優化](https://images.pexels.com/photos/2422286/pexels-photo-2422286.jpeg?auto=compress&cs=tinysrgb&w=1600)
+![職場工作情境，對應個人品牌與平台優化](https://images.pexels.com/photos/2422286/pexels-photo-2422286.jpeg?auto=compress&cs=tinysrgb&w=1200)
 
 ---
 
@@ -89,7 +89,7 @@ Skills 不只是展示，還會影響被搜尋到的機率。
 
 內容題材可用：
 
-![手機與筆電工作場景，象徵持續經營專業曝光](https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1600)
+![手機與筆電工作場景，象徵持續經營專業曝光](https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200)
 
 - 專案拆解（你如何解題）
 - 台灣職場觀察（跨文化協作）
