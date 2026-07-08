@@ -8,11 +8,9 @@ draft: false
 cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408904/wport-blog/ntutec-visit3-dennis-pitch.jpg"
 ---
 
-固定拜訪台大創創也來到第四次了。
+固定拜訪台大創創來到第四次，這次和數位簡報室 Dennis、斐闊 Simon 同行。Dennis 講話條理分明，Simon 上台則意氣風發，兩種氣質都很有辨識度。吃飯時我問 Dennis 為什麼一路創業到現在，甚至歷經失敗還能繼續，他只回一句：「就不想給人管。」現在他主力做 AI 與企業內訓課程，這回把簡報模組獨立拿出來 pitch，也讓我更有感，創辦人的軟實力才是決勝點。
 
-每次帶不同團隊來拜訪，觀察不同創業者的簡報與分享，都有不少體悟。之前在脆上分享過比較硬的指標（會賺錢不等於有投資價值、股權結構、DD 現場那些），今天想分享一點軟的。
-
-很多也是我**自己常犯的錯誤**。
+以下很多，也是我**自己常犯的錯誤**。
 
 ---
 
@@ -20,7 +18,7 @@ cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1
 
 <figure>
   <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408904/wport-blog/ntutec-visit3-dennis-pitch.jpg" alt="數位簡報室 Dennis 在台大創創進行產品 pitch" />
-  <figcaption>數位簡報室 Dennis 這次來 pitch 簡報模組產品。</figcaption>
+  <figcaption>數位簡報室 Dennis 這次也來 pitch，照片裡他正在聽另一位參與者簡報。</figcaption>
 </figure>
 
 我最常犯的錯，就是把簡報當成主體。
@@ -39,7 +37,7 @@ cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1
 
 <figure>
   <img src="https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1783408908/wport-blog/ntutec-visit3-simon-feikuo.jpg" alt="斐闊 Simon 簡報後，投資經理 Howard 在台下與團隊互動" />
-  <figcaption>斐闊 Simon 與 Eric 同為桃園安東基地學員。不知道 Howard 這張笑得這麼開心，是看到什麼商機了。</figcaption>
+  <figcaption>斐闊 Simon 與 Eric 同為桃園安東基地學員。Simon 平常也擔任業師，對上台分享很有節奏。</figcaption>
 </figure>
 
 第二個觀察，跟第一點有關，但更偏「存在感」。
@@ -47,6 +45,8 @@ cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1
 能不能讓與會者感受到：**你天生就是來解決這個問題的人？**
 
 Why not me? 就該是我。除了我以外還能有誰？我拼死也要完成這個目標。
+
+像 Simon 在分享 [斐闊](https://www.finctory.com/) 的存錢助手時，提到自己雖然也教投資，但很多人接觸理財已經是出社會後。真正的根基是學生時期就開始建立投資觀念。這句我超有感，如果學生時期就有人提醒我投資的重要性，也許可以早十年買 Nvidia。現在他把定位講得很清楚，做 0 到 100 萬的投資教練，先把第一桶金的思維養起來。
 
 這不是 arrogance（傲慢），是**使命感的可見度**。VC 聽過幾百個「我們要改變世界」的簡報，但他們能分辨誰是在背稿，誰是真的相信這件事非自己不可。
 
