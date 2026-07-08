@@ -1,0 +1,52 @@
+---
+import { getSiteAssetUrls } from "@/lib/local-image";
+
+interface Props {
+  src: string;
+  alt: string;
+  context?: "hero" | "icon";
+  class?: string;
+  loading?: "lazy" | "eager";
+  fetchpriority?: "high" | "auto" | "low";
+  /** When set, image only loads at this min-width (e.g. desktop-only hero art). */
+  media?: string;
+  width?: number;
+  height?: number;
+}
+
+const {
+  src,
+  alt,
+  context = "hero",
+  class: className,
+  loading = "lazy",
+  fetchpriority = "auto",
+  media,
+  width,
+  height,
+} = Astro.props;
+
+const image = getSiteAssetUrls(src, context);
+---
+
+{
+  media ? (
+    <picture class={className}>
+      <source media={media} srcset={image.srcset} sizes={image.sizes} />
+      <img alt={alt} width={width} height={height} decoding="async" loading={loading} fetchpriority={fetchpriority} />
+    </picture>
+  ) : (
+    <img
+      src={image.default}
+      srcset={image.srcset}
+      sizes={image.sizes}
+      alt={alt}
+      class={className}
+      width={width}
+      height={height}
+      loading={loading}
+      fetchpriority={fetchpriority}
+      decoding="async"
+    />
+  )
+}

@@ -3,15 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ─── Local Font ─────────────────────────────────────────────── */
-@font-face {
-  font-family: "Noto Sans TC";
-  src: url("/blog/fonts/NotoSansTC-VariableFont_wght.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* ─── Design Tokens ──────────────────────────────────────────── */
 :root {
   --color-primary:        #0D7C70;
@@ -49,7 +40,7 @@
   --border-default: var(--color-border);
   --border-accent:  var(--color-primary);
 
-  --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "PingFang TC", "Microsoft JhengHei", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", "Source Code Pro", Consolas, monospace;
 
   --text-xs:   12px;

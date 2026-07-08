@@ -1,4 +1,6 @@
 ---
+import SiteImage from "@/components/SiteImage.astro";
+
 const baseUrl = import.meta.env.BASE_URL;
 const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
 const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
@@ -11,35 +13,35 @@ const links = [
 const socials = [
   {
     href: "https://www.facebook.com/wportjobstation/",
-    src: withBase("/icons/footer/footer_facebook.png"),
+    src: "/icons/footer/footer_facebook.png",
     alt: "wport Facebook 專頁圖標",
     ariaLabel: "前往 wport Facebook 官方粉絲專頁",
     title: "wport Facebook",
   },
   {
     href: "https://www.instagram.com/wport.me/",
-    src: withBase("/icons/footer/footer_instagram.png"),
+    src: "/icons/footer/footer_instagram.png",
     alt: "wport Instagram 圖標",
     ariaLabel: "追蹤 wport Instagram 官方帳號",
     title: "wport Instagram",
   },
   {
     href: "https://www.tiktok.com/@wport.me",
-    src: withBase("/icons/footer/footer_tiktok.png"),
+    src: "/icons/footer/footer_tiktok.png",
     alt: "wport TikTok 圖標",
     ariaLabel: "觀看 wport TikTok 最新影片",
     title: "wport TikTok",
   },
   {
     href: "https://www.youtube.com/@wport-me",
-    src: withBase("/icons/footer/footer_youtube.png"),
+    src: "/icons/footer/footer_youtube.png",
     alt: "wport YouTube 圖標",
     ariaLabel: "訂閱 wport YouTube 頻道",
     title: "wport YouTube",
   },
   {
     href: "https://www.linkedin.com/company/w101人力銀行",
-    src: withBase("/icons/footer/footer_linkedin.png"),
+    src: "/icons/footer/footer_linkedin.png",
     alt: "wport LinkedIn 企業專頁圖標",
     ariaLabel: "在 LinkedIn 上與 wport 建立專業聯繫",
     title: "wport LinkedIn",
@@ -73,7 +75,15 @@ const copyright = `© ${new Date().getFullYear()} WPORT-熱火數碼資訊股份
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img class="blog-footer__social-icon" src={social.src} alt={social.alt} width="24" height="24" loading="lazy" />
+            <SiteImage
+              src={social.src}
+              alt={social.alt}
+              context="icon"
+              class="blog-footer__social-icon"
+              width={24}
+              height={24}
+              loading="lazy"
+            />
           </a>
         ))
       }

@@ -113,7 +113,7 @@ export default function ArticleArchive({ posts, allTags }: Props) {
             outline: "none",
             color: "#2E2E2E",
             background: "#fff",
-            fontFamily: "'PingFang TC','Noto Sans TC',Arial,sans-serif",
+            fontFamily: "'PingFang TC','Microsoft JhengHei',Arial,sans-serif",
             transition: "border-color 150ms ease",
             boxSizing: "border-box",
           }}
@@ -136,7 +136,7 @@ export default function ArticleArchive({ posts, allTags }: Props) {
             cursor: "pointer",
             fontWeight: activeTag === null ? 600 : 400,
             transition: "all 120ms ease",
-            fontFamily: "'PingFang TC','Noto Sans TC',Arial,sans-serif",
+            fontFamily: "'PingFang TC','Microsoft JhengHei',Arial,sans-serif",
           }}
         >
           全部
@@ -155,7 +155,7 @@ export default function ArticleArchive({ posts, allTags }: Props) {
               cursor: "pointer",
               fontWeight: activeTag === tag ? 600 : 400,
               transition: "all 120ms ease",
-              fontFamily: "'PingFang TC','Noto Sans TC',Arial,sans-serif",
+              fontFamily: "'PingFang TC','Microsoft JhengHei',Arial,sans-serif",
             }}
           >
             {tag}

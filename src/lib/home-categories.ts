@@ -14,8 +14,7 @@ export interface HomeCategory {
   coverAlt: string;
 }
 
-const CLOUDINARY_BASE =
-  "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog";
+const CLOUDINARY_BASE = "https://res.cloudinary.com/dyebbsckc/image/upload/wport-blog";
 
 export const HOME_CATEGORIES: HomeCategory[] = [
   {

@@ -1,6 +1,6 @@
 const CLOUDINARY_HOST = "res.cloudinary.com";
 
-export type CoverImageContext = "card" | "thumbnail" | "bento" | "prose";
+export type CoverImageContext = "card" | "thumbnail" | "bento" | "prose" | "hero" | "icon";
 
 const TRANSFORMS: Record<CoverImageContext, { mobile: string; desktop: string; widths: [number, number] }> = {
   card: {
@@ -14,14 +14,24 @@ const TRANSFORMS: Record<CoverImageContext, { mobile: string; desktop: string; w
     widths: [160, 320],
   },
   bento: {
-    mobile: "f_auto,q_auto:good,w_600,c_fill,g_auto",
-    desktop: "f_auto,q_auto:good,w_1200,c_fill,g_auto",
-    widths: [600, 1200],
+    mobile: "f_auto,q_auto:good,w_400,c_fill,g_auto",
+    desktop: "f_auto,q_auto:good,w_800,c_fill,g_auto",
+    widths: [400, 800],
   },
   prose: {
     mobile: "f_auto,q_auto:good,w_640,c_limit",
     desktop: "f_auto,q_auto:good,w_1200,c_limit",
     widths: [640, 1200],
+  },
+  hero: {
+    mobile: "f_auto,q_auto:good,w_480,c_limit",
+    desktop: "f_auto,q_auto:good,w_960,c_limit",
+    widths: [480, 960],
+  },
+  icon: {
+    mobile: "f_auto,q_auto:good,w_24,c_limit",
+    desktop: "f_auto,q_auto:good,w_48,c_limit",
+    widths: [24, 48],
   },
 };
 
@@ -98,11 +108,15 @@ export function getCoverImageUrls(src: string, context: CoverImageContext = "car
   const sizes =
     context === "thumbnail"
       ? "84px"
-      : context === "bento"
-        ? "(max-width: 768px) 100vw, (max-width: 1080px) 50vw, 520px"
-        : context === "prose"
-          ? "(max-width: 768px) 100vw, 720px"
-          : "(max-width: 768px) 100vw, (max-width: 1080px) 50vw, 300px";
+      : context === "icon"
+        ? "24px"
+        : context === "hero"
+          ? "480px"
+          : context === "bento"
+            ? "(max-width: 768px) 100vw, (max-width: 1080px) 50vw, 520px"
+            : context === "prose"
+              ? "(max-width: 768px) 100vw, 720px"
+              : "(max-width: 768px) 100vw, (max-width: 1080px) 50vw, 300px";
 
   return {
     mobile,

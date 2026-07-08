@@ -4,7 +4,9 @@ import BlogLayout from "@/layouts/BlogLayout.astro";
 import Topbar from "@/components/Topbar.astro";
 import CoverImage from "@/components/CoverImage.astro";
 import HomeBento from "@/components/HomeBento.astro";
+import SiteImage from "@/components/SiteImage.astro";
 import { getCoverImageUrls } from "@/lib/cover-image";
+import { HOME_CATEGORIES } from "@/lib/home-categories";
 
 const allPosts = await getCollection("posts", ({ data }) => !data.draft);
 const sorted = allPosts.sort(
@@ -27,6 +29,7 @@ const baseUrl = import.meta.env.BASE_URL;
 const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
 const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
 
+const lcpBentoCover = getCoverImageUrls(HOME_CATEGORIES[0].coverImage, "bento");
 const lcpCoverSource = popular[0]?.data.cover;
 const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : undefined;
 ---
@@ -35,6 +38,15 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
   title="Wport Blog — 在台僑外生求學求職完整指南"
   description="專為在台僑外生打造的求學求職資源。涵蓋評點制、AI 課程、實習與工作許可，透過文章學習第一手資訊，提前布局留台職涯。"
 >
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    href={lcpBentoCover.default}
+    imagesrcset={lcpBentoCover.srcset}
+    imagesizes={lcpBentoCover.sizes}
+    fetchpriority="high"
+  />
   {
     lcpCover && (
       <link
@@ -44,7 +56,6 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
         href={lcpCover.default}
         imagesrcset={lcpCover.srcset}
         imagesizes={lcpCover.sizes}
-        fetchpriority="high"
       />
     )
   }
@@ -73,22 +84,26 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
         </div>
         <div class="hero-art-wrap">
           <div class="hero-figure">
-            <img
-              src={withBase("/mascot-graduation.png")}
-              alt="Wport mascot - graduation"
+            <SiteImage
+              src="/mascot-graduation.png"
+              alt=""
+              context="hero"
               class="hero-mascot hero-mascot--graduation"
-              width="832"
-              height="832"
-              decoding="async"
-              fetchpriority="high"
+              media="(min-width: 769px)"
+              width={832}
+              height={832}
+              loading="eager"
+              fetchpriority="low"
             />
-            <img
-              src={withBase("/mascot-cooperation.png")}
-              alt="Wport mascot - cooperation"
+            <SiteImage
+              src="/mascot-cooperation.png"
+              alt=""
+              context="hero"
               class="hero-mascot hero-mascot--cooperation"
-              width="832"
-              height="832"
-              decoding="async"
+              media="(min-width: 769px)"
+              width={832}
+              height={832}
+              loading="lazy"
             />
           </div>
         </div>
@@ -210,7 +225,7 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
     line-height: 1.25;
     margin-bottom: 18px;
     letter-spacing: -0.5px;
-    font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
   }
   .hero-h2 {
     font-size: 16px;
@@ -218,7 +233,7 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
     color: #5d5d5d;
     line-height: 1.75;
     margin-bottom: 28px;
-    font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
   }
   .hero-ctas {
     display: flex;
@@ -236,7 +251,7 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
     cursor: pointer;
     text-decoration: none;
     transition: background 150ms ease;
-    font-family: "PingFang TC", "Noto Sans TC", Arial, sans-serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
     display: inline-block;
   }
   .btn-primary:hover {
@@ -254,7 +269,7 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
     transition:
       border-color 150ms ease,
       color 150ms ease;
-    font-family: "PingFang TC", "Noto Sans TC", Arial, sans-serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
     display: inline-block;
   }
   .btn-secondary:hover {
@@ -285,9 +300,14 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
     opacity: 0;
     animation: heroCrossfade 8s ease-in-out infinite;
+  }
+  .hero-mascot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
   }
   .hero-mascot--cooperation {
     animation-delay: 4s;
@@ -333,6 +353,8 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
     max-width: 1080px;
     margin: 0 auto;
     padding: 72px 24px 80px;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
   }
   .popular-inner {
     width: 100%;
@@ -350,14 +372,14 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 8px;
-    font-family: "PingFang TC", "Noto Sans TC", Arial, sans-serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
   }
   .popular-title {
     font-size: 28px;
     font-weight: 700;
     color: #2e2e2e;
     line-height: 1.3;
-    font-family: "PingFang TC", "Noto Sans TC", Arial, sans-serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
   }
   .popular-see-all {
     color: #0d7c70;
@@ -365,7 +387,7 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
     font-weight: 500;
     text-decoration: none;
     transition: color 150ms ease;
-    font-family: "PingFang TC", "Noto Sans TC", Arial, sans-serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
   }
   .popular-see-all:hover {
     color: #0a6a60;

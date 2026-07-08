@@ -37,15 +37,16 @@ const cards = HOME_CATEGORIES.map((category) => ({
             href={href}
             class:list={["bento-card", `bento-card--${category.size}`, `bento-card--${category.id}`]}
           >
-            <div class="bento-card__media" style={`--bento-cover: url("${cover.default}")`}>
+            <div class="bento-card__media">
               <img
                 src={cover.default}
                 srcset={cover.srcset}
                 sizes={cover.sizes}
                 alt={category.coverAlt}
                 class="bento-card__image"
-                loading="lazy"
+                loading={category.size === "large" ? "eager" : "lazy"}
                 decoding="async"
+                fetchpriority={category.size === "large" ? "high" : "auto"}
               />
             </div>
             <div class="bento-card__scrim" aria-hidden="true" />
@@ -168,10 +169,6 @@ const cards = HOME_CATEGORIES.map((category) => ({
     z-index: 0;
     overflow: hidden;
     background-color: var(--color-primary);
-    background-image: var(--bento-cover);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
   }
 
   .bento-card__image {
