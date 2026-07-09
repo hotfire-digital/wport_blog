@@ -186,6 +186,50 @@ npm run dev
 
 開啟 `http://localhost:3000` 確認文章顯示正常後再 commit。
 
+### Analytics / GTM / Search Console
+
+Blog 已掛載與主站相同的 Google Tag Manager（預設 `GTM-MGLNLCG5`），並在文章頁送出 `post_view`、`scroll_depth`、`read_complete`、`share_click` 等事件。
+
+- [`docs/analytics-guide.md`](./docs/analytics-guide.md)：**先看這篇**——為什麼這樣設計、怎麼使用、給 AI Agent 的入門
+- [`docs/analytics.md`](./docs/analytics.md)：完整事件字典、GA4 報表維度、GSC 驗證與 sitemap 提交流程
+
+可選環境變數（見 `.env.example`）：
+
+- `PUBLIC_GTM_ID`：覆寫 GTM container
+- `PUBLIC_GSC_VERIFICATION`：Search Console HTML meta 驗證碼
+
+前台「已閱讀」標記寫在瀏覽器 `localStorage`（`wport.readPosts`），僅同裝置有效；真正的閱讀完成度請看 GA4 的 `read_complete` / `mark_read`。
+
+RSS 已加上 XSL 樣式：`https://wport.me/blog/feed.xml`（樣式檔 `/blog/feed.xsl`）。瀏覽器看到的「This XML file does not appear to have any style information」在未部署 XSL 前是正常現象，部署後會變成可讀列表。
+
+#### Google API 自動化（讓 Agent / 你自己執行）
+
+`scripts/` 內有兩支 Python 腳本，讓 Cursor Agent 或人工能透過 Google API 操作 GSC、GTM、GA4，避免所有事都要進後台點：
+
+| 腳本 | 用途 |
+|------|------|
+| [`scripts/google_api_auth_test.py`](./scripts/google_api_auth_test.py) | 首次 OAuth 授權 + 驗證 GSC/GTM/GA4 三項權限，token 存 `~/.config/wport_blog/google_oauth_token.json` |
+| [`scripts/gtm_build_blog_tags.py`](./scripts/gtm_build_blog_tags.py) | 冪等在 `GTM-MGLNLCG5` 建立 blog 事件的 variables / triggers / GA4 event tags（不會 auto-publish） |
+
+**首次授權**（會跳瀏覽器，選 `ericlu@wport.me`）：
+
+```bash
+python3 -m venv /tmp/wport-oauth-venv
+/tmp/wport-oauth-venv/bin/pip install google-auth-oauthlib google-auth-httplib2
+/tmp/wport-oauth-venv/bin/python scripts/google_api_auth_test.py \
+  "/Users/Eric/Documents/憑證/eric_mac_wport.json"
+```
+
+看到三個 `[PASS]` 即通過。之後執行任何腳本會自動 refresh，不用再登入。
+
+**建 GTM tags**（授權完成後）：
+
+```bash
+/tmp/wport-oauth-venv/bin/python scripts/gtm_build_blog_tags.py
+```
+
+前提：OAuth Desktop Client JSON（例：`eric_mac_wport.json`）、`~/.config/wport_blog/google_oauth_token.json`（首次授權後產生），兩者都**不得 commit 進 git**。授權背後的設計理由、常見錯誤（`This app is blocked`、`invalid_rapt`、`403 scope insufficient`）請看 [`docs/analytics-guide.md`](./docs/analytics-guide.md)。
+
 ## Design Kit & Template Reuse
 
 This blog is now structured to support template reuse for client delivery.

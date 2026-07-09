@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # local cursor/claude worktrees
 .claude/worktrees/
+
+# defensive: never commit Google OAuth client secrets or user tokens
+# (real files live outside the repo under ~/Documents/憑證/ and ~/.config/wport_blog/)
+client_secret*.json
+*oauth*token*.json
+google_oauth_token.json

@@ -21,6 +21,7 @@ export default function ArticleArchive({ posts, allTags }: Props) {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [readIds, setReadIds] = useState<Set<string>>(new Set());
   const baseUrl = import.meta.env.BASE_URL;
   const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
   const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
@@ -48,6 +49,25 @@ export default function ArticleArchive({ posts, allTags }: Props) {
       setSearch(urlSearch);
     }
   }, [normalizedTags]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const raw = window.localStorage.getItem("wport.readPosts");
+      if (!raw) {
+        setReadIds(new Set());
+        return;
+      }
+      const parsed: unknown = JSON.parse(raw);
+      if (!Array.isArray(parsed)) {
+        setReadIds(new Set());
+        return;
+      }
+      setReadIds(new Set(parsed.filter((value): value is string => typeof value === "string")));
+    } catch {
+      setReadIds(new Set());
+    }
+  }, []);
 
   const filtered = posts.filter((p) => {
     const matchTag = !activeTag || (p.tags ?? []).includes(activeTag);
@@ -168,52 +188,60 @@ export default function ArticleArchive({ posts, allTags }: Props) {
         <p style={{ color: "#707070", fontSize: 15 }}>找不到符合的文章。</p>
       ) : (
         <ul className="card-grid">
-          {filtered.map((post) => (
-            <li key={post.id}>
-              <a href={withBase(`/posts/${post.id}`)} className="card">
-                <div className="card-cover" style={{ background: post.coverHue }}>
-                  {post.cover ? (
-                    <CoverImage
-                      src={post.cover}
-                      alt={`${post.title} cover`}
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <>
-                      <div className="card-cover-shape1" style={{ background: post.coverAccent }} />
-                      <div className="card-cover-shape2" style={{ background: post.coverAccent }} />
-                      <div className="card-cover-label" style={{ color: post.coverAccent }}>
-                        wport
-                      </div>
-                    </>
-                  )}
-                </div>
-                <div className="card-body">
-                  {post.tags && post.tags.length > 0 && (
-                    <div className="card-tags">
-                      {post.tags.slice(0, 4).map((tag) => (
-                        <span key={tag} className="tag">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  <div className="card-title">{post.title}</div>
-                  <div className="card-excerpt">{post.description}</div>
-                  <div className="card-footer">
-                    <span className="card-date">
-                      {new Date(post.publishDate).toLocaleDateString("zh-TW", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </span>
+          {filtered.map((post) => {
+            const isRead = readIds.has(post.id);
+            return (
+              <li key={post.id}>
+                <a
+                  href={withBase(`/posts/${post.id}`)}
+                  className={`card${isRead ? " is-read" : ""}`}
+                  data-post-id={post.id}
+                >
+                  <div className="card-cover" style={{ background: post.coverHue }}>
+                    {post.cover ? (
+                      <CoverImage
+                        src={post.cover}
+                        alt={`${post.title} cover`}
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <>
+                        <div className="card-cover-shape1" style={{ background: post.coverAccent }} />
+                        <div className="card-cover-shape2" style={{ background: post.coverAccent }} />
+                        <div className="card-cover-label" style={{ color: post.coverAccent }}>
+                          wport
+                        </div>
+                      </>
+                    )}
                   </div>
-                </div>
-              </a>
-            </li>
-          ))}
+                  <div className="card-body">
+                    {post.tags && post.tags.length > 0 && (
+                      <div className="card-tags">
+                        {post.tags.slice(0, 4).map((tag) => (
+                          <span key={tag} className="tag">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <div className="card-title">{post.title}</div>
+                    <div className="card-excerpt">{post.description}</div>
+                    <div className="card-footer">
+                      {isRead && <span className="read-badge">已閱讀</span>}
+                      <span className="card-date">
+                        {new Date(post.publishDate).toLocaleDateString("zh-TW", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>

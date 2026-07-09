@@ -132,7 +132,7 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
                 const cover = COVER_COLORS[i % COVER_COLORS.length];
                 return (
                   <li>
-                    <a href={withBase(`/posts/${post.id}`)} class="card">
+                    <a href={withBase(`/posts/${post.id}`)} class="card" data-post-id={post.id}>
                       <div class="card-cover" style={`background: ${cover.hue};`}>
                         {post.data.cover ? (
                           <CoverImage
@@ -532,3 +532,8 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
     }
   }
 </style>
+
+<script>
+  import { applyReadMarkers } from "@/lib/read-markers";
+  applyReadMarkers();
+</script>

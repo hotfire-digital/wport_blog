@@ -110,7 +110,7 @@ const rssFeedUrl = `${SITE_ORIGIN}${BASE_PATH}/feed.xml`;
               data-description={post.data.description}
               data-tags={tags.join(",")}
             >
-              <a href={withBase(`/posts/${post.id}`)} class="card">
+              <a href={withBase(`/posts/${post.id}`)} class="card" data-post-id={post.id}>
                 <div class="card-cover" style={`background: ${cover.hue};`}>
                   {post.data.cover ? (
                     <CoverImage
@@ -624,4 +624,9 @@ const rssFeedUrl = `${SITE_ORIGIN}${BASE_PATH}/feed.xml`;
     applyFilters();
     syncUrl(getSearchQuery());
   });
+</script>
+
+<script>
+  import { applyReadMarkers } from "@/lib/read-markers";
+  applyReadMarkers();
 </script>
