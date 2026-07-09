@@ -23,6 +23,7 @@ Google Search Console
 | dataLayer helper | `src/lib/analytics.ts` |
 | 文章事件 | `src/pages/posts/[slug].astro` |
 | 已閱讀標記 | `src/lib/read-markers.ts` + archive/index |
+| 閱讀數（build-time 抓 GA4） | `scripts/fetch_ga4_views.py` → `src/data/post-views.json` → `src/lib/post-views.ts` |
 | RSS 樣式 | `public/feed.xsl` + `src/pages/feed.xml.ts` |
 | Env 範例 | `.env.example`（`PUBLIC_GTM_ID`, `PUBLIC_GSC_VERIFICATION`） |
 
@@ -231,7 +232,43 @@ gcloud auth application-default login \
 
 ---
 
-## 5. RSS 可讀化
+## 5. 前台顯示閱讀數（build-time GA4）
+
+Blog 卡片與文章頁的「N 閱讀」文字是**建置時**從 GA4 Data API 抓的快照。
+
+流程：
+
+1. `scripts/fetch_ga4_views.py` 讀 `~/.config/wport_blog/google_oauth_token.json`（沿用 `google_api_auth_test.py` 授權過的 token）
+2. 呼叫 `analyticsdata.googleapis.com/v1beta/properties/514959680:runReport`，維度 `pagePath`、指標 `screenPageViews`，篩選 `pagePath` BEGINS_WITH `/blog/posts/`
+3. 用正則把 `/blog/posts/<slug>/` 解析成 slug，加總後寫入 `src/data/post-views.json`
+4. `astro build` 時 `src/lib/post-views.ts` 讀該 JSON，注入到卡片與文章頁
+
+執行：
+
+```bash
+/tmp/wport-oauth-venv/bin/python scripts/fetch_ga4_views.py
+# 或 dry-run 只印不寫檔
+/tmp/wport-oauth-venv/bin/python scripts/fetch_ga4_views.py --dry-run
+```
+
+參數：
+
+- `--property`：GA4 property 數字 ID，預設 `514959680`（`WPORT-行銷總覽`）
+- `--since`：起始日期，預設 `2024-01-01`（近似 lifetime）
+
+顯示規則：
+
+- 前端 `getPostViews(slug)` 若查不到或為 0，UI **完全不顯示**「N 閱讀」，避免所有新文章都掛「0 閱讀」
+- 數字格式：`1,234 閱讀`（英文千分位 + 中文單位）
+
+建議工作流：
+
+- 每次要 deploy 前先 `python scripts/fetch_ga4_views.py`，再 `npm run build`
+- 之後可考慮加到 GitHub Actions 定時（例如每天 09:00 UTC+8）自動 fetch + rebuild + deploy
+
+---
+
+## 6. RSS 可讀化
 
 - Feed：`https://wport.me/blog/feed.xml`
 - Stylesheet：`https://wport.me/blog/feed.xsl`
@@ -240,7 +277,7 @@ gcloud auth application-default login \
 
 ---
 
-## 6. 上線驗收清單
+## 7. 上線驗收清單
 
 - [ ] `npm run build` 成功
 - [ ] 正式站 HTML 含 GTM snippet（`GTM-MGLNLCG5` 或覆寫值）

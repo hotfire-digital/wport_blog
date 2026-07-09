@@ -7,6 +7,7 @@ import HomeBento from "@/components/HomeBento.astro";
 import SiteImage from "@/components/SiteImage.astro";
 import { getCoverImageUrls } from "@/lib/cover-image";
 import { HOME_CATEGORIES } from "@/lib/home-categories";
+import { getPostViews, formatPostViews } from "@/lib/post-views";
 
 const allPosts = await getCollection("posts", ({ data }) => !data.draft);
 const sorted = allPosts.sort(
@@ -163,6 +164,10 @@ const lcpCover = lcpCoverSource ? getCoverImageUrls(lcpCoverSource, "card") : un
                         <div class="card-title">{post.data.title}</div>
                         <div class="card-excerpt">{post.data.description}</div>
                         <div class="card-footer">
+                          {(() => {
+                            const views = getPostViews(post.id);
+                            return views > 0 ? <span class="card-views">{formatPostViews(views)}</span> : null;
+                          })()}
                           <span class="card-date">
                             {post.data.publishDate.toLocaleDateString("zh-TW", {
                               year: "numeric",

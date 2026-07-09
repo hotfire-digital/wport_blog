@@ -4,6 +4,7 @@ import BlogLayout from "@/layouts/BlogLayout.astro";
 import Topbar from "@/components/Topbar.astro";
 import CoverImage from "@/components/CoverImage.astro";
 import { getCoverImageUrls } from "@/lib/cover-image";
+import { getPostViews, formatPostViews } from "@/lib/post-views";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
@@ -69,6 +70,7 @@ const clientVars = {
 };
 
 const heroCover = post.data.cover ? getCoverImageUrls(post.data.cover, "prose") : undefined;
+const postViews = getPostViews(post.id);
 ---
 
 <BlogLayout
@@ -140,6 +142,16 @@ const heroCover = post.data.cover ? getCoverImageUrls(post.data.cover, "prose") 
                 })
               }
             </span>
+            {
+              postViews > 0 && (
+                <>
+                  <span class="post-meta-sep" aria-hidden="true">
+                    ·
+                  </span>
+                  <span class="post-meta-views">{formatPostViews(postViews)}</span>
+                </>
+              )
+            }
           </div>
           <p class="post-description">
             {post.data.description}
@@ -155,36 +167,49 @@ const heroCover = post.data.cover ? getCoverImageUrls(post.data.cover, "prose") 
             <section class="post-related">
               <h2 class="post-related-title">相關文章</h2>
               <ul class="post-related-list">
-                {relatedPosts.map((related) => (
-                  <li>
-                    <a
-                      href={withBase(`/posts/${related.id}`)}
-                      class:list={["post-related-card", !related.data.cover && "post-related-card--no-cover"]}
-                      data-related-post-id={related.id}
-                    >
-                      {related.data.cover && (
-                        <CoverImage
-                          src={related.data.cover}
-                          alt={`${related.data.title} cover`}
-                          class="post-related-cover"
-                          context="thumbnail"
-                          loading="lazy"
-                        />
-                      )}
-                      <div class="post-related-content">
-                        <div class="post-related-card-title">{related.data.title}</div>
-                        <p class="post-related-card-description">{related.data.description}</p>
-                        <span class="post-related-card-date">
-                          {related.data.publishDate.toLocaleDateString("zh-TW", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
-                        </span>
-                      </div>
-                    </a>
-                  </li>
-                ))}
+                {relatedPosts.map((related) => {
+                  const relatedViews = getPostViews(related.id);
+                  return (
+                    <li>
+                      <a
+                        href={withBase(`/posts/${related.id}`)}
+                        class:list={["post-related-card", !related.data.cover && "post-related-card--no-cover"]}
+                        data-related-post-id={related.id}
+                      >
+                        {related.data.cover && (
+                          <CoverImage
+                            src={related.data.cover}
+                            alt={`${related.data.title} cover`}
+                            class="post-related-cover"
+                            context="thumbnail"
+                            loading="lazy"
+                          />
+                        )}
+                        <div class="post-related-content">
+                          <div class="post-related-card-title">{related.data.title}</div>
+                          <p class="post-related-card-description">{related.data.description}</p>
+                          <div class="post-related-card-meta">
+                            <span class="post-related-card-date">
+                              {related.data.publishDate.toLocaleDateString("zh-TW", {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              })}
+                            </span>
+                            {relatedViews > 0 && (
+                              <>
+                                <span class="post-related-card-sep" aria-hidden="true">
+                                  ·
+                                </span>
+                                <span class="post-related-card-views">{formatPostViews(relatedViews)}</span>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </section>
           )
@@ -518,11 +543,17 @@ const heroCover = post.data.cover ? getCoverImageUrls(post.data.cover, "prose") 
   .post-meta-row {
     display: flex;
     align-items: center;
+    gap: 8px;
     padding: 8px 0;
   }
-  .post-meta-date {
+  .post-meta-date,
+  .post-meta-views {
     font-size: var(--text-sm);
     color: var(--fg-meta);
+  }
+  .post-meta-sep {
+    color: var(--fg-meta);
+    opacity: 0.5;
   }
 
   .post-layout {
@@ -1023,9 +1054,24 @@ const heroCover = post.data.cover ? getCoverImageUrls(post.data.cover, "prose") 
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+  .post-related-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #b0b0b0;
+  }
   .post-related-card-date {
     font-size: 11px;
     color: #b0b0b0;
+  }
+  .post-related-card-views {
+    font-size: 11px;
+    color: #b0b0b0;
+    font-weight: 500;
+  }
+  .post-related-card-sep {
+    opacity: 0.7;
   }
 
   .post-pagination {

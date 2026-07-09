@@ -5,6 +5,7 @@ import Topbar from "@/components/Topbar.astro";
 import { BASE_PATH, SITE_ORIGIN } from "@/lib/llms-content";
 import CoverImage from "@/components/CoverImage.astro";
 import { CANONICAL_TAGS, LEGACY_TAG_REDIRECTS } from "@/lib/tags";
+import { getPostViews, formatPostViews } from "@/lib/post-views";
 
 const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
   (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
@@ -140,6 +141,10 @@ const rssFeedUrl = `${SITE_ORIGIN}${BASE_PATH}/feed.xml`;
                   <div class="card-title">{post.data.title}</div>
                   <div class="card-excerpt">{post.data.description}</div>
                   <div class="card-footer">
+                    {(() => {
+                      const views = getPostViews(post.id);
+                      return views > 0 ? <span class="card-views">{formatPostViews(views)}</span> : null;
+                    })()}
                     <span class="card-date">
                       {post.data.publishDate.toLocaleDateString("zh-TW", {
                         year: "numeric",

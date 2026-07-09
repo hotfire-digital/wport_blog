@@ -451,14 +451,27 @@ body {
   position: relative;
 }
 
-.card.is-read .card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
 .card.is-read .card-title {
   opacity: 0.88;
+}
+
+/* ─── Card footer meta (views + date) ─────────────────────────── */
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card-footer .card-date {
+  margin-left: auto;
+}
+
+.card-views {
+  font-size: 12px;
+  color: var(--fg-meta, #5d5d5d);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
 }
 
