@@ -6,6 +6,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import rehypeRaw from "rehype-raw";
 import { rehypeOptimizeImages } from "./src/lib/rehype-optimize-images.ts";
+import { rehypeJobRecommendations } from "./src/lib/rehype-job-recommendations.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,7 +15,7 @@ export default defineConfig({
   base: "/blog",
   integrations: [react(), sitemap()],
   markdown: {
-    rehypePlugins: [rehypeRaw, rehypeOptimizeImages],
+    rehypePlugins: [rehypeRaw, rehypeJobRecommendations, rehypeOptimizeImages],
     shikiConfig: {
       theme: "github-light",
       wrap: true,
@@ -23,5 +24,13 @@ export default defineConfig({
   server: { port: 3000 },
   vite: {
     plugins: [tailwindcss()],
+    // Dev-only: proxy the jobs API through the dev server so localhost calls are
+    // same-origin (production is already same-origin, so no proxy is needed there).
+    // Pairs with getJobsConfig() using a relative "/v2/api" base in dev.
+    server: {
+      proxy: {
+        "/v2/api": { target: "https://wport.me", changeOrigin: true },
+      },
+    },
   },
 });

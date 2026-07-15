@@ -4,7 +4,10 @@ export type AnalyticsEventName =
   | "read_complete"
   | "share_click"
   | "related_post_click"
-  | "mark_read";
+  | "mark_read"
+  | "recommended_jobs_view"
+  | "recommended_job_click"
+  | "recommended_jobs_search_click";
 
 export interface PostAnalyticsContext {
   post_id: string;
@@ -33,6 +36,44 @@ export function getGtmId(): string {
     return fromEnv.trim();
   }
   return DEFAULT_GTM_ID;
+}
+
+/**
+ * Job listing endpoints on the Wport talent hub. The blog is served from the
+ * same origin (https://wport.me/blog), so the API call is same-origin and
+ * needs no CORS handling. The in-article recommendations use two sources:
+ * general job search (by a post's jobKeywords) and the foreign-student zone
+ * (default for posts tagged 僑外生). `{enc_id}` / `{kw}` are substituted at
+ * runtime. Override any value via PUBLIC_* env.
+ */
+export const DEFAULT_JOBS_API_BASE = "https://wport.me/v2/api";
+export const DEFAULT_JOB_DETAIL_URL = "https://wport.me/job/{enc_id}";
+export const DEFAULT_JOB_SEARCH_URL = "https://wport.me/jobs?keyword={kw}";
+export const DEFAULT_JOB_ZONE_URL = "https://wport.me/foreign-student-zone";
+
+function envOrDefault(value: string | undefined, fallback: string): string {
+  return value && value.trim() ? value.trim() : fallback;
+}
+
+export interface JobsConfig {
+  apiBase: string;
+  detailUrl: string;
+  searchUrl: string;
+  zoneUrl: string;
+}
+
+/** Resolve job endpoint config from PUBLIC_* env with hardcoded fallbacks. */
+export function getJobsConfig(): JobsConfig {
+  // In `npm run dev`, call a relative path that the Vite dev-server proxy
+  // (see astro.config.mjs) forwards to wport.me, so localhost is same-origin
+  // and not blocked by CORS. Production is already same-origin.
+  const apiBaseFallback = import.meta.env.DEV ? "/v2/api" : DEFAULT_JOBS_API_BASE;
+  return {
+    apiBase: envOrDefault(import.meta.env.PUBLIC_JOBS_API_BASE as string | undefined, apiBaseFallback),
+    detailUrl: envOrDefault(import.meta.env.PUBLIC_JOB_DETAIL_URL as string | undefined, DEFAULT_JOB_DETAIL_URL),
+    searchUrl: envOrDefault(import.meta.env.PUBLIC_JOB_SEARCH_URL as string | undefined, DEFAULT_JOB_SEARCH_URL),
+    zoneUrl: envOrDefault(import.meta.env.PUBLIC_JOB_ZONE_URL as string | undefined, DEFAULT_JOB_ZONE_URL),
+  };
 }
 
 export function pushAnalyticsEvent(event: AnalyticsEventName, payload: AnalyticsPayload = {}): void {

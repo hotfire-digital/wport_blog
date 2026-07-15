@@ -7,6 +7,9 @@ dist/
 # dependencies
 node_modules/
 
+# python virtualenv (for scripts/*.py, e.g. setup_gtm_job_events.py)
+.venv/
+
 # logs
 npm-debug.log*
 yarn-debug.log*
