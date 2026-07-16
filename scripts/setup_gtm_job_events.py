@@ -340,9 +340,12 @@ def main() -> int:
                 print(f"  would mark key event: {name}")
             else:
                 status, created = api("POST", url, token, body)
-                ok = status in (200, 201)
-                print(f"  {'marked' if ok else 'FAILED'} key event {name}: HTTP {status}"
-                      + ("" if ok else f" {created}"))
+                if status in (200, 201):
+                    print(f"  marked key event {name}: HTTP {status}")
+                elif status == 409:
+                    print(f"  key event {name} already exists (ok)")
+                else:
+                    print(f"  FAILED key event {name}: HTTP {status} {created}")
 
     if args.apply and args.publish:
         print("\n-- Publish --")
