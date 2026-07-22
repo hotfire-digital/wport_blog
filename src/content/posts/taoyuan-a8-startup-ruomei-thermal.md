@@ -7,7 +7,7 @@ featured: false
 draft: true
 ---
 
-這次是**台大創創**找 WPORT 一起到**桃園 A8**聽新創 pitch，現場一家一家聽。這篇文章先記第一家：**台灣若美科技股份有限公司**。後面還會補其他廠商與細節，所以先當草稿用，能改就改。
+這次是**台大創創**找 WPORT 一起到**桃園 A8**聽新創 pitch，現場一家一家聽。這是**四篇系列的第一篇**，先記：**台灣若美科技股份有限公司**。後續三家為[環創源（二）](/blog/posts/taoyuan-a8-startup-eith-wastewater/)、[宸祿（三）](/blog/posts/taoyuan-a8-startup-chenlu-endoscopy/)、[歐維克（四）](/blog/posts/taoyuan-a8-startup-awarek-thermal/)。先當草稿，能改就改。
 
 若美給我的第一印象很清楚：他們本來就是材料公司，主軸放在次世代散熱。AI 算力往上衝，資料中心與高功率裝置為了把熱帶走，電費與冷卻成本跟著燒。他們的切入點不是再做一個更大的風扇或液冷板，而是從材料與輻射路徑下手，並開始補一層熱模擬軟體。
 
@@ -125,9 +125,6 @@ draft: true
 
 ## 待補（其他廠商與細節）
 
-> 第二家已另寫：[環創源科技看案筆記（二）](/blog/posts/taoyuan-a8-startup-eith-wastewater/)  
-> TODO：現場照片／簡報重點圖  
-> TODO：若美量測數據、日本代理合約進度、清大與政府合作細節  
-> TODO：同一場 A8 看案第三家起
-
-先寫到這裡。同場其他廠商會陸續以「（二）（三）…」接續。
+> **桃園 A8 看案系列（共四家）**  
+> （一）若美 · （二）[環創源](/blog/posts/taoyuan-a8-startup-eith-wastewater/) · （三）[宸祿](/blog/posts/taoyuan-a8-startup-chenlu-endoscopy/) · （四）[歐維克](/blog/posts/taoyuan-a8-startup-awarek-thermal/)  
+> TODO：現場照片／簡報重點圖
