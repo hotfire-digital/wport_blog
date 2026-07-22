@@ -14,7 +14,7 @@ export const localePathPrefix: Record<Locale, string> = {
   "th-TH": "th",
 };
 
-/** Filename suffix for paired post files: `slug.md` / `slug.en.md`. */
+/** Filename suffix for paired post files: `post.md` / `post-en.md`. */
 export const localeFileSuffix: Record<Locale, string> = {
   "zh-TW": "",
   "en-US": "en",

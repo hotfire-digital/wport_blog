@@ -52,6 +52,8 @@ export type UiKey =
   | "bento.features.coverAlt"
   | "archive.title"
   | "archive.heading"
+  | "archive.subtitle"
+  | "archive.rss"
   | "archive.searchPlaceholder"
   | "archive.empty"
   | "archive.allTags"
@@ -124,6 +126,8 @@ const zhTW: UiDict = {
   "bento.features.coverAlt": "WPORT 功能專區封面，產品教學與實作現場",
   "archive.title": "所有文章 — Wport Blog",
   "archive.heading": "所有文章",
+  "archive.subtitle": "分享觀點、紀錄思考",
+  "archive.rss": "RSS 訂閱",
   "archive.searchPlaceholder": "搜尋文章…",
   "archive.empty": "找不到符合的文章。",
   "archive.allTags": "全部",
@@ -196,6 +200,8 @@ const enUS: UiDict = {
   "bento.features.coverAlt": "Cover for the WPORT features section, product workshop",
   "archive.title": "All posts — Wport Blog",
   "archive.heading": "All posts",
+  "archive.subtitle": "Share perspectives, record thinking",
+  "archive.rss": "RSS feed",
   "archive.searchPlaceholder": "Search posts…",
   "archive.empty": "No matching posts found.",
   "archive.allTags": "All",
@@ -268,6 +274,8 @@ const idID: UiDict = {
   "bento.features.coverAlt": "Sampul fitur WPORT, lokakarya produk",
   "archive.title": "Semua artikel — Wport Blog",
   "archive.heading": "Semua artikel",
+  "archive.subtitle": "Berbagi sudut pandang, mencatat pemikiran",
+  "archive.rss": "Langganan RSS",
   "archive.searchPlaceholder": "Cari artikel…",
   "archive.empty": "Tidak ada artikel yang cocok.",
   "archive.allTags": "Semua",
@@ -340,6 +348,8 @@ const viVN: UiDict = {
   "bento.features.coverAlt": "Ảnh bìa tính năng WPORT, workshop sản phẩm",
   "archive.title": "Tất cả bài viết — Wport Blog",
   "archive.heading": "Tất cả bài viết",
+  "archive.subtitle": "Chia sẻ góc nhìn, ghi lại suy nghĩ",
+  "archive.rss": "Theo dõi RSS",
   "archive.searchPlaceholder": "Tìm bài viết…",
   "archive.empty": "Không tìm thấy bài viết phù hợp.",
   "archive.allTags": "Tất cả",
@@ -412,6 +422,8 @@ const thTH: UiDict = {
   "bento.features.coverAlt": "ภาพปกฟีเจอร์ WPORT เวิร์กช็อปผลิตภัณฑ์",
   "archive.title": "บทความทั้งหมด — Wport Blog",
   "archive.heading": "บทความทั้งหมด",
+  "archive.subtitle": "แบ่งปันมุมมอง บันทึกความคิด",
+  "archive.rss": "ติดตาม RSS",
   "archive.searchPlaceholder": "ค้นหาบทความ…",
   "archive.empty": "ไม่พบบทความที่ตรงกัน",
   "archive.allTags": "ทั้งหมด",

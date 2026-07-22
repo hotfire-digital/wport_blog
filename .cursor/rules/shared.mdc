@@ -22,7 +22,7 @@ When introducing changes to the project, always follow the directory structure b
 - `./src` - source code
 - `./src/layouts` - Astro layouts
 - `./src/pages` - Astro pages
-- `./src/content/posts` - Blog posts (Markdown; paired i18n files e.g. `slug.md` / `slug.en.md`)
+- `./src/content/posts` - Blog posts (Markdown; paired i18n files e.g. `slug.md` / `slug-en.md`)
 - `./src/i18n` - Locale config, UI dictionaries, path helpers
 - `./src/styles/global.css` - design tokens and prose styles
 - `./src/types.ts` - Shared types (Entities, DTOs)

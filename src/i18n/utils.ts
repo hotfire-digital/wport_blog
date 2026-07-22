@@ -54,10 +54,11 @@ export function mainSitePath(locale: Locale, path: string): string {
 
 /**
  * Parse collection entry id into base slug + locale.
- * Examples: `resume-tips` → zh-TW; `resume-tips.en` → en-US
+ * Examples: `resume-tips` → zh-TW; `resume-tips-en` → en-US
+ * Note: Astro content IDs drop dots, so paired files use `slug-en.md` (not `slug.en.md`).
  */
 export function parsePostEntryId(entryId: string): { baseSlug: string; locale: Locale } {
-  const match = entryId.match(/^(.*)\.(en|id|vi|th)$/);
+  const match = entryId.match(/^(.*)-(en|id|vi|th)$/);
   if (!match) {
     return { baseSlug: entryId, locale: defaultLocale };
   }

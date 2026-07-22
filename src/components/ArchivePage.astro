@@ -43,9 +43,9 @@ const rssFeedUrl = `${SITE_ORIGIN}${BASE_PATH}/feed.xml`;
       <div class="archive-header__top">
         <div>
           <h1 class="archive-title">{t(locale, "archive.heading")}</h1>
-          <p class="archive-subtitle">分享觀點、紀錄思考</p>
+          <p class="archive-subtitle">{t(locale, "archive.subtitle")}</p>
         </div>
-        <a href={rssFeedUrl} class="archive-rss-link" rel="alternate" type="application/rss+xml" title="RSS 訂閱">
+        <a href={rssFeedUrl} class="archive-rss-link" rel="alternate" type="application/rss+xml" title={t(locale, "archive.rss")}>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path
               d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"
@@ -54,7 +54,7 @@ const rssFeedUrl = `${SITE_ORIGIN}${BASE_PATH}/feed.xml`;
               stroke-linecap="round"></path>
             <circle cx="5" cy="19" r="1" fill="currentColor"></circle>
           </svg>
-          RSS 訂閱
+          {t(locale, "archive.rss")}
         </a>
       </div>
     </header>
