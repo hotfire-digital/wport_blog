@@ -2,16 +2,16 @@
 title: "入職前 90 天職涯行銷計畫：僑外生在台灣如何做出可見績效"
 description: "拿到 offer 後，如何用行銷思維設計前 90 天行動，建立信任、做出成果，強化留任與升遷機會。"
 publishDate: 2026-05-12
-tags: ["僑外生", "個人品牌"]
+tags: ["僑外生", "職涯成長", "在台工作", "行銷策略"]
 featured: false
 draft: true
-cover: "https://images.pexels.com/photos/6829538/pexels-photo-6829538.jpeg?auto=compress&cs=tinysrgb&w=1200"
+cover: "https://images.pexels.com/photos/6829538/pexels-photo-6829538.jpeg?auto=compress&cs=tinysrgb&w=1600"
 ---
 
 拿到 offer 只是第一步。  
 對僑外生來說，前 90 天是建立信任、降低試用期風險、累積長期留台資本的關鍵階段。
 
-![團隊會議與協作場景，對應入職前 90 天規劃](https://images.pexels.com/photos/6829538/pexels-photo-6829538.jpeg?auto=compress&cs=tinysrgb&w=1200)
+![團隊會議與協作場景，對應入職前 90 天規劃](https://images.pexels.com/photos/6829538/pexels-photo-6829538.jpeg?auto=compress&cs=tinysrgb&w=1600)
 
 ---
 
@@ -60,7 +60,7 @@ cover: "https://images.pexels.com/photos/6829538/pexels-photo-6829538.jpeg?auto=
 
 你不只是執行者，而是能放大團隊效能的人。
 
-![同事討論工作內容，象徵持續同步成果與擴大影響力](https://images.pexels.com/photos/7889204/pexels-photo-7889204.jpeg?auto=compress&cs=tinysrgb&w=1200)
+![同事討論工作內容，象徵持續同步成果與擴大影響力](https://images.pexels.com/photos/7889204/pexels-photo-7889204.jpeg?auto=compress&cs=tinysrgb&w=1600)
 
 ---
 

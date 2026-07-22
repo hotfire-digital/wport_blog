@@ -171,6 +171,17 @@ const postViews = getPostViews(post.id);
           <Content />
         </div>
 
+        <div class="follow-card">
+          <div class="follow-card-text">
+            <div class="follow-card-title">追蹤 WPORT，不錯過每一場活動</div>
+            <div class="follow-card-desc">最新活動資訊、AI 工具教學、在台求職攻略，第一時間送到你面前。</div>
+            <div class="follow-card-btns">
+              <a href="https://hypelink.app/organizers/@wport" class="follow-btn follow-btn-primary">最新活動</a>
+              <a href="https://wport.me/" class="follow-btn follow-btn-outline">WPORT 職航站</a>
+            </div>
+          </div>
+        </div>
+
         {
           relatedPosts.length > 0 && (
             <section class="post-related">
@@ -992,6 +1003,55 @@ const postViews = getPostViews(post.id);
   .prose strong {
     color: var(--fg-heading);
     font-weight: var(--weight-bold);
+  }
+
+  .follow-card {
+    margin: 40px 0 0;
+    padding: 28px 32px;
+    background: linear-gradient(135deg, #eaf8f7 0%, #f0faf9 100%);
+    border-radius: 16px;
+    border: 1px solid #c5e8e5;
+  }
+
+  .follow-card-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0d7c70;
+    margin-bottom: 8px;
+  }
+
+  .follow-card-desc {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .follow-card-btns {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .follow-btn {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+
+  .follow-btn-primary {
+    background: #0d7c70;
+    color: #fff;
+  }
+
+  .follow-btn-outline {
+    background: #fff;
+    color: #0d7c70;
+    border: 1.5px solid #0d7c70;
   }
 
   .post-related {
