@@ -67,6 +67,45 @@ export type UiKey =
   | "post.next"
   | "post.toc"
   | "post.paginationNav"
+  | "post.aiCopy.title"
+  | "post.aiCopy.formatAria"
+  | "post.aiCopy.open"
+  | "post.aiCopy.copyUrl"
+  | "post.aiCopy.copyAsMd"
+  | "post.aiCopy.copyAsJson"
+  | "post.aiCopy.openMdTitle"
+  | "post.aiCopy.openMdAria"
+  | "post.aiCopy.openJsonTitle"
+  | "post.aiCopy.openJsonAria"
+  | "post.aiCopy.copyMdUrlTitle"
+  | "post.aiCopy.copyMdUrlAria"
+  | "post.aiCopy.copyMdContentTitle"
+  | "post.aiCopy.copyMdContentAria"
+  | "post.aiCopy.copyJsonUrlTitle"
+  | "post.aiCopy.copyJsonUrlAria"
+  | "post.aiCopy.copyJsonContentTitle"
+  | "post.aiCopy.copyJsonContentAria"
+  | "post.aiCopy.mdUrlToast"
+  | "post.aiCopy.mdContentToast"
+  | "post.aiCopy.jsonUrlToast"
+  | "post.aiCopy.jsonContentToast"
+  | "post.aiCopy.fail"
+  | "post.aiCopy.markdownAlternate"
+  | "post.share.title"
+  | "post.share.x"
+  | "post.share.linkedin"
+  | "post.share.line"
+  | "post.share.facebook"
+  | "post.share.threads"
+  | "post.share.instagram"
+  | "post.share.copyLink"
+  | "post.share.copiedLink"
+  | "post.share.copiedLinkInstagram"
+  | "post.code.copy"
+  | "post.code.copied"
+  | "post.code.copiedToast"
+  | "post.code.copyFail"
+  | "post.backToTop"
   | "layout.siteName"
   | "layout.defaultDescription";
 
@@ -141,6 +180,45 @@ const zhTW: UiDict = {
   "post.next": "下一篇",
   "post.toc": "目錄",
   "post.paginationNav": "文章導覽",
+  "post.aiCopy.title": "AI 友善複製",
+  "post.aiCopy.formatAria": "選擇格式",
+  "post.aiCopy.open": "Open",
+  "post.aiCopy.copyUrl": "Copy URL",
+  "post.aiCopy.copyAsMd": "Copy as MD",
+  "post.aiCopy.copyAsJson": "Copy as JSON",
+  "post.aiCopy.openMdTitle": "在新分頁開啟 Markdown 原文",
+  "post.aiCopy.openMdAria": "開啟 Markdown 原文",
+  "post.aiCopy.openJsonTitle": "在新分頁開啟 JSON 原文",
+  "post.aiCopy.openJsonAria": "開啟 JSON 原文",
+  "post.aiCopy.copyMdUrlTitle": "複製 Markdown 連結",
+  "post.aiCopy.copyMdUrlAria": "複製 Markdown 連結",
+  "post.aiCopy.copyMdContentTitle": "複製 Markdown 全文",
+  "post.aiCopy.copyMdContentAria": "複製 Markdown 全文",
+  "post.aiCopy.copyJsonUrlTitle": "複製 JSON 連結",
+  "post.aiCopy.copyJsonUrlAria": "複製 JSON 連結",
+  "post.aiCopy.copyJsonContentTitle": "複製 JSON 全文",
+  "post.aiCopy.copyJsonContentAria": "複製 JSON 全文",
+  "post.aiCopy.mdUrlToast": "已複製 MD 連結",
+  "post.aiCopy.mdContentToast": "已複製 Markdown 全文",
+  "post.aiCopy.jsonUrlToast": "已複製 JSON 連結",
+  "post.aiCopy.jsonContentToast": "已複製 JSON 全文",
+  "post.aiCopy.fail": "複製失敗，請稍後再試",
+  "post.aiCopy.markdownAlternate": "Markdown 原文（AI 友善）",
+  "post.share.title": "分享",
+  "post.share.x": "分享到 X",
+  "post.share.linkedin": "分享到 LinkedIn",
+  "post.share.line": "分享到 LINE",
+  "post.share.facebook": "分享到 Facebook",
+  "post.share.threads": "分享到 Threads",
+  "post.share.instagram": "分享到 Instagram",
+  "post.share.copyLink": "複製連結",
+  "post.share.copiedLink": "已複製連結",
+  "post.share.copiedLinkInstagram": "已複製連結，請貼到 Instagram",
+  "post.code.copy": "複製",
+  "post.code.copied": "已複製",
+  "post.code.copiedToast": "已複製到剪貼簿",
+  "post.code.copyFail": "複製失敗，請手動選取",
+  "post.backToTop": "回到最上方",
   "layout.siteName": "WPORT 職航站",
   "layout.defaultDescription":
     "WPORT 職航站｜專為僑外生打造的台灣求職資源，提供求職攻略、工作許可指南、履歷工具與職缺媒合。",
@@ -215,6 +293,45 @@ const enUS: UiDict = {
   "post.next": "Next",
   "post.toc": "Contents",
   "post.paginationNav": "Post navigation",
+  "post.aiCopy.title": "AI-friendly copy",
+  "post.aiCopy.formatAria": "Choose format",
+  "post.aiCopy.open": "Open",
+  "post.aiCopy.copyUrl": "Copy URL",
+  "post.aiCopy.copyAsMd": "Copy as MD",
+  "post.aiCopy.copyAsJson": "Copy as JSON",
+  "post.aiCopy.openMdTitle": "Open Markdown source in a new tab",
+  "post.aiCopy.openMdAria": "Open Markdown source",
+  "post.aiCopy.openJsonTitle": "Open JSON source in a new tab",
+  "post.aiCopy.openJsonAria": "Open JSON source",
+  "post.aiCopy.copyMdUrlTitle": "Copy Markdown URL",
+  "post.aiCopy.copyMdUrlAria": "Copy Markdown URL",
+  "post.aiCopy.copyMdContentTitle": "Copy full Markdown",
+  "post.aiCopy.copyMdContentAria": "Copy full Markdown",
+  "post.aiCopy.copyJsonUrlTitle": "Copy JSON URL",
+  "post.aiCopy.copyJsonUrlAria": "Copy JSON URL",
+  "post.aiCopy.copyJsonContentTitle": "Copy full JSON",
+  "post.aiCopy.copyJsonContentAria": "Copy full JSON",
+  "post.aiCopy.mdUrlToast": "Markdown URL copied",
+  "post.aiCopy.mdContentToast": "Full Markdown copied",
+  "post.aiCopy.jsonUrlToast": "JSON URL copied",
+  "post.aiCopy.jsonContentToast": "Full JSON copied",
+  "post.aiCopy.fail": "Copy failed. Please try again.",
+  "post.aiCopy.markdownAlternate": "Markdown source (AI-friendly)",
+  "post.share.title": "Share",
+  "post.share.x": "Share on X",
+  "post.share.linkedin": "Share on LinkedIn",
+  "post.share.line": "Share on LINE",
+  "post.share.facebook": "Share on Facebook",
+  "post.share.threads": "Share on Threads",
+  "post.share.instagram": "Share on Instagram",
+  "post.share.copyLink": "Copy link",
+  "post.share.copiedLink": "Link copied",
+  "post.share.copiedLinkInstagram": "Link copied. Paste it on Instagram.",
+  "post.code.copy": "Copy",
+  "post.code.copied": "Copied",
+  "post.code.copiedToast": "Copied to clipboard",
+  "post.code.copyFail": "Copy failed. Please select manually.",
+  "post.backToTop": "Back to top",
   "layout.siteName": "WPORT Job Station",
   "layout.defaultDescription":
     "WPORT Job Station | Career resources for overseas students in Taiwan: job tips, work permits, resumes, and job matching.",
@@ -289,6 +406,45 @@ const idID: UiDict = {
   "post.next": "Berikutnya",
   "post.toc": "Daftar isi",
   "post.paginationNav": "Navigasi artikel",
+  "post.aiCopy.title": "Salin ramah AI",
+  "post.aiCopy.formatAria": "Pilih format",
+  "post.aiCopy.open": "Open",
+  "post.aiCopy.copyUrl": "Copy URL",
+  "post.aiCopy.copyAsMd": "Copy as MD",
+  "post.aiCopy.copyAsJson": "Copy as JSON",
+  "post.aiCopy.openMdTitle": "Buka sumber Markdown di tab baru",
+  "post.aiCopy.openMdAria": "Buka sumber Markdown",
+  "post.aiCopy.openJsonTitle": "Buka sumber JSON di tab baru",
+  "post.aiCopy.openJsonAria": "Buka sumber JSON",
+  "post.aiCopy.copyMdUrlTitle": "Salin URL Markdown",
+  "post.aiCopy.copyMdUrlAria": "Salin URL Markdown",
+  "post.aiCopy.copyMdContentTitle": "Salin Markdown lengkap",
+  "post.aiCopy.copyMdContentAria": "Salin Markdown lengkap",
+  "post.aiCopy.copyJsonUrlTitle": "Salin URL JSON",
+  "post.aiCopy.copyJsonUrlAria": "Salin URL JSON",
+  "post.aiCopy.copyJsonContentTitle": "Salin JSON lengkap",
+  "post.aiCopy.copyJsonContentAria": "Salin JSON lengkap",
+  "post.aiCopy.mdUrlToast": "URL Markdown disalin",
+  "post.aiCopy.mdContentToast": "Markdown lengkap disalin",
+  "post.aiCopy.jsonUrlToast": "URL JSON disalin",
+  "post.aiCopy.jsonContentToast": "JSON lengkap disalin",
+  "post.aiCopy.fail": "Gagal menyalin. Coba lagi.",
+  "post.aiCopy.markdownAlternate": "Sumber Markdown (ramah AI)",
+  "post.share.title": "Bagikan",
+  "post.share.x": "Bagikan ke X",
+  "post.share.linkedin": "Bagikan ke LinkedIn",
+  "post.share.line": "Bagikan ke LINE",
+  "post.share.facebook": "Bagikan ke Facebook",
+  "post.share.threads": "Bagikan ke Threads",
+  "post.share.instagram": "Bagikan ke Instagram",
+  "post.share.copyLink": "Salin tautan",
+  "post.share.copiedLink": "Tautan disalin",
+  "post.share.copiedLinkInstagram": "Tautan disalin. Tempel ke Instagram.",
+  "post.code.copy": "Salin",
+  "post.code.copied": "Disalin",
+  "post.code.copiedToast": "Disalin ke clipboard",
+  "post.code.copyFail": "Gagal menyalin. Silakan pilih manual.",
+  "post.backToTop": "Kembali ke atas",
   "layout.siteName": "WPORT Job Station",
   "layout.defaultDescription":
     "WPORT Job Station | Sumber karier untuk mahasiswa luar negeri di Taiwan: tips kerja, izin kerja, resume, dan pencocokan lowongan.",
@@ -363,6 +519,45 @@ const viVN: UiDict = {
   "post.next": "Sau",
   "post.toc": "Mục lục",
   "post.paginationNav": "Điều hướng bài viết",
+  "post.aiCopy.title": "Sao chép thân thiện AI",
+  "post.aiCopy.formatAria": "Chọn định dạng",
+  "post.aiCopy.open": "Open",
+  "post.aiCopy.copyUrl": "Copy URL",
+  "post.aiCopy.copyAsMd": "Copy as MD",
+  "post.aiCopy.copyAsJson": "Copy as JSON",
+  "post.aiCopy.openMdTitle": "Mở nguồn Markdown trong tab mới",
+  "post.aiCopy.openMdAria": "Mở nguồn Markdown",
+  "post.aiCopy.openJsonTitle": "Mở nguồn JSON trong tab mới",
+  "post.aiCopy.openJsonAria": "Mở nguồn JSON",
+  "post.aiCopy.copyMdUrlTitle": "Sao chép URL Markdown",
+  "post.aiCopy.copyMdUrlAria": "Sao chép URL Markdown",
+  "post.aiCopy.copyMdContentTitle": "Sao chép toàn bộ Markdown",
+  "post.aiCopy.copyMdContentAria": "Sao chép toàn bộ Markdown",
+  "post.aiCopy.copyJsonUrlTitle": "Sao chép URL JSON",
+  "post.aiCopy.copyJsonUrlAria": "Sao chép URL JSON",
+  "post.aiCopy.copyJsonContentTitle": "Sao chép toàn bộ JSON",
+  "post.aiCopy.copyJsonContentAria": "Sao chép toàn bộ JSON",
+  "post.aiCopy.mdUrlToast": "Đã sao chép URL Markdown",
+  "post.aiCopy.mdContentToast": "Đã sao chép toàn bộ Markdown",
+  "post.aiCopy.jsonUrlToast": "Đã sao chép URL JSON",
+  "post.aiCopy.jsonContentToast": "Đã sao chép toàn bộ JSON",
+  "post.aiCopy.fail": "Sao chép thất bại. Vui lòng thử lại.",
+  "post.aiCopy.markdownAlternate": "Nguồn Markdown (thân thiện AI)",
+  "post.share.title": "Chia sẻ",
+  "post.share.x": "Chia sẻ lên X",
+  "post.share.linkedin": "Chia sẻ lên LinkedIn",
+  "post.share.line": "Chia sẻ lên LINE",
+  "post.share.facebook": "Chia sẻ lên Facebook",
+  "post.share.threads": "Chia sẻ lên Threads",
+  "post.share.instagram": "Chia sẻ lên Instagram",
+  "post.share.copyLink": "Sao chép liên kết",
+  "post.share.copiedLink": "Đã sao chép liên kết",
+  "post.share.copiedLinkInstagram": "Đã sao chép liên kết. Hãy dán vào Instagram.",
+  "post.code.copy": "Sao chép",
+  "post.code.copied": "Đã sao chép",
+  "post.code.copiedToast": "Đã sao chép vào clipboard",
+  "post.code.copyFail": "Sao chép thất bại. Vui lòng chọn thủ công.",
+  "post.backToTop": "Về đầu trang",
   "layout.siteName": "WPORT Job Station",
   "layout.defaultDescription":
     "WPORT Job Station | Tài nguyên nghề nghiệp cho du học sinh tại Đài Loan: mẹo tìm việc, giấy phép lao động, hồ sơ và kết nối việc làm.",
@@ -437,6 +632,45 @@ const thTH: UiDict = {
   "post.next": "ถัดไป",
   "post.toc": "สารบัญ",
   "post.paginationNav": "นำทางบทความ",
+  "post.aiCopy.title": "คัดลอกแบบ AI-friendly",
+  "post.aiCopy.formatAria": "เลือกรูปแบบ",
+  "post.aiCopy.open": "Open",
+  "post.aiCopy.copyUrl": "Copy URL",
+  "post.aiCopy.copyAsMd": "Copy as MD",
+  "post.aiCopy.copyAsJson": "Copy as JSON",
+  "post.aiCopy.openMdTitle": "เปิดแหล่ง Markdown ในแท็บใหม่",
+  "post.aiCopy.openMdAria": "เปิดแหล่ง Markdown",
+  "post.aiCopy.openJsonTitle": "เปิดแหล่ง JSON ในแท็บใหม่",
+  "post.aiCopy.openJsonAria": "เปิดแหล่ง JSON",
+  "post.aiCopy.copyMdUrlTitle": "คัดลอก URL Markdown",
+  "post.aiCopy.copyMdUrlAria": "คัดลอก URL Markdown",
+  "post.aiCopy.copyMdContentTitle": "คัดลอก Markdown ทั้งไฟล์",
+  "post.aiCopy.copyMdContentAria": "คัดลอก Markdown ทั้งไฟล์",
+  "post.aiCopy.copyJsonUrlTitle": "คัดลอก URL JSON",
+  "post.aiCopy.copyJsonUrlAria": "คัดลอก URL JSON",
+  "post.aiCopy.copyJsonContentTitle": "คัดลอก JSON ทั้งไฟล์",
+  "post.aiCopy.copyJsonContentAria": "คัดลอก JSON ทั้งไฟล์",
+  "post.aiCopy.mdUrlToast": "คัดลอก URL Markdown แล้ว",
+  "post.aiCopy.mdContentToast": "คัดลอก Markdown ทั้งไฟล์แล้ว",
+  "post.aiCopy.jsonUrlToast": "คัดลอก URL JSON แล้ว",
+  "post.aiCopy.jsonContentToast": "คัดลอก JSON ทั้งไฟล์แล้ว",
+  "post.aiCopy.fail": "คัดลอกไม่สำเร็จ กรุณาลองใหม่",
+  "post.aiCopy.markdownAlternate": "แหล่ง Markdown (AI-friendly)",
+  "post.share.title": "แชร์",
+  "post.share.x": "แชร์ไปยัง X",
+  "post.share.linkedin": "แชร์ไปยัง LinkedIn",
+  "post.share.line": "แชร์ไปยัง LINE",
+  "post.share.facebook": "แชร์ไปยัง Facebook",
+  "post.share.threads": "แชร์ไปยัง Threads",
+  "post.share.instagram": "แชร์ไปยัง Instagram",
+  "post.share.copyLink": "คัดลอกลิงก์",
+  "post.share.copiedLink": "คัดลอกลิงก์แล้ว",
+  "post.share.copiedLinkInstagram": "คัดลอกลิงก์แล้ว กรุณาวางใน Instagram",
+  "post.code.copy": "คัดลอก",
+  "post.code.copied": "คัดลอกแล้ว",
+  "post.code.copiedToast": "คัดลอกไปยังคลิปบอร์ดแล้ว",
+  "post.code.copyFail": "คัดลอกไม่สำเร็จ กรุณาเลือกเอง",
+  "post.backToTop": "กลับขึ้นด้านบน",
   "layout.siteName": "WPORT Job Station",
   "layout.defaultDescription":
     "WPORT Job Station | แหล่งข้อมูลอาชีพสำหรับนักศึกษาต่างชาติในไต้หวัน: เคล็ดลับหางาน ใบอนุญาตทำงาน เรซูเม่ และการจับคู่งาน",

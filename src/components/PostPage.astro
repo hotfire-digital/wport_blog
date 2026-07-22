@@ -14,6 +14,7 @@ import {
   postCanonicalUrl,
   t,
 } from "@/i18n/utils";
+import { translateTag } from "@/i18n/tags";
 import {
   getLanguageSwitcherHrefs,
   getPostsByLocale,
@@ -90,6 +91,41 @@ const clientVars = {
   jobDetailUrl: jobsConfig.detailUrl,
   jobSearchUrl: jobsConfig.searchUrl,
   jobZoneUrl: jobsConfig.zoneUrl,
+  i18n: {
+    aiCopy: {
+      open: t(locale, "post.aiCopy.open"),
+      copyUrl: t(locale, "post.aiCopy.copyUrl"),
+      copyAsMd: t(locale, "post.aiCopy.copyAsMd"),
+      copyAsJson: t(locale, "post.aiCopy.copyAsJson"),
+      openMdTitle: t(locale, "post.aiCopy.openMdTitle"),
+      openMdAria: t(locale, "post.aiCopy.openMdAria"),
+      openJsonTitle: t(locale, "post.aiCopy.openJsonTitle"),
+      openJsonAria: t(locale, "post.aiCopy.openJsonAria"),
+      copyMdUrlTitle: t(locale, "post.aiCopy.copyMdUrlTitle"),
+      copyMdUrlAria: t(locale, "post.aiCopy.copyMdUrlAria"),
+      copyMdContentTitle: t(locale, "post.aiCopy.copyMdContentTitle"),
+      copyMdContentAria: t(locale, "post.aiCopy.copyMdContentAria"),
+      copyJsonUrlTitle: t(locale, "post.aiCopy.copyJsonUrlTitle"),
+      copyJsonUrlAria: t(locale, "post.aiCopy.copyJsonUrlAria"),
+      copyJsonContentTitle: t(locale, "post.aiCopy.copyJsonContentTitle"),
+      copyJsonContentAria: t(locale, "post.aiCopy.copyJsonContentAria"),
+      mdUrlToast: t(locale, "post.aiCopy.mdUrlToast"),
+      mdContentToast: t(locale, "post.aiCopy.mdContentToast"),
+      jsonUrlToast: t(locale, "post.aiCopy.jsonUrlToast"),
+      jsonContentToast: t(locale, "post.aiCopy.jsonContentToast"),
+      fail: t(locale, "post.aiCopy.fail"),
+    },
+    share: {
+      copiedLink: t(locale, "post.share.copiedLink"),
+      copiedLinkInstagram: t(locale, "post.share.copiedLinkInstagram"),
+    },
+    code: {
+      copy: t(locale, "post.code.copy"),
+      copied: t(locale, "post.code.copied"),
+      copiedToast: t(locale, "post.code.copiedToast"),
+      copyFail: t(locale, "post.code.copyFail"),
+    },
+  },
 };
 
 const heroCover = post.data.cover ? getCoverImageUrls(post.data.cover, "prose") : undefined;
@@ -108,7 +144,7 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
   alternateUrls={alternateUrls}
 >
   <Fragment slot="head">
-    <link rel="alternate" type="text/markdown" href={rawMdUrl} title="Markdown 原文（AI 友善）" />
+    <link rel="alternate" type="text/markdown" href={rawMdUrl} title={t(locale, "post.aiCopy.markdownAlternate")} />
     {
       heroCover && (
         <link
@@ -150,7 +186,7 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
               post.data.tags &&
                 post.data.tags.slice(0, 4).map((tag: string) => (
                   <a href={`${withBase("/archive")}?tag=${encodeURIComponent(tag)}`} class="tag">
-                    {tag}
+                    {translateTag(locale, tag)}
                   </a>
                 ))
             }
@@ -312,9 +348,9 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
 
         <!-- AI 友善複製 -->
         <div class="sidebar-card" id="ai-copy-panel">
-          <div class="sidebar-label sidebar-section-label">AI 友善複製</div>
+          <div class="sidebar-label sidebar-section-label">{t(locale, "post.aiCopy.title")}</div>
           <div class="ai-copy-body">
-            <div class="ai-copy-segment" role="tablist" aria-label="選擇格式" data-active="md">
+            <div class="ai-copy-segment" role="tablist" aria-label={t(locale, "post.aiCopy.formatAria")} data-active="md">
               <span class="ai-copy-segment-indicator" aria-hidden="true"></span>
               <button
                 type="button"
@@ -336,8 +372,8 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
                 href={rawMdPath}
                 target="_blank"
                 rel="noopener"
-                title="在新分頁開啟 Markdown 原文"
-                aria-label="開啟 Markdown 原文"
+                title={t(locale, "post.aiCopy.openMdTitle")}
+                aria-label={t(locale, "post.aiCopy.openMdAria")}
               >
                 <svg
                   width="14"
@@ -354,14 +390,14 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
                   <polyline points="15 3 21 3 21 9"></polyline>
                   <line x1="10" y1="14" x2="21" y2="3"></line>
                 </svg>
-                <span class="ai-copy-icon-btn-label">Open</span>
+                <span class="ai-copy-icon-btn-label">{t(locale, "post.aiCopy.open")}</span>
               </a>
               <button
                 type="button"
                 class="ai-copy-icon-btn"
                 id="ai-copy-url-btn"
-                title="複製 Markdown 連結"
-                aria-label="複製 Markdown 連結"
+                title={t(locale, "post.aiCopy.copyMdUrlTitle")}
+                aria-label={t(locale, "post.aiCopy.copyMdUrlAria")}
               >
                 <svg
                   width="14"
@@ -377,14 +413,14 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
                   <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
                   <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                 </svg>
-                <span class="ai-copy-icon-btn-label">Copy URL</span>
+                <span class="ai-copy-icon-btn-label">{t(locale, "post.aiCopy.copyUrl")}</span>
               </button>
               <button
                 type="button"
                 class="ai-copy-icon-btn"
                 id="ai-copy-content-btn"
-                title="複製 Markdown 全文"
-                aria-label="複製 Markdown 全文"
+                title={t(locale, "post.aiCopy.copyMdContentTitle")}
+                aria-label={t(locale, "post.aiCopy.copyMdContentAria")}
               >
                 <svg
                   width="14"
@@ -400,7 +436,9 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                   <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                 </svg>
-                <span class="ai-copy-icon-btn-label ai-copy-content-label" id="ai-copy-content-label">Copy as MD</span>
+                <span class="ai-copy-icon-btn-label ai-copy-content-label" id="ai-copy-content-label"
+                  >{t(locale, "post.aiCopy.copyAsMd")}</span
+                >
               </button>
             </div>
           </div>
@@ -408,7 +446,7 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
 
         <!-- 分享 -->
         <div class="sidebar-card">
-          <div class="sidebar-label sidebar-section-label">分享</div>
+          <div class="sidebar-label sidebar-section-label">{t(locale, "post.share.title")}</div>
           <div class="share-row">
             <a
               href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrlEncoded}`}
@@ -416,7 +454,7 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
               rel="noopener noreferrer"
               class="share-btn"
               data-share-platform="x"
-              title="分享到 X"
+              title={t(locale, "post.share.x")}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path
@@ -430,7 +468,7 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
               rel="noopener noreferrer"
               class="share-btn"
               data-share-platform="linkedin"
-              title="分享到 LinkedIn"
+              title={t(locale, "post.share.linkedin")}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path
@@ -444,7 +482,7 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
               rel="noopener noreferrer"
               class="share-btn"
               data-share-platform="line"
-              title="分享到 LINE"
+              title={t(locale, "post.share.line")}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path
@@ -458,7 +496,7 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
               rel="noopener noreferrer"
               class="share-btn"
               data-share-platform="facebook"
-              title="分享到 Facebook"
+              title={t(locale, "post.share.facebook")}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path
@@ -472,7 +510,7 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
               rel="noopener noreferrer"
               class="share-btn"
               data-share-platform="threads"
-              title="分享到 Threads"
+              title={t(locale, "post.share.threads")}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path
@@ -480,14 +518,14 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
                 ></path>
               </svg>
             </a>
-            <button class="share-btn" id="share-instagram-btn" data-share-platform="instagram" title="分享到 Instagram">
+            <button class="share-btn" id="share-instagram-btn" data-share-platform="instagram" title={t(locale, "post.share.instagram")}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path
                   d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm8.2 1.8H8A4.2 4.2 0 0 0 3.8 8v8a4.2 4.2 0 0 0 4.2 4.2h8a4.2 4.2 0 0 0 4.2-4.2V8A4.2 4.2 0 0 0 16 3.8zm-4 3.1a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2zm0 1.8a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6zm5.6-.9a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"
                 ></path>
               </svg>
             </button>
-            <button class="share-btn" id="copy-link-btn" data-share-platform="copy_link" title="複製連結">
+            <button class="share-btn" id="copy-link-btn" data-share-platform="copy_link" title={t(locale, "post.share.copyLink")}>
               <svg
                 width="14"
                 height="14"
@@ -512,7 +550,7 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
   <div id="toast" class="post-toast"></div>
 
   <!-- 回到頂部 -->
-  <button id="back-to-top" class="back-to-top-btn" title="回到最上方">
+  <button id="back-to-top" class="back-to-top-btn" title={t(locale, "post.backToTop")}>
     <svg
       width="16"
       height="16"
@@ -1554,8 +1592,8 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "code-block-copy";
-      btn.setAttribute("aria-label", "複製程式碼");
-      btn.innerHTML = copyIconSvg + '<span>複製</span>';
+      btn.setAttribute("aria-label", i18n.code.copy);
+      btn.innerHTML = copyIconSvg + `<span>${i18n.code.copy}</span>`;
 
       const label = btn.querySelector("span");
 
@@ -1564,14 +1602,14 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
         try {
           await navigator.clipboard.writeText(text);
           btn.classList.add("is-copied");
-          if (label) label.textContent = "已複製";
-          showToast("已複製到剪貼簿");
+          if (label) label.textContent = i18n.code.copied;
+          showToast(i18n.code.copiedToast);
           window.setTimeout(() => {
             btn.classList.remove("is-copied");
-            if (label) label.textContent = "複製";
+            if (label) label.textContent = i18n.code.copy;
           }, 2000);
         } catch {
-          showToast("複製失敗，請手動選取");
+          showToast(i18n.code.copyFail);
         }
       });
 
@@ -1590,12 +1628,12 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
   });
 
   document.getElementById("copy-link-btn")?.addEventListener("click", () => {
-    navigator.clipboard.writeText(shareUrl).then(() => showToast("已複製連結"));
+    navigator.clipboard.writeText(shareUrl).then(() => showToast(i18n.share.copiedLink));
   });
 
   document.getElementById("share-instagram-btn")?.addEventListener("click", () => {
     navigator.clipboard.writeText(shareUrl).then(() => {
-      showToast("已複製連結，請貼到 Instagram");
+      showToast(i18n.share.copiedLinkInstagram);
       window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
     });
   });
@@ -1613,29 +1651,29 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
       label: "Markdown",
       path: rawMdPath,
       url: rawMdUrl,
-      openTitle: "在新分頁開啟 Markdown 原文",
-      urlTitle: "複製 Markdown 連結",
-      contentTitle: "複製 Markdown 全文",
-      openAria: "開啟 Markdown 原文",
-      urlAria: "複製 Markdown 連結",
-      contentAria: "複製 Markdown 全文",
-      copyToast: "已複製 Markdown 全文",
-      urlToast: "已複製 MD 連結",
-      copyLabel: "Copy as MD",
+      openTitle: i18n.aiCopy.openMdTitle,
+      urlTitle: i18n.aiCopy.copyMdUrlTitle,
+      contentTitle: i18n.aiCopy.copyMdContentTitle,
+      openAria: i18n.aiCopy.openMdAria,
+      urlAria: i18n.aiCopy.copyMdUrlAria,
+      contentAria: i18n.aiCopy.copyMdContentAria,
+      copyToast: i18n.aiCopy.mdContentToast,
+      urlToast: i18n.aiCopy.mdUrlToast,
+      copyLabel: i18n.aiCopy.copyAsMd,
     },
     json: {
       label: "JSON",
       path: rawJsonPath,
       url: rawJsonUrl,
-      openTitle: "在新分頁開啟 JSON 原文",
-      urlTitle: "複製 JSON 連結",
-      contentTitle: "複製 JSON 全文",
-      openAria: "開啟 JSON 原文",
-      urlAria: "複製 JSON 連結",
-      contentAria: "複製 JSON 全文",
-      copyToast: "已複製 JSON 全文",
-      urlToast: "已複製 JSON 連結",
-      copyLabel: "Copy as JSON",
+      openTitle: i18n.aiCopy.openJsonTitle,
+      urlTitle: i18n.aiCopy.copyJsonUrlTitle,
+      contentTitle: i18n.aiCopy.copyJsonContentTitle,
+      openAria: i18n.aiCopy.openJsonAria,
+      urlAria: i18n.aiCopy.copyJsonUrlAria,
+      contentAria: i18n.aiCopy.copyJsonContentAria,
+      copyToast: i18n.aiCopy.jsonContentToast,
+      urlToast: i18n.aiCopy.jsonUrlToast,
+      copyLabel: i18n.aiCopy.copyAsJson,
     },
   };
 
@@ -1717,7 +1755,7 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
       await navigator.clipboard.writeText(text);
       showToast(selectedAiCopyFormat.copyToast);
     } catch {
-      showToast("複製失敗，請稍後再試");
+      showToast(i18n.aiCopy.fail);
     } finally {
       aiCopyContentBtn.disabled = false;
     }

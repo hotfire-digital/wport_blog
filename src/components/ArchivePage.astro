@@ -7,6 +7,7 @@ import { CANONICAL_TAGS, LEGACY_TAG_REDIRECTS } from "@/lib/tags";
 import { getPostViews, formatPostViews } from "@/lib/post-views";
 import { defaultLocale, type Locale } from "@/i18n/locales";
 import { dateLocaleFor, localizedPath, t } from "@/i18n/utils";
+import { translateTag } from "@/i18n/tags";
 import { getLanguageSwitcherHrefs, getPostsByLocale, viewsKeyForPost } from "@/lib/posts";
 
 interface Props {
@@ -95,7 +96,7 @@ const rssFeedUrl = `${SITE_ORIGIN}${BASE_PATH}/feed.xml`;
         {
           archiveTags.map((tag) => (
             <button type="button" class="archive-tag-btn" data-tag={tag}>
-              {tag}
+              {translateTag(locale, tag)}
             </button>
           ))
         }
@@ -140,7 +141,7 @@ const rssFeedUrl = `${SITE_ORIGIN}${BASE_PATH}/feed.xml`;
                   {tags.length > 0 && (
                     <div class="card-tags">
                       {tags.slice(0, 4).map((tag: string) => (
-                        <span class="tag">{tag}</span>
+                        <span class="tag">{translateTag(locale, tag)}</span>
                       ))}
                     </div>
                   )}
