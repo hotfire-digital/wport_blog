@@ -1,21 +1,23 @@
-import { getCollection, type CollectionEntry } from "astro:content";
 import { buildPostMarkdown } from "@/lib/post-markdown";
+import { defaultLocale } from "@/i18n/locales";
+import { getPostsByLocale } from "@/lib/posts";
 import type { APIRoute, GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
 
 const SITE_ORIGIN = "https://wport.me";
 const BASE_PATH = "/blog";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getCollection("posts", ({ data }) => !data.draft);
-  return posts.map((post: CollectionEntry<"posts">) => ({
-    params: { slug: post.id },
-    props: { post },
+  const posts = await getPostsByLocale(defaultLocale);
+  return posts.map((postMeta) => ({
+    params: { slug: postMeta.baseSlug },
+    props: { post: postMeta.entry, baseSlug: postMeta.baseSlug },
   }));
 };
 
 export const GET: APIRoute = async ({ props }) => {
   const post = props.post as CollectionEntry<"posts">;
-  const slug = post.id;
+  const slug = props.baseSlug as string;
   const payload = {
     title: post.data.title,
     description: post.data.description,

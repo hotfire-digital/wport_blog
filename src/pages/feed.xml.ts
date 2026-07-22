@@ -1,5 +1,6 @@
-import { getCollection, type CollectionEntry } from "astro:content";
 import { BASE_PATH, SITE_ORIGIN } from "@/lib/llms-content";
+import { defaultLocale } from "@/i18n/locales";
+import { getPostsByLocale } from "@/lib/posts";
 import type { APIRoute } from "astro";
 
 function escapeXml(value: string): string {
@@ -12,24 +13,20 @@ function escapeXml(value: string): string {
 }
 
 export const GET: APIRoute = async () => {
-  const posts = await getCollection("posts", ({ data }) => !data.draft);
-  const sorted = [...posts].sort(
-    (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
-      b.data.publishDate.getTime() - a.data.publishDate.getTime()
-  );
+  const postsMeta = await getPostsByLocale(defaultLocale);
 
   const feedUrl = `${SITE_ORIGIN}${BASE_PATH}/feed.xml`;
   const siteUrl = `${SITE_ORIGIN}${BASE_PATH}/`;
 
-  const items = sorted
-    .map((post) => {
-      const url = `${SITE_ORIGIN}${BASE_PATH}/posts/${post.id}/`;
-      const pubDate = post.data.publishDate.toUTCString();
+  const items = postsMeta
+    .map((meta) => {
+      const url = `${SITE_ORIGIN}${BASE_PATH}/posts/${meta.baseSlug}/`;
+      const pubDate = meta.entry.data.publishDate.toUTCString();
       return `    <item>
-      <title>${escapeXml(post.data.title)}</title>
+      <title>${escapeXml(meta.entry.data.title)}</title>
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
-      <description>${escapeXml(post.data.description)}</description>
+      <description>${escapeXml(meta.entry.data.description)}</description>
       <pubDate>${pubDate}</pubDate>
     </item>`;
     })

@@ -1,59 +1,64 @@
 ---
 import SiteImage from "@/components/SiteImage.astro";
+import { defaultLocale, type Locale } from "@/i18n/locales";
+import { mainSitePath, t } from "@/i18n/utils";
 
-const baseUrl = import.meta.env.BASE_URL;
-const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
-const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const year = new Date().getFullYear();
 
 const links = [
-  { label: "關於我們", href: "https://wport.me/about-us" },
-  { label: "聯絡我們", href: "https://wport.me/contact-us" },
+  { label: t(locale, "footer.about"), href: mainSitePath(locale, "/about-us") },
+  { label: t(locale, "footer.contact"), href: mainSitePath(locale, "/contact-us") },
 ];
 
 const socials = [
   {
     href: "https://www.facebook.com/wportjobstation/",
     src: "/icons/footer/footer_facebook.png",
-    alt: "wport Facebook 專頁圖標",
-    ariaLabel: "前往 wport Facebook 官方粉絲專頁",
+    alt: t(locale, "footer.facebook.alt"),
+    ariaLabel: t(locale, "footer.facebook.aria"),
     title: "wport Facebook",
   },
   {
     href: "https://www.instagram.com/wport.me/",
     src: "/icons/footer/footer_instagram.png",
-    alt: "wport Instagram 圖標",
-    ariaLabel: "追蹤 wport Instagram 官方帳號",
+    alt: t(locale, "footer.instagram.alt"),
+    ariaLabel: t(locale, "footer.instagram.aria"),
     title: "wport Instagram",
   },
   {
     href: "https://www.tiktok.com/@wport.me",
     src: "/icons/footer/footer_tiktok.png",
-    alt: "wport TikTok 圖標",
-    ariaLabel: "觀看 wport TikTok 最新影片",
+    alt: t(locale, "footer.tiktok.alt"),
+    ariaLabel: t(locale, "footer.tiktok.aria"),
     title: "wport TikTok",
   },
   {
     href: "https://www.youtube.com/@wport-me",
     src: "/icons/footer/footer_youtube.png",
-    alt: "wport YouTube 圖標",
-    ariaLabel: "訂閱 wport YouTube 頻道",
+    alt: t(locale, "footer.youtube.alt"),
+    ariaLabel: t(locale, "footer.youtube.aria"),
     title: "wport YouTube",
   },
   {
     href: "https://www.linkedin.com/company/w101人力銀行",
     src: "/icons/footer/footer_linkedin.png",
-    alt: "wport LinkedIn 企業專頁圖標",
-    ariaLabel: "在 LinkedIn 上與 wport 建立專業聯繫",
+    alt: t(locale, "footer.linkedin.alt"),
+    ariaLabel: t(locale, "footer.linkedin.aria"),
     title: "wport LinkedIn",
   },
 ];
 
-const copyright = `© ${new Date().getFullYear()} WPORT-熱火數碼資訊股份有限公司`;
+const copyright = t(locale, "footer.copyright", { year });
 ---
 
 <footer class="blog-footer">
   <section class="blog-footer__top">
-    <nav class="blog-footer__links" aria-label="網站連結">
+    <nav class="blog-footer__links" aria-label={t(locale, "footer.siteLinks")}>
       {
         links.map((item) => (
           <p>
@@ -65,7 +70,7 @@ const copyright = `© ${new Date().getFullYear()} WPORT-熱火數碼資訊股份
       }
     </nav>
 
-    <section class="blog-footer__socials" aria-label="wport 官方社群連結">
+    <section class="blog-footer__socials" aria-label={t(locale, "footer.socials")}>
       {
         socials.map((social) => (
           <a

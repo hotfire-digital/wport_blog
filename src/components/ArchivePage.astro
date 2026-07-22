@@ -1,0 +1,643 @@
+---
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import Topbar from "@/components/Topbar.astro";
+import { BASE_PATH, SITE_ORIGIN } from "@/lib/llms-content";
+import CoverImage from "@/components/CoverImage.astro";
+import { CANONICAL_TAGS, LEGACY_TAG_REDIRECTS } from "@/lib/tags";
+import { getPostViews, formatPostViews } from "@/lib/post-views";
+import { defaultLocale, type Locale } from "@/i18n/locales";
+import { dateLocaleFor, localizedPath, t } from "@/i18n/utils";
+import { getLanguageSwitcherHrefs, getPostsByLocale, viewsKeyForPost } from "@/lib/posts";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+
+const postsMeta = await getPostsByLocale(locale);
+const posts = postsMeta.map((p) => p.entry);
+const languageHrefs = await getLanguageSwitcherHrefs(locale, { page: "archive" });
+
+const COVER_COLORS = [
+  { hue: "#E0F5F3", accent: "#56C7BB" },
+  { hue: "#FEF3E2", accent: "#F59E0B" },
+  { hue: "#EEF2FF", accent: "#6366F1" },
+  { hue: "#FDF2F8", accent: "#EC4899" },
+  { hue: "#F0FDF4", accent: "#22C55E" },
+  { hue: "#FFF7ED", accent: "#F97316" },
+];
+
+const usedTagSet = new Set(posts.flatMap((p) => p.data.tags ?? []));
+const archiveTags = CANONICAL_TAGS.filter((tag) => usedTagSet.has(tag));
+
+const withBase = (path: string) => localizedPath(locale, path);
+const rssFeedUrl = `${SITE_ORIGIN}${BASE_PATH}/feed.xml`;
+---
+
+<BlogLayout title={t(locale, "archive.title")} locale={locale} alternatePath="/archive">
+  <Topbar currentPage="archive" locale={locale} languageHrefs={languageHrefs} />
+
+  <main class="archive-main">
+    <header class="archive-header">
+      <div class="archive-header__top">
+        <div>
+          <h1 class="archive-title">{t(locale, "archive.heading")}</h1>
+          <p class="archive-subtitle">分享觀點、紀錄思考</p>
+        </div>
+        <a href={rssFeedUrl} class="archive-rss-link" rel="alternate" type="application/rss+xml" title="RSS 訂閱">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"></path>
+            <circle cx="5" cy="19" r="1" fill="currentColor"></circle>
+          </svg>
+          RSS 訂閱
+        </a>
+      </div>
+    </header>
+
+    <div class="archive-filters">
+      <div class="archive-search-wrap">
+        <svg
+          class="archive-search-icon"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#9A9A9A"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          id="archive-search"
+          class="archive-search"
+          type="search"
+          placeholder={t(locale, "archive.searchPlaceholder")}
+          autocomplete="off"
+        />
+      </div>
+
+      <div
+        class="archive-tag-row"
+        id="archive-tag-row"
+        data-canonical-tags={JSON.stringify(CANONICAL_TAGS)}
+        data-legacy-redirects={JSON.stringify(LEGACY_TAG_REDIRECTS)}
+      >
+        <button type="button" class="archive-tag-btn is-active" data-tag="">{t(locale, "archive.allTags")}</button>
+        {
+          archiveTags.map((tag) => (
+            <button type="button" class="archive-tag-btn" data-tag={tag}>
+              {tag}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <p id="archive-empty" class="archive-empty" hidden>{t(locale, "archive.empty")}</p>
+
+    <ul class="card-grid" id="archive-grid">
+      {
+        postsMeta.map((meta, i) => {
+          const post = meta.entry;
+          const cover = COVER_COLORS[i % COVER_COLORS.length];
+          const tags = post.data.tags ?? [];
+          return (
+            <li
+              class="archive-card-item"
+              data-title={post.data.title}
+              data-description={post.data.description}
+              data-tags={tags.join(",")}
+            >
+              <a href={withBase(`/posts/${meta.baseSlug}`)} class="card" data-post-id={meta.baseSlug}>
+                <div class="card-cover" style={`background: ${cover.hue};`}>
+                  {post.data.cover ? (
+                    <CoverImage
+                      src={post.data.cover}
+                      alt={`${post.data.title} cover`}
+                      class="card-cover-image"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <>
+                      <div class="card-cover-shape1" style={`background: ${cover.accent};`} />
+                      <div class="card-cover-shape2" style={`background: ${cover.accent};`} />
+                      <div class="card-cover-label" style={`color: ${cover.accent};`}>
+                        wport
+                      </div>
+                    </>
+                  )}
+                </div>
+                <div class="card-body">
+                  {tags.length > 0 && (
+                    <div class="card-tags">
+                      {tags.slice(0, 4).map((tag: string) => (
+                        <span class="tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                  <div class="card-title">{post.data.title}</div>
+                  <div class="card-excerpt">{post.data.description}</div>
+                  <div class="card-footer">
+                    {(() => {
+                      const views = getPostViews(viewsKeyForPost(meta));
+                      return views > 0 ? <span class="card-views">{formatPostViews(views)}</span> : null;
+                    })()}
+                    <span class="card-date">
+                      {post.data.publishDate.toLocaleDateString(dateLocaleFor(locale), {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </main>
+</BlogLayout>
+
+<style is:global>
+  .archive-main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  .archive-header {
+    margin-bottom: 40px;
+  }
+
+  .archive-header__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .archive-rss-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border: 1px solid var(--border-default);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fg-primary);
+    text-decoration: none;
+    background: var(--bg-page);
+    transition:
+      background 150ms ease,
+      border-color 150ms ease,
+      color 150ms ease;
+  }
+
+  .archive-rss-link:hover {
+    background: var(--color-primary-light);
+    border-color: var(--color-primary-muted);
+    color: var(--color-primary-hover);
+  }
+
+  .archive-title {
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--fg-heading);
+    line-height: 1.25;
+    margin-bottom: 10px;
+    font-family: var(--font-sans);
+  }
+
+  .archive-subtitle {
+    font-size: var(--text-base);
+    color: var(--fg-meta);
+    line-height: 1.7;
+    font-family: var(--font-sans);
+  }
+
+  .archive-filters {
+    margin-bottom: 40px;
+  }
+
+  .archive-search-wrap {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .archive-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .archive-search {
+    width: 100%;
+    padding: 10px 16px 10px 42px;
+    font-size: 14px;
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+    outline: none;
+    color: #2e2e2e;
+    background: #fff;
+    font-family: var(--font-sans);
+    transition: border-color 150ms ease;
+    box-sizing: border-box;
+  }
+
+  .archive-search:focus {
+    border-color: var(--color-primary);
+  }
+
+  .archive-tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .archive-tag-btn {
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid #d7d7d7;
+    background: #fff;
+    color: #5d5d5d;
+    cursor: pointer;
+    font-weight: 500;
+    white-space: nowrap;
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease,
+      box-shadow 180ms ease,
+      transform 120ms ease;
+    font-family: var(--font-sans);
+  }
+
+  .archive-tag-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .archive-tag-btn:active {
+    transform: scale(0.97);
+  }
+
+  .archive-tag-btn.is-active {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-primary) 18%, transparent);
+  }
+
+  .archive-card-item {
+    transition:
+      opacity 200ms ease,
+      transform 200ms ease;
+  }
+
+  .archive-card-item.is-filtered-out {
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .archive-tag-btn,
+    .archive-card-item {
+      transition: none;
+    }
+
+    .archive-tag-btn:active {
+      transform: none;
+    }
+  }
+
+  .archive-empty {
+    color: var(--fg-meta);
+    font-size: 15px;
+    margin: 0 0 24px;
+  }
+
+  .archive-card-item[hidden] {
+    display: none;
+  }
+
+  .card-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 640px) {
+    .card-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 960px) {
+    .card-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--bg-page);
+    border-radius: 12px;
+    border: 1px solid #e8e8e8;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition:
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+    transform: translateY(-2px);
+  }
+
+  .card-cover {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-cover-shape1 {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    opacity: 0.18;
+    position: absolute;
+    top: 28px;
+    left: 28px;
+  }
+
+  .card-cover-shape2 {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    opacity: 0.25;
+    position: absolute;
+    bottom: 20px;
+    right: 36px;
+  }
+
+  .card-cover-label {
+    font-size: 36px;
+    font-weight: 700;
+    opacity: 0.22;
+    user-select: none;
+    letter-spacing: -2px;
+  }
+
+  .card-body {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-primary);
+    background: var(--bg-tag);
+    border-radius: 999px;
+    padding: 2px 8px;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--fg-heading);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: calc(1.4em * 2);
+  }
+
+  .card-excerpt {
+    font-size: 13.5px;
+    color: var(--fg-meta);
+    line-height: 1.65;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-footer {
+    padding-top: 8px;
+    border-top: 1px solid var(--bg-code);
+  }
+
+  .card-date {
+    font-size: 12px;
+    color: var(--color-text-faint);
+  }
+</style>
+
+<script is:inline>
+  const searchInput = document.getElementById("archive-search");
+  const tagRow = document.getElementById("archive-tag-row");
+  const emptyState = document.getElementById("archive-empty");
+  const cards = Array.from(document.querySelectorAll(".archive-card-item"));
+
+  let canonicalTags = [];
+  let legacyTagRedirects = {};
+
+  if (tagRow) {
+    try {
+      canonicalTags = JSON.parse(tagRow.getAttribute("data-canonical-tags") || "[]");
+      legacyTagRedirects = JSON.parse(tagRow.getAttribute("data-legacy-redirects") || "{}");
+    } catch {
+      canonicalTags = [];
+      legacyTagRedirects = {};
+    }
+  }
+
+  let activeTag = "";
+  let debounceTimer = 0;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const CARD_TRANSITION_MS = prefersReducedMotion ? 0 : 200;
+
+  function setCardVisibility(card, visible) {
+    const isFilteredOut = card.classList.contains("is-filtered-out");
+    const isHidden = card.hasAttribute("hidden");
+
+    if (visible) {
+      card.classList.remove("is-filtered-out");
+      if (isHidden) {
+        card.removeAttribute("hidden");
+        if (!prefersReducedMotion) {
+          card.classList.add("is-filtered-out");
+          requestAnimationFrame(() => {
+            card.classList.remove("is-filtered-out");
+          });
+        }
+      }
+      return;
+    }
+
+    if (isHidden || isFilteredOut) {
+      card.classList.add("is-filtered-out");
+      card.setAttribute("hidden", "");
+      return;
+    }
+
+    card.classList.add("is-filtered-out");
+    window.setTimeout(() => {
+      if (card.classList.contains("is-filtered-out")) {
+        card.setAttribute("hidden", "");
+      }
+    }, CARD_TRANSITION_MS);
+  }
+
+  function getSearchQuery() {
+    return searchInput instanceof HTMLInputElement ? searchInput.value.trim().toLowerCase() : "";
+  }
+
+  function cardMatches(card, query) {
+    const title = (card.getAttribute("data-title") ?? "").toLowerCase();
+    const description = (card.getAttribute("data-description") ?? "").toLowerCase();
+    const tags = (card.getAttribute("data-tags") ?? "").toLowerCase();
+
+    const matchTag = !activeTag || tags.split(",").includes(activeTag.toLowerCase());
+    const matchSearch = !query || title.includes(query) || description.includes(query) || tags.includes(query);
+
+    return matchTag && matchSearch;
+  }
+
+  function applyFilters() {
+    const query = getSearchQuery();
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const visible = cardMatches(card, query);
+      setCardVisibility(card, visible);
+      if (visible) visibleCount += 1;
+    });
+
+    if (emptyState) {
+      emptyState.hidden = visibleCount > 0;
+    }
+  }
+
+  function syncUrl(query) {
+    const params = new URLSearchParams();
+    if (activeTag) params.set("tag", activeTag);
+    if (query) params.set("q", query);
+    const next = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
+    window.history.replaceState(null, "", next);
+  }
+
+  function setActiveTagButton(tag) {
+    if (!tagRow) return;
+    tagRow.querySelectorAll(".archive-tag-btn").forEach((btn) => {
+      const btnTag = btn.getAttribute("data-tag") ?? "";
+      btn.classList.toggle("is-active", btnTag === tag);
+    });
+  }
+
+  function resolveTag(tag) {
+    if (!tag) {
+      return null;
+    }
+
+    if (canonicalTags.includes(tag)) {
+      return tag;
+    }
+
+    return legacyTagRedirects[tag] ?? tag;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const urlTag = params.get("tag");
+  const urlSearch = params.get("q") ?? "";
+  const resolvedTag = resolveTag(urlTag);
+
+  if (resolvedTag && tagRow?.querySelector(`[data-tag="${CSS.escape(resolvedTag)}"]`)) {
+    activeTag = resolvedTag;
+    setActiveTagButton(resolvedTag);
+
+    if (urlTag && urlTag !== resolvedTag) {
+      const params = new URLSearchParams(window.location.search);
+      params.set("tag", resolvedTag);
+      const next = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState(null, "", next);
+    }
+  }
+
+  if (searchInput instanceof HTMLInputElement && urlSearch) {
+    searchInput.value = urlSearch;
+  }
+
+  applyFilters();
+
+  searchInput?.addEventListener("input", () => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(() => {
+      applyFilters();
+      syncUrl(getSearchQuery());
+    }, 180);
+  });
+
+  tagRow?.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLButtonElement) || !target.classList.contains("archive-tag-btn")) {
+      return;
+    }
+
+    const nextTag = target.getAttribute("data-tag") ?? "";
+    activeTag = activeTag === nextTag ? "" : nextTag;
+    setActiveTagButton(activeTag);
+    applyFilters();
+    syncUrl(getSearchQuery());
+  });
+</script>
+
+<script>
+  import { applyReadMarkers } from "@/lib/read-markers";
+  applyReadMarkers();
+</script>

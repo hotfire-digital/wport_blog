@@ -1,10 +1,11 @@
-import { getCollection } from "astro:content";
 import { buildLlmsTxt } from "@/lib/llms-content";
+import { defaultLocale } from "@/i18n/locales";
+import { getPostsByLocale } from "@/lib/posts";
 import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async () => {
-  const posts = await getCollection("posts", ({ data }) => !data.draft);
-  const body = buildLlmsTxt(posts);
+  const postsMeta = await getPostsByLocale(defaultLocale);
+  const body = buildLlmsTxt(postsMeta.map((p) => p.entry));
 
   return new Response(body, {
     headers: {

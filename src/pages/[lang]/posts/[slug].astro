@@ -1,0 +1,24 @@
+---
+import PostPage from "@/components/PostPage.astro";
+import { localeFromPathPrefix, nonDefaultPathPrefixes } from "@/i18n/locales";
+import { getPostsByLocale } from "@/lib/posts";
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const lang of nonDefaultPathPrefixes) {
+    const locale = localeFromPathPrefix(lang);
+    const posts = await getPostsByLocale(locale);
+    for (const postMeta of posts) {
+      paths.push({
+        params: { lang, slug: postMeta.baseSlug },
+        props: { postMeta, locale },
+      });
+    }
+  }
+  return paths;
+}
+
+const { postMeta, locale } = Astro.props;
+---
+
+<PostPage postMeta={postMeta} locale={locale} />

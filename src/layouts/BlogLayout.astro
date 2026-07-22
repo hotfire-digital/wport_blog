@@ -2,6 +2,14 @@
 import "../styles/global.css";
 import BlogFooter from "@/components/BlogFooter.astro";
 import { getGtmId } from "@/lib/analytics";
+import {
+  defaultLocale,
+  localeHtmlLang,
+  localeOg,
+  locales,
+  type Locale,
+} from "@/i18n/locales";
+import { localizedCanonicalUrl, t } from "@/i18n/utils";
 
 interface Props {
   title?: string;
@@ -10,16 +18,25 @@ interface Props {
   publishDate?: Date;
   tags?: string[];
   canonicalUrl?: string;
+  locale?: Locale;
+  /** Logical path without locale prefix, e.g. `/`, `/archive`, `/posts/foo/` */
+  alternatePath?: string;
+  alternateUrls?: Partial<Record<Locale, string>>;
 }
 
 const {
   title = "Wport Blog",
-  description = "WPORT 職航站｜專為僑外生打造的台灣求職資源，提供求職攻略、工作許可指南、履歷工具與職缺媒合。",
+  description,
   cover,
   publishDate,
   tags = [],
   canonicalUrl,
+  locale = defaultLocale,
+  alternatePath = "/",
+  alternateUrls,
 } = Astro.props;
+
+const resolvedDescription = description ?? t(locale, "layout.defaultDescription");
 
 const baseUrl = import.meta.env.BASE_URL;
 const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
@@ -28,17 +45,22 @@ const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`
 const siteUrl = "https://wport.me";
 const blogBasePath = import.meta.env.BASE_URL.replace(/\/$/, "") || "/blog";
 const rssFeedUrl = `${siteUrl}${blogBasePath}/feed.xml`;
-const siteName = "WPORT 職航站";
+const siteName = t(locale, "layout.siteName");
 const fullTitle = title === "Wport Blog" ? title : `${title} | ${siteName}`;
 const ogImage = cover || `${siteUrl}/template.png`;
 const canonical = canonicalUrl || Astro.url.href;
 const publishedTime = publishDate?.toISOString();
 const gtmId = getGtmId();
 const gscVerification = (import.meta.env.PUBLIC_GSC_VERIFICATION as string | undefined)?.trim();
+
+const hreflangLinks = locales.map((loc) => ({
+  hreflang: localeHtmlLang[loc],
+  href: alternateUrls?.[loc] ?? localizedCanonicalUrl(loc, alternatePath),
+}));
 ---
 
 <!doctype html>
-<html lang="zh-TW">
+<html lang={localeHtmlLang[locale]}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -65,9 +87,15 @@ const gscVerification = (import.meta.env.PUBLIC_GSC_VERIFICATION as string | und
 
     <!-- Primary SEO -->
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={resolvedDescription} />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title={`${siteName} Blog RSS`} href={rssFeedUrl} />
+    {
+      hreflangLinks.map(({ hreflang, href }) => (
+        <link rel="alternate" hreflang={hreflang} href={href} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={localizedCanonicalUrl(defaultLocale, alternatePath)} />
     {tags.length > 0 && <meta name="keywords" content={tags.join(", ")} />}
     <meta name="author" content={siteName} />
     <meta name="robots" content="index, follow" />
@@ -76,20 +104,25 @@ const gscVerification = (import.meta.env.PUBLIC_GSC_VERIFICATION as string | und
     <!-- Open Graph -->
     <meta property="og:type" content={publishDate ? "article" : "website"} />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={resolvedDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:locale" content={localeOg[locale]} />
+    {
+      locales
+        .filter((loc) => loc !== locale)
+        .map((loc) => <meta property="og:locale:alternate" content={localeOg[loc]} />)
+    }
     {publishedTime && <meta property="article:published_time" content={publishedTime} />}
     {tags.map((tag) => <meta property="article:tag" content={tag} />)}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={resolvedDescription} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:site" content="@wport_me" />
 
@@ -99,9 +132,10 @@ const gscVerification = (import.meta.env.PUBLIC_GSC_VERIFICATION as string | und
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": title,
-        "description": description,
+        "description": resolvedDescription,
         "image": ogImage,
         "datePublished": publishedTime,
+        "inLanguage": localeHtmlLang[locale],
         "author": {
           "@type": "Organization",
           "name": siteName,
@@ -138,7 +172,7 @@ const gscVerification = (import.meta.env.PUBLIC_GSC_VERIFICATION as string | und
       )
     }
     <slot />
-    <BlogFooter />
+    <BlogFooter locale={locale} />
   </body>
 </html>
 

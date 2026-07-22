@@ -1,28 +1,68 @@
 ---
+import {
+  defaultLocale,
+  localeLabels,
+  locales,
+  type Locale,
+} from "@/i18n/locales";
+import { jobsUrlForLocale, localizedPath, t } from "@/i18n/utils";
+
 interface Props {
   currentPage?: "home" | "archive";
+  locale?: Locale;
+  languageHrefs?: Partial<Record<Locale, string>>;
 }
-const { currentPage } = Astro.props;
-const baseUrl = import.meta.env.BASE_URL;
-const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
-const withBase = (path: string) => `${normalizedBase}${path.replace(/^\//, "")}`;
-const JOBS_URL = "https://wport.me/jobs";
+
+const {
+  currentPage,
+  locale = defaultLocale,
+  languageHrefs = {},
+} = Astro.props;
+
+const homeHref = localizedPath(locale, "/");
+const archiveHref = localizedPath(locale, "/archive");
+const jobsHref = jobsUrlForLocale(locale);
+const assetBase = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 ---
 
 <nav class="topbar">
   <div class="topbar-inner">
-    <!-- Logo -->
-    <a href={withBase("/")} title="Wport Blog" class="topbar-logo">
-      <img src={withBase("/wport.svg")} alt="WPORT" width="77" height="37" class="topbar-logo-image" />
+    <a href={homeHref} title="Wport Blog" class="topbar-logo">
+      <img src={`${assetBase}wport.svg`} alt="WPORT" width="77" height="37" class="topbar-logo-image" />
     </a>
 
-    <!-- Right nav -->
     <nav class="topbar-nav">
-      <a href={withBase("/")} class:list={["topbar-link", { "topbar-link--active": currentPage === "home" }]}>首頁</a>
-      <a href={withBase("/archive")} class:list={["topbar-link", { "topbar-link--active": currentPage === "archive" }]}
-        >所有文章</a
+      <a href={homeHref} class:list={["topbar-link", { "topbar-link--active": currentPage === "home" }]}
+        >{t(locale, "nav.home")}</a
       >
-      <a href={JOBS_URL} class="topbar-link topbar-link--cta" target="_blank" rel="noopener noreferrer">找工作</a>
+      <a
+        href={archiveHref}
+        class:list={["topbar-link", { "topbar-link--active": currentPage === "archive" }]}
+        >{t(locale, "nav.archive")}</a
+      >
+      <a href={jobsHref} class="topbar-link topbar-link--cta" target="_blank" rel="noopener noreferrer"
+        >{t(locale, "nav.jobs")}</a
+      >
+
+      <div class="topbar-lang">
+        <label class="visually-hidden" for={`lang-switch-${locale}`}>{t(locale, "nav.language")}</label>
+        <select
+          id={`lang-switch-${locale}`}
+          class="topbar-lang-select"
+          aria-label={t(locale, "nav.language")}
+          onchange="if (this.value) window.location.href = this.value"
+        >
+          {
+            locales.map((loc) => (
+              <option value={languageHrefs[loc] ?? localizedPath(loc, "/")} selected={loc === locale}>
+                {localeLabels[loc]}
+              </option>
+            ))
+          }
+        </select>
+      </div>
     </nav>
   </div>
 </nav>
@@ -108,6 +148,59 @@ const JOBS_URL = "https://wport.me/jobs";
     display: block;
   }
 
+  .topbar-lang {
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Outline sibling of the green CTA: same size, primary green, light fill */
+  .topbar-lang-select {
+    appearance: none;
+    -webkit-appearance: none;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230D7C70' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    border: 1px solid var(--color-primary);
+    border-radius: 6px;
+    padding: 6px 30px 6px 14px;
+    max-width: 168px;
+    cursor: pointer;
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      color 150ms ease;
+  }
+
+  .topbar-lang-select:hover {
+    background-color: #d8f1ee;
+    border-color: var(--color-primary-hover);
+    color: var(--color-primary-hover);
+  }
+
+  .topbar-lang-select:focus {
+    outline: 2px solid color-mix(in srgb, var(--color-primary) 35%, transparent);
+    outline-offset: 2px;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   @media (max-width: 900px) {
     .topbar-nav {
       gap: 2px;
@@ -117,6 +210,13 @@ const JOBS_URL = "https://wport.me/jobs";
     .topbar-link {
       font-size: 13px;
       padding: 6px 10px;
+    }
+
+    .topbar-lang-select {
+      max-width: 112px;
+      font-size: 12px;
+      padding: 6px 26px 6px 10px;
+      background-position: right 8px center;
     }
   }
 </style>

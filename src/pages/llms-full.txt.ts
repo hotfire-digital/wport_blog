@@ -1,4 +1,5 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { defaultLocale } from "@/i18n/locales";
+import { getPostsByLocale } from "@/lib/posts";
 import type { APIRoute } from "astro";
 
 const SITE_ORIGIN = "https://wport.me";
@@ -9,11 +10,7 @@ function formatDate(date: Date): string {
 }
 
 export const GET: APIRoute = async () => {
-  const posts = await getCollection("posts", ({ data }) => !data.draft);
-  const sorted = [...posts].sort(
-    (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
-      b.data.publishDate.getTime() - a.data.publishDate.getTime()
-  );
+  const postsMeta = await getPostsByLocale(defaultLocale);
 
   const chunks: string[] = [];
   chunks.push("# WPORT 職航站｜完整文章原文");
@@ -27,9 +24,10 @@ export const GET: APIRoute = async () => {
   chunks.push(`RSS: ${SITE_ORIGIN}${BASE_PATH}/feed.xml`);
   chunks.push("");
 
-  for (const post of sorted) {
-    const canonical = `${SITE_ORIGIN}${BASE_PATH}/posts/${post.id}/`;
-    const mdUrl = `${SITE_ORIGIN}${BASE_PATH}/posts/${post.id}.md`;
+  for (const meta of postsMeta) {
+    const post = meta.entry;
+    const canonical = `${SITE_ORIGIN}${BASE_PATH}/posts/${meta.baseSlug}/`;
+    const mdUrl = `${SITE_ORIGIN}${BASE_PATH}/posts/${meta.baseSlug}.md`;
     chunks.push("");
     chunks.push("---");
     chunks.push("");

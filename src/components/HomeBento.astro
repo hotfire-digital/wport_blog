@@ -5,34 +5,71 @@ import {
   HOME_CATEGORIES,
   getCategoryArchiveHref,
   getPostsForCategory,
+  type HomeCategoryId,
 } from "@/lib/home-categories";
+import { defaultLocale, type Locale } from "@/i18n/locales";
+import { t, type UiKey } from "@/i18n/utils";
 
 interface Props {
   posts: CollectionEntry<"posts">[];
   withBase: (path: string) => string;
+  locale?: Locale;
 }
 
-const { posts, withBase } = Astro.props;
+const { posts, withBase, locale = defaultLocale } = Astro.props;
 
-const cards = HOME_CATEGORIES.map((category) => ({
-  category,
-  href: getCategoryArchiveHref(category, withBase),
-  countLabel: `${getPostsForCategory(posts, category).length} 篇`,
-  cover: getCoverImageUrls(category.coverImage, "bento"),
-}));
+const categoryKeys: Record<
+  HomeCategoryId,
+  { label: UiKey; description: UiKey; coverAlt: UiKey }
+> = {
+  "overseas-students": {
+    label: "bento.overseasStudents.label",
+    description: "bento.overseasStudents.description",
+    coverAlt: "bento.overseasStudents.coverAlt",
+  },
+  ai: {
+    label: "bento.ai.label",
+    description: "bento.ai.description",
+    coverAlt: "bento.ai.coverAlt",
+  },
+  startup: {
+    label: "bento.startup.label",
+    description: "bento.startup.description",
+    coverAlt: "bento.startup.coverAlt",
+  },
+  features: {
+    label: "bento.features.label",
+    description: "bento.features.description",
+    coverAlt: "bento.features.coverAlt",
+  },
+};
+
+const cards = HOME_CATEGORIES.map((category) => {
+  const keys = categoryKeys[category.id];
+  const count = getPostsForCategory(posts, category).length;
+  return {
+    category,
+    href: getCategoryArchiveHref(category, withBase),
+    label: t(locale, keys.label),
+    description: t(locale, keys.description),
+    coverAlt: t(locale, keys.coverAlt),
+    countLabel: t(locale, "bento.count", { n: count }),
+    cover: getCoverImageUrls(category.coverImage, "bento"),
+  };
+});
 ---
 
-<section class="bento-section" aria-label="內容分類導覽">
+<section class="bento-section" aria-label={t(locale, "bento.aria")}>
   <div class="bento-inner">
     <div class="bento-header">
-      <div class="bento-label">EXPLORE</div>
-      <h2 class="bento-title">依主題找你想看的文章</h2>
-      <p class="bento-subtitle">留台求職、AI 實作、新創募資到 WPORT 功能，各類文章幫你快速對到需求。</p>
+      <div class="bento-label">{t(locale, "bento.label")}</div>
+      <h2 class="bento-title">{t(locale, "bento.title")}</h2>
+      <p class="bento-subtitle">{t(locale, "bento.subtitle")}</p>
     </div>
 
     <div class="bento-grid">
       {
-        cards.map(({ category, href, countLabel, cover }) => (
+        cards.map(({ category, href, label, description, coverAlt, countLabel, cover }) => (
           <a
             href={href}
             class:list={["bento-card", `bento-card--${category.size}`, `bento-card--${category.id}`]}
@@ -42,7 +79,7 @@ const cards = HOME_CATEGORIES.map((category) => ({
                 src={cover.default}
                 srcset={cover.srcset}
                 sizes={cover.sizes}
-                alt={category.coverAlt}
+                alt={coverAlt}
                 class="bento-card__image"
                 loading={category.size === "large" ? "eager" : "lazy"}
                 decoding="async"
@@ -55,10 +92,10 @@ const cards = HOME_CATEGORIES.map((category) => ({
                 <span class="bento-card__eyebrow">{category.eyebrow}</span>
                 <span class="bento-card__count">{countLabel}</span>
               </div>
-              <h3 class="bento-card__label">{category.label}</h3>
-              <p class="bento-card__description">{category.description}</p>
+              <h3 class="bento-card__label">{label}</h3>
+              <p class="bento-card__description">{description}</p>
               <div class="bento-card__footer">
-                <span class="bento-card__cta">進入專區 →</span>
+                <span class="bento-card__cta">{t(locale, "bento.cta")}</span>
               </div>
             </div>
           </a>
