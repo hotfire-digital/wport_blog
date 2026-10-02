@@ -4,10 +4,10 @@ description: "台灣企業的履歷格式跟海外不一樣。這篇教你從格
 publishDate: 2026-07-23
 tags: ["僑外生", "求職面試", "留台工作"]
 featured: false
-cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/chinese-resume-tips-cover.jpg"
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/w_1200,h_630,c_fill,g_auto,f_auto,q_auto/wport-blog/activity-interview-resume-review.jpg"
 ---
 
-![準備中文履歷的求職者](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/chinese-resume-tips-cover.jpg)
+![雇主與僑外生面對面審閱履歷](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/activity-interview-resume-review.jpg)
 
 台灣的中文履歷和海外的英文履歷，在格式上有不少差異。如果你直接把英文履歷翻譯成中文就送出，HR 一眼就能看出你不熟悉台灣的求職慣例，第一印象分數會打折。
 
@@ -35,7 +35,7 @@ cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1
 
 **4. 技能**<br>分成語言能力（中英文程度、其他語言）和專業技能（軟體、工具、證照）兩類列出。
 
-![履歷撰寫中](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/office-collaboration.jpg)
+![WPORT 職航站「履歷健檢」服務攤位](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/activity-wport-resume-booth.jpg)
 
 ---
 
