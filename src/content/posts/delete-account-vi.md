@@ -4,6 +4,7 @@ description: "Hướng dẫn tự xóa tài khoản người tìm việc WPORT �
 publishDate: 2026-10-13
 tags: ["WPORT 功能"]
 featured: false
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1791876909/wport-blog/delete-account-cover.jpg"
 ---
 
 Trang này hướng dẫn cách xóa tài khoản **WPORT 職航站** của bạn. Hướng dẫn áp dụng cho tài khoản người tìm việc trên ứng dụng WPORT 職航站 (iOS và Android) và trên trang web wport.me. Cả hai dùng chung một tài khoản, nên bạn chỉ cần thực hiện một lần ở một trong hai nơi.

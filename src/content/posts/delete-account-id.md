@@ -4,6 +4,7 @@ description: "Panduan menghapus akun pencari kerja WPORT 職航站 sendiri, lewa
 publishDate: 2026-10-13
 tags: ["WPORT 功能"]
 featured: false
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1791876909/wport-blog/delete-account-cover.jpg"
 ---
 
 Halaman ini menjelaskan cara menghapus akun **WPORT 職航站** Anda. Panduan ini berlaku untuk akun pencari kerja di aplikasi WPORT 職航站 (iOS dan Android) maupun di situs wport.me. Keduanya memakai akun yang sama, jadi cukup lakukan sekali di salah satu tempat.

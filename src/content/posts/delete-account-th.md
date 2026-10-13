@@ -4,6 +4,7 @@ description: "วิธีลบบัญชีผู้หางาน WPORT �
 publishDate: 2026-10-13
 tags: ["WPORT 功能"]
 featured: false
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1791876909/wport-blog/delete-account-cover.jpg"
 ---
 
 หน้านี้อธิบายวิธีลบบัญชี **WPORT 職航站** ของคุณ ใช้ได้กับบัญชีผู้หางานทั้งในแอป WPORT 職航站 (iOS และ Android) และบนเว็บไซต์ wport.me ทั้งสองใช้บัญชีเดียวกัน จึงลบเพียงครั้งเดียวที่ใดที่หนึ่งก็พอ

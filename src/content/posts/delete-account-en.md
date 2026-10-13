@@ -4,6 +4,7 @@ description: "How to delete your WPORT 職航站 job seeker account yourself, in
 publishDate: 2026-10-13
 tags: ["WPORT 功能"]
 featured: false
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1791876909/wport-blog/delete-account-cover.jpg"
 ---
 
 This page explains how to delete your **WPORT 職航站** account. It applies to job seeker accounts on the WPORT 職航站 app (iOS and Android) and on the website wport.me. Both use the same account, so you only need to do it once, in either place.

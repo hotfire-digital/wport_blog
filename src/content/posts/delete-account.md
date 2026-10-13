@@ -4,6 +4,7 @@ description: "WPORT 職航站求職者帳號刪除教學：在 App（iOS、Andro
 publishDate: 2026-10-13
 tags: ["WPORT 功能"]
 featured: false
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1791876909/wport-blog/delete-account-cover.jpg"
 ---
 
 本頁說明如何刪除你的 **WPORT 職航站**帳號。適用 WPORT 職航站 App（iOS、Android）與網站 wport.me 的求職者帳號，兩邊刪除的是同一個帳號，任選一種方式即可。
