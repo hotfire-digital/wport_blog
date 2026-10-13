@@ -1440,6 +1440,22 @@ const postViews = getPostViews(viewsKeyForPost(postMeta));
   }
 </style>
 
+<script>
+  // 文章內圖片點擊放大（不含已經包在連結裡的圖）
+  import mediumZoom from "medium-zoom";
+  mediumZoom(".prose img:not(a img)", { margin: 24, background: "rgba(15, 23, 42, 0.9)" });
+</script>
+
+<style is:global>
+  .medium-zoom-overlay,
+  .medium-zoom-image--opened {
+    z-index: 999;
+  }
+  .prose img:not(a img) {
+    cursor: zoom-in;
+  }
+</style>
+
 <script is:inline define:vars={clientVars}>
   const READ_POSTS_STORAGE_KEY = "wport.readPosts";
   const SCROLL_THRESHOLDS = [25, 50, 75, 90];
