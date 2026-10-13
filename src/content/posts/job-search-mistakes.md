@@ -4,10 +4,10 @@ description: "很多僑外生在台灣求職時踩到一樣的坑。這篇整理
 publishDate: 2026-07-23
 tags: ["僑外生", "求職面試", "留台工作"]
 featured: false
-cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/job-search-mistakes-cover.jpg"
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/w_1200,h_630,c_fill,g_auto,f_auto,q_auto/wport-blog/activity-job-seeker-consultation.jpg"
 ---
 
-![在台灣求職的僑外生](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/job-search-mistakes-cover.jpg)
+![雇主與僑外生進行個別面談諮詢](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/activity-job-seeker-consultation.jpg)
 
 很多僑外生剛開始在台灣找工作時，都走了一段彎路。不是能力不夠，而是對台灣就業市場的運作方式還不夠熟悉。這篇整理 5 個最常見的誤區，讓你提早避開。
 
@@ -27,7 +27,7 @@ cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1
 
 **怎麼做更好？** 台灣主流履歷格式是一到兩頁、有大頭照、中文為主，並附上學歷、工作經歷、技能三大區塊。可以參考我們的 [台灣履歷撰寫技巧](/blog/posts/resume-tips/) 和 [中文履歷完整攻略](/blog/posts/chinese-resume-tips/)。
 
-![準備履歷中的求職者](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/chinese-resume-tips-cover.jpg)
+![顧問逐一協助僑外生檢視求職資料](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/activity-job-counseling-session.jpg)
 
 ---
 

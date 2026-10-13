@@ -4,10 +4,10 @@ description: "求職過程中遇到奇怪的職缺，你知道怎麼判斷真假
 publishDate: 2026-08-19
 tags: ["僑外生", "求職面試", "留台工作"]
 featured: false
-cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1787888445/wport-blog/job-scam-warning-cover.jpg"
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/w_1200,h_630,c_fill,g_auto,f_auto,q_auto/v1790754821/8763f560-7eeb-4761-b3a7-e938691d6bf3_gr0bm3.png"
 ---
 
-![小心工作詐騙](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1787888445/wport-blog/job-scam-warning-cover.jpg)
+![小心工作詐騙](https://res.cloudinary.com/dyebbsckc/image/upload/w_1200,f_auto,q_auto/v1790754821/8763f560-7eeb-4761-b3a7-e938691d6bf3_gr0bm3.png)
 
 在台灣求職的僑外生，面對的風險不只是找不到工作，有時候還會遇到真正的詐騙。詐騙者很清楚僑外生對台灣就業市場還不熟悉，往往把陷阱設計得看起來像正常的工作機會。
 
