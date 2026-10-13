@@ -304,6 +304,22 @@ npx wrangler deployments list --name wport-blog
 
 Dashboard：<https://dash.cloudflare.com/75b047576ec4742e0e6e7dac01966a46/workers/services/view/wport-blog/production>
 
+### push 了卻沒有自動部署
+
+先看那個 commit 上有沒有 Cloudflare 的檢查：
+
+```bash
+gh api repos/hotfire-digital/wport_blog/commits/<sha>/check-runs --jq '.check_runs[].name'
+```
+
+- **完全沒有 `Workers Builds: wport-blog`**：Cloudflare 收不到 push。去 GitHub org 的
+  [Cloudflare Workers and Pages App 設定](https://github.com/organizations/hotfire-digital/settings/installations/144086541)，
+  確認 Repository access 清單裡有 `wport_blog`。這份清單是**所有要自動部署的 repo 總表**，
+  新接一個 repo 時要「加進去」，不是只勾新的那個。2026-09-21 接 hub 時只勾了 hub，
+  部落格因此停了自動部署到 2026-10-13。
+- **有檢查但 failed in 0s**：多半是 Workers Builds 的 build token 被刪或輪替，
+  到 Worker → Settings → Builds 換新 token。
+
 ### 手動部署（緊急時才用）
 
 自動部署掛掉、或要在不 push 的情況下先推上去時：
