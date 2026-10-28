@@ -87,4 +87,4 @@ Untuk cara kami menangani data pribadi Anda setelah akun dihapus, lihat [Kebijak
 
 ## Butuh bantuan?
 
-Jika Anda tidak bisa masuk, tidak menemukan tombol hapus, atau ingin kami yang menghapus akun Anda, kirim email ke [support@wport.me](mailto:support@wport.me) dan sertakan alamat email yang Anda gunakan saat mendaftar.
+Jika Anda tidak bisa masuk, tidak menemukan tombol hapus, atau ingin kami yang menghapus akun Anda, kirim email ke [contact@wport.me](mailto:contact@wport.me) dan sertakan alamat email yang Anda gunakan saat mendaftar.

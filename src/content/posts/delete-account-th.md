@@ -87,4 +87,4 @@ cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1
 
 ## ต้องการความช่วยเหลือ?
 
-หากเข้าสู่ระบบไม่ได้ หาปุ่มลบไม่เจอ หรือต้องการให้เราลบบัญชีให้ ส่งอีเมลมาที่ [support@wport.me](mailto:support@wport.me) พร้อมระบุอีเมลที่ใช้สมัคร
+หากเข้าสู่ระบบไม่ได้ หาปุ่มลบไม่เจอ หรือต้องการให้เราลบบัญชีให้ ส่งอีเมลมาที่ [contact@wport.me](mailto:contact@wport.me) พร้อมระบุอีเมลที่ใช้สมัคร

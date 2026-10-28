@@ -87,4 +87,4 @@ For how we handle your personal data after your account is deleted, see our [Pri
 
 ## Need help?
 
-If you can't sign in, can't find the delete button, or would like us to delete your account for you, email [support@wport.me](mailto:support@wport.me) and include the email address you signed up with.
+If you can't sign in, can't find the delete button, or would like us to delete your account for you, email [contact@wport.me](mailto:contact@wport.me) and include the email address you signed up with.

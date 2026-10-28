@@ -87,4 +87,4 @@ cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1
 
 ## 需要協助？
 
-無法登入、找不到刪除按鈕，或想請我們代為刪除帳號，請來信 [support@wport.me](mailto:support@wport.me)，並註明你註冊時使用的 Email。
+無法登入、找不到刪除按鈕，或想請我們代為刪除帳號，請來信 [contact@wport.me](mailto:contact@wport.me)，並註明你註冊時使用的 Email。

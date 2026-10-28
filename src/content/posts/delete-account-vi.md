@@ -87,4 +87,4 @@ Về cách chúng tôi xử lý dữ liệu cá nhân của bạn sau khi tài k
 
 ## Cần hỗ trợ?
 
-Nếu bạn không đăng nhập được, không tìm thấy nút xóa, hoặc muốn chúng tôi xóa tài khoản giúp bạn, hãy gửi email đến [support@wport.me](mailto:support@wport.me) kèm địa chỉ email bạn đã dùng để đăng ký.
+Nếu bạn không đăng nhập được, không tìm thấy nút xóa, hoặc muốn chúng tôi xóa tài khoản giúp bạn, hãy gửi email đến [contact@wport.me](mailto:contact@wport.me) kèm địa chỉ email bạn đã dùng để đăng ký.
