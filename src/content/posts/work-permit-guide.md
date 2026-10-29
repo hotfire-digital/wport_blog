@@ -4,7 +4,7 @@ description: "僑外生在台灣工作前，一定要先拿到工作許可！本
 publishDate: 2026-06-10
 tags: ["僑外生", "留台工作"]
 featured: false
-cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/jobseeker-outside-office.jpg"
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/w_1200,h_630,c_fill,g_auto,f_auto,q_auto/wport-blog/activity-wport-overseas-students-intro.jpg"
 ---
 
 剛畢業，想留在台灣工作？
@@ -13,7 +13,7 @@ cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1
 
 很多僑外生都不知道這件事，等拿到 offer 才發現還有這關，搞得手忙腳亂。工作許可不只是一張紙，它是你在台灣合法工作的法律依據，少了它，就算公司錄用你也不能上班。
 
-![拿著文件在辦公室前準備的求職者](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/jobseeker-outside-office.jpg)
+![WPORT 向中央大學僑外生介紹求職資源與工作許可流程](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/activity-wport-overseas-students-intro.jpg)
 
 ---
 
@@ -121,7 +121,7 @@ cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1
 
 工作許可是針對「特定雇主」核發的，換公司不能沿用舊的許可，新雇主必須重新幫你申請一次。打算換工作之前，記得提前跟新公司確認他們願意配合辦理。
 
-![在咖啡廳整理求職資料的求職者](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/organizing-documents-cafe.jpg)
+![WPORT 在中央大學向僑外生介紹求職平台](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/activity-wport-presentation-ncu.jpg)
 
 ---
 
