@@ -1,6 +1,6 @@
 ---
 title: "Ghi nhận sự kiện | Ngày hội tuyển dụng theo hệ thống chấm điểm cho du học sinh tại Đào Viên 20/8 × Icon Consulting"
-description: "Ngày 20/8/2026, WPORT phối hợp cùng Icon Consulting tổ chức ngày hội tuyển dụng theo hệ thống chấm điểm dành cho du học sinh. Ba doanh nghiệp Đào Viên phỏng vấn trực tiếp, người tham dự được đánh giá hồ sơ trước khi ghép cặp một đối một."
+description: "Ngày 20/8/2026, WPORT phối hợp cùng Icon Consulting tổ chức ngày hội tuyển dụng theo hệ thống chấm điểm dành cho du học sinh. Ba doanh nghiệp Đào Viên phỏng vấn trực tiếp, người tham dự được đánh giá hồ sơ trước khi được Icon Consulting ghép cặp một đối một."
 publishDate: 2026-08-20
 tags: ["僑外生", "留台工作", "求職面試"]
 featured: false
@@ -25,7 +25,7 @@ Trên slide liệt kê thẳng khoảng lương, địa điểm làm việc, ch�
 
 ## Phần chấm điểm: hiểu mình trước, rồi hãy phỏng vấn
 
-Trước khi sự kiện bắt đầu, ban tổ chức hỗ trợ người tham dự điền phiếu thông tin cơ bản, làm căn cứ cho việc chấm điểm và ghép cặp về sau.
+Trước khi sự kiện bắt đầu, ban tổ chức hỗ trợ người tham dự điền phiếu thông tin cơ bản, làm căn cứ cho việc chấm điểm và ghép cặp (do Icon Consulting thực hiện) về sau.
 
 ![Người tham dự làm thủ tục và điền thông tin](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1787647045/wport-blog/taoyuan-job-fair-0820-sign.jpg)
 

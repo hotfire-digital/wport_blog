@@ -1,6 +1,6 @@
 ---
 title: "Event Recap | 8/20 Taoyuan Points-Based Job Fair for International Students × Icon Consulting"
-description: "On 20 August 2026, WPORT and Icon Consulting co-hosted a points-based job fair for overseas Chinese and international students. Three Taoyuan companies interviewed on site, and participants had their resumes assessed before one-on-one matching."
+description: "On 20 August 2026, WPORT and Icon Consulting co-hosted a points-based job fair for overseas Chinese and international students. Three Taoyuan companies interviewed on site, and participants had their resumes assessed before one-on-one matching provided by Icon Consulting."
 publishDate: 2026-08-20
 tags: ["僑外生", "留台工作", "求職面試"]
 featured: false
@@ -25,7 +25,7 @@ The slides laid out each company's salary range, work location, shift pattern, a
 
 ## The assessment: understand yourself before the interview
 
-Before the event began, staff helped participants fill in a basic information form, which then served as the basis for the assessment and matching that followed.
+Before the event began, staff helped participants fill in a basic information form, which then served as the basis for the assessment and the matching (provided by Icon Consulting) that followed.
 
 ![Participants checking in and filling in their details](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1787647045/wport-blog/taoyuan-job-fair-0820-sign.jpg)
 

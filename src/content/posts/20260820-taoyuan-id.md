@@ -1,6 +1,6 @@
 ---
 title: "Catatan Acara | Bursa Kerja Sistem Poin untuk Mahasiswa Asing di Taoyuan 20/8 × Icon Consulting"
-description: "Pada 20 Agustus 2026, WPORT dan Icon Consulting menggelar bursa kerja sistem poin untuk mahasiswa asing. Tiga perusahaan Taoyuan mewawancarai langsung di lokasi, dan peserta menjalani penilaian CV sebelum pencocokan satu lawan satu."
+description: "Pada 20 Agustus 2026, WPORT dan Icon Consulting menggelar bursa kerja sistem poin untuk mahasiswa asing. Tiga perusahaan Taoyuan mewawancarai langsung di lokasi, dan peserta menjalani penilaian CV sebelum pencocokan satu lawan satu oleh Icon Consulting."
 publishDate: 2026-08-20
 tags: ["僑外生", "留台工作", "求職面試"]
 featured: false
@@ -25,7 +25,7 @@ Slide menampilkan langsung rentang gaji, lokasi kerja, sistem sif, dan tunjangan
 
 ## Sesi penilaian: pahami diri dulu, baru wawancara
 
-Sebelum acara dimulai, panitia membantu peserta mengisi formulir data dasar yang menjadi acuan penilaian dan pencocokan berikutnya.
+Sebelum acara dimulai, panitia membantu peserta mengisi formulir data dasar yang menjadi acuan penilaian dan pencocokan (oleh Icon Consulting) berikutnya.
 
 ![Peserta mendaftar ulang dan mengisi data](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/v1787647045/wport-blog/taoyuan-job-fair-0820-sign.jpg)
 
