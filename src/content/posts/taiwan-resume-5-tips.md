@@ -4,10 +4,10 @@ description: "你的履歷投出去都沒有回音嗎？可能是這些地方出
 publishDate: 2026-08-19
 tags: ["僑外生", "求職面試", "留台工作"]
 featured: false
-cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/chinese-resume-tips-cover.jpg"
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/w_1200,h_630,c_fill,g_auto,f_auto,q_auto/wport-blog/activity-resume-form-filling.jpg"
 ---
 
-![台灣履歷撰寫重點](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/chinese-resume-tips-cover.jpg)
+![僑外生現場填寫應徵資料](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/activity-resume-form-filling.jpg)
 
 你的履歷投出去都沒有回音嗎？不一定是能力的問題，很可能是履歷格式或內容沒有符合台灣雇主的期待。
 
@@ -52,7 +52,7 @@ cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1
 
 只要記住一個原則：**每一條工作經歷，都試著加上數字**。人數、金額、百分比、時間長度，任何可以量化的指標都比模糊的描述有說服力。
 
-![求職者準備履歷](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/job-search-mistakes-cover.jpg)
+![活動後僑外生與企業代表交流討論](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/activity-post-event-networking.jpg)
 
 ---
 

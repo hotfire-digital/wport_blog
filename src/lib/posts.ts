@@ -18,7 +18,8 @@ export function enrichPost(entry: PostEntry): PostMeta {
 }
 
 export async function getPublishedPosts(): Promise<PostMeta[]> {
-  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  const isDev = import.meta.env.DEV;
+  const posts = await getCollection("posts", ({ data }) => isDev || !data.draft);
   return posts.map(enrichPost);
 }
 

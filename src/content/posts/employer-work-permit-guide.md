@@ -4,10 +4,10 @@ description: "僑外生打工、畢業 2 年內、正職聘僱，三種情境的
 publishDate: 2026-07-23
 tags: ["僑外生", "留台工作"]
 featured: false
-cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/employer-work-permit-guide-cover.jpg"
+cover: "https://res.cloudinary.com/dyebbsckc/image/upload/w_1200,h_630,c_fill,g_auto,f_auto,q_auto/wport-blog/activity-hr-consultant-presentation.jpg"
 ---
 
-![HR 辦理工作許可文件](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/employer-work-permit-guide-cover.jpg)
+![人資顧問向企業說明僑外生招募流程](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/activity-hr-consultant-presentation.jpg)
 
 台灣企業僱用僑外生，工作許可的辦理方式依聘僱性質不同。很多 HR 對這個流程不熟悉，這篇把不同情境下的規定拆開來說。
 
@@ -80,7 +80,7 @@ cover: "https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1
 
 **Q：員工的工作許可過期後還繼續上班，雇主要負責任嗎？**<br>A：是的，雇主對此有連帶責任，可能面臨裁罰。請務必追蹤每位外籍員工的許可到期日。
 
-![辦公室行政作業](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/office-admin-work.jpg)
+![2026 中央大學秋季校園徵才暨國際生就業媒合會參與企業名單](https://res.cloudinary.com/dyebbsckc/image/upload/f_auto,q_auto:good,w_1200,c_limit/wport-blog/activity-ncu-company-list-poster.jpg)
 
 ---
 
